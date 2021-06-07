@@ -1,0 +1,53 @@
+gs25.controller
+	1. 로그인 (Login)
+	
+	(db에 아이디와 비번이 있고) 스윙에서 아이디와 비밀번호를 입력받는 창 (입력받음)
+	-> db에서 확인후 승인 -> 메인페이지로 이동  
+
+	2. 회원가입 (join)
+
+	회원가입 버튼을 누르면 새로운 회원을 추가함. insert
+
+gs25.view
+	1. Login_View (아이디 비밀번호 입력받는창) 
+	2. Join_View (회원가입 정보 입력받는 창)
+	3. Main_View (상품판매, 수불관리, 재고조회, 시재관리, 영수증업무) 각 페이지로 넘어가는 View
+
+
+
+# 수불관리 : payment management
+재고처리등록 : Inventory processing registration
+폐기등록 : Disposal registration
+배송재고반영 : Shipping stock
+직현금매입 : cash purchase
+
+# 상품판매 : 
+조회업무 : inquiry work
+판매수량 : sales quantity
+현금결제 : cash payment
+카드결제 : credit card payment
+
+# 재고조회 : Inventory inquiry
+
+#시재관리 : petty cash management
+현금관리: cash management
+재고점검: Inventory check
+
+#영수증업무 : receipt business
+현금영수증: Cash receipts
+영수증발행: receipt issue
+반품업무: Return service
+조회 : Lookup
+
+#영수증조회 : receipt Lookup
+매출구분: Sales division
+거래기간: trading period
+결제수단: method of payment
+판매금액: sale price
+상품코드: Product Code
+영수증 번호: receipt number
+
+직원:
+공급자:
+결제시스템:
+재고시스템:
