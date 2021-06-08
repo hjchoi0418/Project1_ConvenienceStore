@@ -32,7 +32,7 @@ public class Join {
 			String select_sql = "SELECT * FROM employee ORDER BY employee_no";
 			PreparedStatement pstmt = con.prepareStatement(select_sql);
 			ResultSet rs = pstmt.executeQuery();
-		
+		 
 			while(rs.next()) {
 				employee.setEmployee_no(rs.getString(1));
 				employee.setEmployee_id(rs.getString(2));		
