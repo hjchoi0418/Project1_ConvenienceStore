@@ -1,4 +1,4 @@
-package gs25.model;
+package AnyPlace.model;
 
 public class All_products {
 	private String serial_no;

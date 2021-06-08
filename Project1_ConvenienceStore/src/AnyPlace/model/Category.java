@@ -1,4 +1,4 @@
-package gs25.model;
+package AnyPlace.model;
 
 public class Category {
 	private String category_no;

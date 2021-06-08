@@ -1,4 +1,4 @@
-package gs25.view;
+package AnyPlace.view;
 
 public class Join_view {
 
