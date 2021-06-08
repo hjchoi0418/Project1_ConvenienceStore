@@ -1,4 +1,4 @@
-package gs25.model;
+package AnyPlace.model;
 
 public class Order_Detail {
     private String order_detail_no;
