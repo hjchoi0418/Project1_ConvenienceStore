@@ -1,4 +1,4 @@
-package gs25.model;
+package AnyPlace.model;
 
 public class Waste {
 	private String waste_no;

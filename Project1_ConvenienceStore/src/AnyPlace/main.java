@@ -1,4 +1,4 @@
-package gs25;
+package AnyPlace;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
