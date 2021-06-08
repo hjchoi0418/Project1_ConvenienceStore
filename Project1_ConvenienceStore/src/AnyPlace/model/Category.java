@@ -4,6 +4,9 @@ public class Category {
 	private String category_no;
 	private String category_name;
 	
+	public Category(String category_name) {
+		this.category_name = category_name;
+	}
 	public String getCategory_no() {
 		return category_no;
 	}
