@@ -8,6 +8,15 @@ public class Product{
     private String product_price;
     private String product_image_path;
     
+	private String serial_no;
+	private String build_date;
+	private String expiration_date;
+	private String supplier;
+	private String delivery_date;
+	private String product_state;
+	
+	private String product_count;
+	
     public String getProduct_no() {
         return product_no;
     }
@@ -38,9 +47,55 @@ public class Product{
     public void setProduct_image_path(String product_image_path) {
         this.product_image_path = product_image_path;
     }
-    @Override
-    public String toString() {
-        return "product [product_no=" + product_no + ", category_no=" + category_no + ", product_name=" + product_name
-                + ", product_price=" + product_price + ", product_image_path=" + product_image_path + "]";
-    }
+    
+    public String getSerial_no() {
+		return serial_no;
+	}
+	public void setSerial_no(String serial_no) {
+		this.serial_no = serial_no;
+	}
+	public String getBuild_date() {
+		return build_date;
+	}
+	public void setBuild_date(String build_date) {
+		this.build_date = build_date;
+	}
+	public String getExpiration_date() {
+		return expiration_date;
+	}
+	public void setExpiration_date(String expiration_date) {
+		this.expiration_date = expiration_date;
+	}
+	public String getSupplier() {
+		return supplier;
+	}
+	public void setSupplier(String supplier) {
+		this.supplier = supplier;
+	}
+	public String getDelivery_date() {
+		return delivery_date;
+	}
+	public void setDelivery_date(String delivery_date) {
+		this.delivery_date = delivery_date;
+	}
+	public String getProduct_state() {
+		return product_state;
+	}
+	public void setProduct_state(String product_state) {
+		this.product_state = product_state;
+	}
+	public String getProduct_count() {
+		return product_count;
+	}
+	public void setProduct_count(String product_count) {
+		this.product_count = product_count;
+	}
+	@Override
+	public String toString() {
+		return "Product [product_no=" + product_no + ", category_no=" + category_no + ", product_name=" + product_name
+				+ ", product_price=" + product_price + ", product_image_path=" + product_image_path + ", serial_no="
+				+ serial_no + ", build_date=" + build_date + ", expiration_date=" + expiration_date + ", supplier="
+				+ supplier + ", delivery_date=" + delivery_date + ", product_state=" + product_state + "]";
+	}
+	
 }
