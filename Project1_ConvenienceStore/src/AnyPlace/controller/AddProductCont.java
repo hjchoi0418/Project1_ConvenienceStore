@@ -1,16 +1,13 @@
 package AnyPlace.controller;
 
-import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import AnyPlace.JPool;
-import AnyPlace.main;
-import AnyPlace.model.*;
+import AnyPlace.model.Product;
 
 public class AddProductCont {
 /*
