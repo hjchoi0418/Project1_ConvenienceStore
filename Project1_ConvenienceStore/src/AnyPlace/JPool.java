@@ -9,31 +9,40 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JPool {
-	
-	// 파일에 있는 내용을 읽어서 DB와의 연결을 생성해보세요.
-	static String driverName;
-	static String url;
-	static String id;
-	static String password;
-	static String text;
-	
-	static {
-		try (BufferedReader in = new BufferedReader(new FileReader("db.txt"))) {
+
+	public static Connection getConnection() {
+
+		String driver;
+		String url;
+		String id;
+		String password;
+
+		try {
+			BufferedReader in = new BufferedReader(new FileReader("DB.txt"));
+
+			driver = in.readLine();
 			url = in.readLine();
 			id = in.readLine();
 			password = in.readLine();
-			System.out.println("[Info] Initialize static variables");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+
+			Class.forName(driver);
+
+			// 2. DriverManager 클래스를 통해 DB와의 연결을 생성한다.
+			Connection conn = DriverManager.getConnection(url, id, password);
+
+			return conn;
+
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-	
-	public static Connection getConnection() {
-		try {
-			return DriverManager.getConnection(url, id, password);
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
