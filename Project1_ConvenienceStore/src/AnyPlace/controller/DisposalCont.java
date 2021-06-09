@@ -66,7 +66,7 @@ public class DisposalCont {
 //			while(rs.next()) {
 //				for(int i=1; i<=col_cnt; i++) 
 //					System.out.print(rs.getString(i) + " | ");
-//				System.out.println();
+//				System.out.println(); 
 //			}
 		} catch (SQLException e) {
 			e.printStackTrace();
