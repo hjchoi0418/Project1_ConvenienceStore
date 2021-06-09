@@ -1,4 +1,5 @@
-package gs25.mainpage;
+//package gs25.mainpage;
+package GUI;
 
 public class A01_mainpage {
 
