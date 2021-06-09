@@ -24,7 +24,7 @@ public class Lookup_method {
 				+ "product_price, "
 				+ "expiration_date "
 				+ "FROM "
-				+ "product INNER JOIN all_products USING ( product_no ) "
+				+ "all_products INNER JOIN product USING ( product_no ) "
 				+ "ORDER BY expiration_date";
 		
 		try (Connection conn = DBConnector.getConnection();
@@ -61,7 +61,11 @@ public class Lookup_method {
 	}
 	public void select_stock() {
 
-		String sql = "SELECT product_name FROM product";
+		String sql = "SELECT "
+				+ "product_name "
+				+ "FROM "
+				+ "All_products INNER JOIN product USING (product_no) "
+				+ "WHERE product_state = 1";
 		
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -84,7 +88,12 @@ public class Lookup_method {
 		
 	}
 	public void search(String name) {
-		String sql = "SELECT product_name FROM product where product_name LIKE '%" + name +"%'";
+		String sql = "SELECT "
+				+ "product_name "
+				+ "FROM "
+				+ "All_products INNER JOIN product USING (product_no) "
+				+ "where product_name LIKE '%" + name +"%' "
+						+ "AND product_state = 1";
 		
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
