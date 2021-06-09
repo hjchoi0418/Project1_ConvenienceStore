@@ -10,32 +10,49 @@ import java.util.List;
 import java.util.Set;
 
 import AnyPlace.controller.DBConnector;
+import AnyPlace.model.All_products;
 import AnyPlace.model.Product;
 
 public class Lookup_method {
 	
 	public void selectMethod() {
 		
-		String sql = "SELECT DISTINCT product_name, category_no, product_price FROM product order by category_no";
+		String sql = "SELECT "
+				+ "product_no, "
+				+ "category_no, "
+				+ "product_name, "
+				+ "product_price, "
+				+ "expiration_date "
+				+ "FROM "
+				+ "product INNER JOIN all_products USING ( product_no ) "
+				+ "ORDER BY expiration_date";
 		
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 		    ){
 			ResultSet rs = pstmt.executeQuery();				
 			List <Product> productList = new ArrayList <Product>();
-			
+			List <All_products> expiration_list = new ArrayList <All_products>();
 			while (rs.next()) {
-				Product products = new Product();	
-				products.setProduct_name(rs.getString(1));
+				Product products = new Product();
+				All_products all_products = new All_products();
+				products.setProduct_no(rs.getString(1));
 				products.setCategory_no(rs.getString(2));
-				products.setProduct_price(rs.getString(3));
+				products.setProduct_name(rs.getString(3));
+				products.setProduct_price(rs.getString(4));
+				all_products.setExpiration_date(rs.getString(5));
 
 				productList.add(products);		
+				expiration_list.add(all_products);
 			}
-			for(int i = 0; i < productList.size(); ++i) {	
-				System.out.print("    " + productList.get(i).getCategory_no() + "\t\t");
+			int count = 0;
+			for(int i = 0; i < productList.size(); ++i) {
+				++count;
+				System.out.print(count + "\t" + productList.get(i).getProduct_no() + "\t\t" );
+				System.out.print(productList.get(i).getCategory_no() + "\t");
 				System.out.print(productList.get(i).getProduct_name()+ "\t\t");
-				System.out.print(productList.get(i).getProduct_price()+ "\t\n");
+				System.out.print(productList.get(i).getProduct_price()+ "\t\t");
+				System.out.print(expiration_list.get(i).getExpiration_date() + "\n");
 			}
 	
 		} catch (Exception e) {
