@@ -24,14 +24,14 @@ public class Cash_Management_view extends JFrame implements TableModelListener {
 	String[] colNames = new String[] { "권종", "수량", "금액" };
 	// 표에 들어갈 데이터들 / 처음엔 빈 테이블 만들기 위해 데이터관리객체 생성
 	private Object[][] data = {
-            {"50,000원", "0", "0"},
-            {"10,000원", "0", "0"},
-            {"5,000원", "0", "0"},
-            {"1,000원", "0", "0"},
-            {"500원", "0", "0"},
-            {"100원", "0", "0"},
-            {"50원", "0", "0"},
-            {"10원", "0", "0"},
+            {"50,000원", 0, 0},
+            {"10,000원", 0, 0},
+            {"5,000원", 0, 0},
+            {"1,000원", 0, 0},
+            {"500원", 0, 0},
+            {"100원", 0, 0},
+            {"50원", 0, 0},
+            {"10원", 0, 0},
     };
     private String[] columnType = { "권종", "수량", "금액" };
 	DefaultTableModel model = new DefaultTableModel(data, columnType) {
