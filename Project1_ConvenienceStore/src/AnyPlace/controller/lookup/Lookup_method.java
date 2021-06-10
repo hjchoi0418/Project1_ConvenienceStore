@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -76,11 +77,12 @@ public class Lookup_method {
 				productList.add(rs.getString(1));		
 			}
 			Set<String> set = new HashSet<String>(productList);
-			int count = 0;
+			HashMap<String,Integer> inventory_check = new HashMap<>();		
 			for (String str : set) {
-				++count;
-				System.out.println(count + "." + str + "\t\t 재고수량: " + Collections.frequency(productList, str));
-			}
+				Collections.frequency(productList, str);
+				inventory_check.put(str,Collections.frequency(productList, str));				
+			}			
+			System.out.println(inventory_check);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,13 +105,14 @@ public class Lookup_method {
 			while (rs.next()) {
 				productList.add(rs.getString(1));		
 			}
+			System.out.println(productList);
 			Set<String> set = new HashSet<String>(productList);
-			int count = 0;
+			HashMap<String,Integer> inventory_check = new HashMap<>();		
 			for (String str : set) {
-				++count;
-				System.out.println(count + "." + str + "\t\t 재고수량: " + Collections.frequency(productList, str));
-			}
-			
+				Collections.frequency(productList, str);
+				inventory_check.put(str,Collections.frequency(productList, str));				
+			}			
+			System.out.println(inventory_check);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
