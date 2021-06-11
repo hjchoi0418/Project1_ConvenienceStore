@@ -1,75 +1,67 @@
 package AnyPlace.controller;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 import java.util.Scanner;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-import jdbc.DBConnector;
 
-/* 이렇게 맞을까요.....
- 1. 입력을 한다 / 2. db를 읽고, 확인여부 / 3. 확인여부에 따른 로그인/ 실패메시지
  
- SANAGO
-*/
+// SANAGO
+
 
 public class Login {
 	
 
 	public static void main(String[] args) {
 		
-		Scanner sc = new Scanner(System.in);
-		AnyPlace.model.Employee employee = new AnyPlace.model.Employee(); // employee 객체 생성
-		List<String> employee_id_list = new ArrayList<String>(); // 현재 회원의 id을 저장
-		HikariConfig config = new HikariConfig("./Hikari_Hyeyoung.properties");
+		
+		HikariConfig config = new HikariConfig();
+		
+		config.setJdbcUrl("jdbc:oracle:thin:@localhost:1521/XEPDB1");
+		config.setUsername("gs25");
+		config.setPassword("1234");
+		config.addDataSourceProperty("cachePrepStmts", "true");
+		config.addDataSourceProperty("prepStmtCacheSize", "250");
+		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+
 		HikariDataSource ds = new HikariDataSource(config);
 		
 		
-		System.out.println("회원 ID 입력 : ");
-		String employee_id = sc.next();
+		System.out.println("ID를 입력하세요 >");
 		
-		String select_sql = "SELECT employee_id FROM employee";
-
-		try {		
-			Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(select_sql);
-			ResultSet rs = pstmt.executeQuery();
-		 
-			while(rs.next()) {
-				rs.getString("employee_id");		
-
-			} 
-
+		Scanner sc = new Scanner(System.in);
+		String id_input = sc.next();
+		String sql = "SELECT * FROM employee WHERE employee_id"
+				+ " LIKE ?";
 		
-			pstmt = con.prepareStatement("SELECT employee_id FROM employee");
-			pstmt.setString(1, employee_id);
+		try (
+				Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				) {
 			
-			if (rs.next()) {
-				if (rs.getString(1).contentEquals(employee_id)) {
-				System.out.println("로그인 성공");
-					return; // 로그인 성공
-				}
-				else {
-					System.out.println("로그인 실패");
-					return; // 로그인 실패
-				}
-			}
-			System.out.println("아이디 오류");
-			return; // 아이디 오류
 			
+				pstmt.setString(1, id_input);
+				ResultSet rs = pstmt.executeQuery();
 	
-		} catch (Exception e) {
+		
+				if (!rs.next()) {
+					System.out.println("로그인 실패");
+					
+				} else {
+					System.out.println("회원 ID : " + id_input);
+					rs.getString("employee_id");
+					System.out.println("로그인 성공");
+					
+				}
+				
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
 
+		}
 	}
 }
