@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import AnyPlace.JPool;
+import AnyPlace.DBConnector;
 
 public class DeliveryCont {
 
@@ -108,7 +108,7 @@ public class DeliveryCont {
 
 		HashMap<String, Integer> order_map = new HashMap<>();
 		
-		try (Connection conn = JPool.getConnection();
+		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 				PreparedStatement pstmt3 = conn.prepareStatement(sql3);

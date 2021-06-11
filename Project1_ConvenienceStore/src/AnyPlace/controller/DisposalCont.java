@@ -7,7 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import AnyPlace.JPool;
+import AnyPlace.DBConnector;
 import AnyPlace.model.Product;
 
 public class DisposalCont {
@@ -26,7 +26,7 @@ public class DisposalCont {
 
 		// Æó±â Ã³¸®
 		String delete_sql = "DELETE ALL_PRODUCTS WHERE SERIAL_NO = ?";
-		try (Connection conn = JPool.getConnection();
+		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement delete_pstmt = conn.prepareStatement(delete_sql);
 				ResultSet rs = pstmt.executeQuery();) {

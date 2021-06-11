@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import AnyPlace.controller.DBConnector;
+import AnyPlace.DBConnector;
 import AnyPlace.model.All_products;
 import AnyPlace.model.Product;
 
@@ -105,8 +105,4 @@ public class Lookup_method {
 		} 
 	}
 	
-
 }
-
-
-

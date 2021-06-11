@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import AnyPlace.JPool;
+import AnyPlace.DBConnector;
 import AnyPlace.model.Product;
 
 public class AddProductCont {
@@ -64,7 +64,7 @@ public class AddProductCont {
 	}
 	public static void main(String[] args) {
 		
-		try (Connection conn = JPool.getConnection();
+		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt_insert = conn.prepareStatement(sql_insert);
 				ResultSet rs = pstmt.executeQuery();) {

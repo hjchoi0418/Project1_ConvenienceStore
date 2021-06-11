@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import AnyPlace.JPool;
+import AnyPlace.DBConnector;
 import AnyPlace.view.Cash_Management_view;
 
 public class Cash_Management {
@@ -28,7 +28,7 @@ public class Cash_Management {
 		
 		String sql = "SELECT cash FROM cash";
 
-		try (Connection conn = JPool.getConnection();
+		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery();) {
 			

@@ -13,14 +13,14 @@ public class Login_View extends JFrame {
 		
 		ArrayList<JButton> btns = new ArrayList<>();
 		
-		btns.add(new Login_View(100, 100));
-
-		JButton loginBtn = new JButton(100, 300, btns);
+//		btns.add(new Login_View(100, 100));
+//
+//		JButton loginBtn = new JButton(100, 300, btns);
 		
 		for (JButton btn : btns) {
 			add(btn);
 		}
-		add(loginBtn);
+//		add(loginBtn);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(1300,700);
