@@ -1,13 +1,15 @@
 package AnyPlace.controller;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import AnyPlace.JPool;
+import AnyPlace.view.Cash_Management_view;
+
 public class Cash_Management {
-	
+
 	private static int pos_cash = 0;
 	private static int db_cash = 0;
 	private static int difference = 0;
@@ -20,41 +22,46 @@ public class Cash_Management {
 	private static int _50won = 0;
 	private static int _10won = 0;
 	
+	static Cash_Management_view cmView = new Cash_Management_view();
+
 	public static void main(String[] args) {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("OracleDriver가 존재함.");
-			
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XE", "gs25", "1234");
-			System.out.println("연결 생성됨");
-			
-			PreparedStatement pstmt = conn.prepareStatement("SELECT cash FROM cash");
-			ResultSet rs = pstmt.executeQuery();
+		
+		String sql = "SELECT cash FROM cash";
+
+		try (Connection conn = JPool.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery();) {
 			
 			rs.next();
 			db_cash = rs.getInt(1);
+			
+			_50000won = cmView.get50000();
+			_10000won = cmView.get10000();
+			_5000won = cmView.get5000();
+			_1000won = cmView.get1000();
+			_500won = cmView.get500();
+			_100won = cmView.get100();
+			_50won = cmView.get50();
+			_10won = cmView.get10();
 			
 			pos_cash = _50000won * 50000 +
 					_10000won * 10000 +
 					_5000won * 5000 +
 					_1000won * 1000 +
 					_500won * 500 +
-					_100won * 100 +
+					_100won * 100+
 					_50won * 50 +
 					_10won * 10;
-			
+
 			difference = pos_cash - db_cash;
-			
+
+			System.out.println("점검계 : " + db_cash);
+			System.out.println("pos 현금 : " + pos_cash);
 			System.out.println("차이 : " + difference);
-			
-			rs.close();
-			pstmt.close();
-			conn.close();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("-------------------");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 }
