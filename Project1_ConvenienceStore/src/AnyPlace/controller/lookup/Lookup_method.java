@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import AnyPlace.controller.DBConnector;
@@ -15,8 +17,8 @@ import AnyPlace.model.Product;
 
 public class Lookup_method {
 	
-	public void selectMethod() {
-		
+	// 1.전체 상품 조회
+	public void selectMethod() {		
 		String sql = "SELECT "
 				+ "product_no, "
 				+ "category_no, "
@@ -25,8 +27,7 @@ public class Lookup_method {
 				+ "expiration_date "
 				+ "FROM "
 				+ "all_products INNER JOIN product USING ( product_no ) "
-				+ "ORDER BY expiration_date";
-		
+				+ "ORDER BY expiration_date";	
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 		    ){
@@ -54,47 +55,32 @@ public class Lookup_method {
 				System.out.print(productList.get(i).getProduct_price()+ "\t\t");
 				System.out.print(expiration_list.get(i).getExpiration_date() + "\n");
 			}
-	
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
 	}
+	// 2.전체 상품 재고 찾기
 	public void select_stock() {
-
 		String sql = "SELECT "
 				+ "product_name "
 				+ "FROM "
 				+ "All_products INNER JOIN product USING (product_no) "
-				+ "WHERE product_state = 1";
-		
-		try (Connection conn = DBConnector.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-		    ){
-			ResultSet rs = pstmt.executeQuery();				
-			List <String> productList = new ArrayList <String>();			
-			while (rs.next()) {
-				productList.add(rs.getString(1));		
-			}
-			Set<String> set = new HashSet<String>(productList);
-			int count = 0;
-			for (String str : set) {
-				++count;
-				System.out.println(count + "." + str + "\t\t 재고수량: " + Collections.frequency(productList, str));
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		
+				+ "WHERE product_state = 1";	
+		inventory(sql);		
 	}
+	
+	// 3.이름 으로 물품 재고 찾기
 	public void search(String name) {
 		String sql = "SELECT "
 				+ "product_name "
 				+ "FROM "
 				+ "All_products INNER JOIN product USING (product_no) "
 				+ "where product_name LIKE '%" + name +"%' "
-						+ "AND product_state = 1";
-		
+						+ "AND product_state = 1";	
+		inventory(sql);
+	}
+	//재고 찾는 메서드
+	public void inventory(String sql) {
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 		    ){
@@ -104,16 +90,21 @@ public class Lookup_method {
 				productList.add(rs.getString(1));		
 			}
 			Set<String> set = new HashSet<String>(productList);
-			int count = 0;
+			HashMap<String,Integer> inventory_check = new HashMap<>();		
 			for (String str : set) {
-				++count;
-				System.out.println(count + "." + str + "\t\t 재고수량: " + Collections.frequency(productList, str));
+				Collections.frequency(productList, str);
+				inventory_check.put(str,Collections.frequency(productList, str));				
+			}			
+			for( Entry<String, Integer> element : inventory_check.entrySet() ){
+			    String key = element.getKey();
+			    Integer value = element.getValue();
+			    System.out.println( String.format("상품 : "+ key + "\t\t수량 : "+ value));
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
 	}
+	
 
 }
 
