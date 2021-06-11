@@ -57,14 +57,14 @@ public class Order_product {
 				+ "product_name "
 				+ "FROM "
 				+ "All_products INNER JOIN product USING (product_no) "
-				+ "where product_name LIKE '%" + product_name +"%' "
+				+ "where product_name LIKE '" + product_name +"' "
 						+ "AND product_state = 1";
 		
 		String sql = "SELECT "
 				+ "product_no, product_price"
 				+ " FROM"
 				+ " product"
-				+ " WHERE product_name LIKE '%" + product_name + "%'";
+				+ " WHERE product_name LIKE '" + product_name + "'";
 		
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt_insert = conn.prepareStatement(sql_insert);
