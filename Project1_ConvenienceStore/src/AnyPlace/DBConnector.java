@@ -12,7 +12,6 @@ public class DBConnector {
 
 	public static Connection getConnection() {
 
-		String driver;
 		String url;
 		String id;
 		String password;
@@ -20,14 +19,10 @@ public class DBConnector {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader("DB.txt"));
 
-			driver = in.readLine();
 			url = in.readLine();
 			id = in.readLine();
 			password = in.readLine();
 
-			Class.forName(driver);
-
-			// 2. DriverManager 클래스를 통해 DB와의 연결을 생성한다.
 			Connection conn = DriverManager.getConnection(url, id, password);
 
 			return conn;
@@ -36,9 +31,6 @@ public class DBConnector {
 			e1.printStackTrace();
 			return null;
 		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			return null;
 		} catch (SQLException e) {
