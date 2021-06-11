@@ -19,10 +19,14 @@ public class Order_product {
 	
 	Scanner sc;
 
+	// 1.임시로 order_ 만듬
 	public void Temporary_order() {
 		this.sc = new Scanner(System.in);
-		String sql = "INSERT INTO ORDER_ (order_no, order_date, payment_method, order_amount)"
-				+ "VALUES((SELECT MAX(order_no)+1 FROM ORDER_),SYSDATE,?,2)";
+		String sql = "INSERT INTO order_ (order_no, order_date, payment_method, order_amount)"
+				+ "VALUES((SELECT MAX(order_no)+1 FROM order_), "
+				+ "SYSDATE, "
+				+ "?, "
+				+ "2)";
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 			){
@@ -35,39 +39,13 @@ public class Order_product {
 		} 		
 	}
 	
-	public void update_order() {
-		
-		String sql_update = "UPDATE ORDER_ SET order_amount = ? "
-				+ "WHERE order_no = (SELECT MAX(order_no)FROM ORDER_)";
-		
-		String sql = "SELECT order_detail_price "
-				+ "FROM order_detail "
-				+ "WHERE order_no = (SELECT MAX(order_no)FROM ORDER_detail)";
-		
-		try (Connection conn = DBConnector.getConnection();
-				PreparedStatement pstmt_update = conn.prepareStatement(sql_update);
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-			){
-			ResultSet rs = pstmt.executeQuery();
-			List <Integer> amount = new ArrayList <Integer>();	
-			if (rs.next()) {
-				do {
-					amount.add(rs.getInt("order_detail_price"));
-				}while (rs.next());	
-			}
-			int sum = amount.stream().mapToInt(Integer::intValue).sum();
-			pstmt_update.setInt(1, sum);
-			pstmt_update.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 		
-	}
+	// 2.order_detail 만듬
 	public void detail_order() {
 		this.sc = new Scanner(System.in);
 		String sql_insert = "INSERT INTO order_detail"
 				+ "(order_detail_no, order_no, product_no, order_count, order_detail_price)"
 				+ "VALUES((SELECT MAX(order_detail_no)+1 FROM ORDER_DETAIL),"
-				+ "(SELECT MAX(order_no)FROM ORDER_),"
+				+ "(SELECT MAX(order_no)FROM order_),"
 				+ "?,"
 				+ "?,"
 				+ "?)";
@@ -128,6 +106,36 @@ public class Order_product {
 			e.printStackTrace();
 		} 		
 	}
+	
+	// 3.임시로 만든 order_ 수정
+	public void update_order() {
+		String sql_update = "UPDATE order_ SET order_amount = ? "
+				+ "WHERE order_no = (SELECT MAX(order_no)FROM order_)";
+		
+		String sql = "SELECT order_detail_price "
+				+ "FROM order_detail "
+				+ "WHERE order_no = (SELECT MAX(order_no)FROM ORDER_detail)";
+		
+		try (Connection conn = DBConnector.getConnection();
+				PreparedStatement pstmt_update = conn.prepareStatement(sql_update);
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+			ResultSet rs = pstmt.executeQuery();
+			List <Integer> amount = new ArrayList <Integer>();	
+			if (rs.next()) {
+				do {
+					amount.add(rs.getInt("order_detail_price"));
+				}while (rs.next());	
+			}
+			int sum = amount.stream().mapToInt(Integer::intValue).sum();
+			pstmt_update.setInt(1, sum);
+			pstmt_update.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 		
+	}
+	
+	// 4.주문서를 바탕으로 수량에 맞춰 product_state를 0으로 변경
 	public void stock_minus() {		
 		String sql_update = "UPDATE all_products SET product_state = 0 "
 				+ "WHERE serial_no = ?";
@@ -167,10 +175,8 @@ public class Order_product {
 						serial_no.add(rs2.getInt("serial_no"));
 					}while (rs2.next());
 				}
-				// product_no 이 product_no.get(i)인 serial_no를 담아둠
 				System.out.println("상품번호<" + product_no.get(i) + ">인 serial_no:"+serial_no);
-				// 해쉬맵에서 수량을 파악후 수량만큼 pro
-				// serial_no가 serial_no.get(j)인 상품의 product_state를 0으로 변경
+				// 해쉬맵에서 수량을 파악후 수량만큼 product_state를 0으로 변경
 				for(int j = 0; j < product_check.get(product_no.get(i)); ++j) {
 					System.out.println("판매된 상품 serial_no:" + serial_no.get(j));
 					pstmt_update.setInt(1, serial_no.get(j));	
@@ -182,21 +188,3 @@ public class Order_product {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
