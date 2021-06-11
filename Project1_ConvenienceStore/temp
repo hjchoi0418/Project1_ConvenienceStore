@@ -34,10 +34,11 @@ gs25.view
 재고점검: Inventory check
 
 #영수증업무 : receipt business
-현금영수증: Cash receipts
 영수증발행: receipt issue
+반품 재판매 : 
 반품업무: Return service
-조회 : Lookup
+
+
 
 #영수증조회 : receipt Lookup
 매출구분: Sales division
