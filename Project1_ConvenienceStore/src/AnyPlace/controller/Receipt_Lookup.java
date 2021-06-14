@@ -31,7 +31,7 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 		영수증 번호: receipt number ( 오더 디테일의 order_no 를 이용해서 상세 영수증을 출력한다)
 		*/
 		ResultSet odrs;
-		odrs = trading_period("21/06/09");
+		odrs = receipt_number("2");
 	}
 	
 	static public ResultSet receipt_number(String search_Options) { 
@@ -42,8 +42,8 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				System.out.printf("order_detail_no : %-10s order_no : %-10s product_no : %-10s order_count : %-10s order_detail_price : %-10s\n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));	
+				System.out.printf("order_detail_no : %-10s order_no : %-10s serial_no : %-10s order_detail_price : %-10s\n",
+						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
 			}
 			return rs;
 		} catch (SQLException e) {
@@ -59,10 +59,9 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				System.out.printf("order_detail_no : %-10s order_no : %-10s product_no : %-10s order_count : %-10s order_detail_price : %-10s\n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-		
+			while(rs.next()){
+				System.out.printf("order_detail_no : %-10s order_no : %-10s serial_no : %-10s order_detail_price : %-10s\n",
+						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
 			}
 			return rs;		
 			
@@ -81,9 +80,9 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				System.out.printf("order_detail_no : %-10s order_no : %-10s product_no : %-10s order_count : %-10s order_detail_price : %-10s\n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+			while(rs.next()){
+				System.out.printf("order_detail_no : %-10s order_no : %-10s serial_no : %-10s order_detail_price : %-10s\n",
+						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
 			}
 			return rs;	
 			
@@ -102,10 +101,9 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				System.out.printf("order_detail_no : %-10s order_no : %-10s product_no : %-10s order_count : %-10s order_detail_price : %-10s\n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-				
+			while(rs.next()){
+				System.out.printf("order_detail_no : %-10s order_no : %-10s serial_no : %-10s order_detail_price : %-10s\n",
+						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
 			}
 			return rs;	
 		} catch (SQLException e) {
@@ -124,10 +122,9 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				System.out.printf("order_detail_no : %-10s order_no : %-10s product_no : %-10s order_count : %-10s order_detail_price : %-10s\n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-
+			while(rs.next()){
+				System.out.printf("order_detail_no : %-10s order_no : %-10s serial_no : %-10s order_detail_price : %-10s\n",
+						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
 			}
 			return rs;	
 		} catch (SQLException e) {

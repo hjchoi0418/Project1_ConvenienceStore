@@ -22,11 +22,56 @@ public class Receipt_Business {
 		판매금액: sale price ( 오더의 총액을 통해서 주문번호를 가져와 영수증을 출력한다)
 		상품코드: Product Code ( 오더 디테일의 prodcut_no 를 이용해서 영수증을 출력한다)
 		영수증 번호: receipt number ( 오더 디테일의 order_no 를 이용해서 영수증을 출력한다)
+		
+		영수증 발행 : receipt issue ( 딱히 할게 없다. receipt_number 기능으로 써도됨)
+		반품 재판매 : Return resale ( 영수증 번호로 영수증을 찾아서 rs를 반환한다음 상품판매로 넘기고 영수증을 삭제함.)
+		반품 업무 : Return service ( db에 들어가서 delete)
 		*/
 		ResultSet ors;
 		ors = trading_period("21/06/09");
+		
+	}
+	static public ResultSet Return_resale(String search_Options) { //반품 재판매 : Return resale ( 영수증 번호로 영수증을 찾아서 rs를 반환한다음 상품판매로 넘기고 영수증을 삭제함.)
+		ResultSet rs;
+		try {
+			Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT order_detail_no, o.order_no, serial_no, order_detail_price,"
+					+ " payment_method, order_amount FROM order_detail od INNER JOIN  order_ o ON od.order_no = o.order_no");
+			pstmt.setString(1, search_Options);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				System.out.printf("order_detail_no : %-10s order_no : %-10s serial_no : %-10s order_detail_price : %-10s payment_method : %-10s order_amount : %-10s ",
+						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));	
+			}
+			pstmt = con.prepareStatement("DELETE FROM order_detail WHERE order_no = ?;");
+			pstmt.setString(1, search_Options);
+			pstmt.executeUpdate();
+			return rs;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	static public void return_service (String search_Options) { // 제품 판매상태 0으로 바꾸고 영수증, 상세 영수증 삭제
+		
+		Connection con;
+		try {
+			con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("UPDATE all_porducts SET product_state = "+1+" WHERE seiral_no IN "
+					+ "(SELECT seiral_no FROM order_detail WHERE order no = ?) ");
+			pstmt.executeUpdate();
+			pstmt = con.prepareStatement("DELETE FROM order_detail WHERE order_no = ?;");
+			pstmt.setString(1, search_Options);
+			pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
+	
+	
 	static public ResultSet receipt_number(String search_Options) { 
 		ResultSet rs;
 		try {
