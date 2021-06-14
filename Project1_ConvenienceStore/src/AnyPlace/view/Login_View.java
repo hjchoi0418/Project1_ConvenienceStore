@@ -83,6 +83,7 @@ public class Login_View extends JFrame {
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setFont(new Font("나눔고딕", Font.BOLD, 15));
 		btnNewButton.setBackground(new Color(255, 204, 51));
+		btnNewButton.setFocusPainted(false);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -92,13 +93,13 @@ public class Login_View extends JFrame {
 		
 		
 		JButton joinButton = new JButton("join");
-		joinButton.setIcon(new ImageIcon("./가입버튼.jpg"));
-		joinButton.setSelectedIcon(new ImageIcon("./가입버튼.jpg"));
+		//joinButton.setIcon(new ImageIcon("./img/가입버튼.jpg"));
+	//	joinButton.setSelectedIcon(new ImageIcon("./img/가입버튼.jpg"));
 		joinButton.setForeground(new Color(255, 204, 51));
 		joinButton.setFont(new Font("나눔고딕", Font.PLAIN, 12));
-//		joinButton.setBorderPainted(false);
-//		joinButton.setContentAreaFilled(false);
-//		joinButton.setFocusPainted(false);
+		joinButton.setBorderPainted(false);
+		joinButton.setContentAreaFilled(false);
+		joinButton.setFocusPainted(false);
 	
 		joinButton.setBounds(850, 550, 74, 58);
 		getContentPane().add(joinButton);
