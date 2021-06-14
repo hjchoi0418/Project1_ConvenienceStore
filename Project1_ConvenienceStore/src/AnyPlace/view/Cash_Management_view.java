@@ -56,7 +56,7 @@ public class Cash_Management_view extends JFrame implements TableModelListener {
 		setTitle("시재점검");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setAlwaysOnTop(true);
-		setBounds(400, 100, 400, 220);
+		setBounds(100, 100, 1000, 500);
 		setResizable(false);
 		
 		table = new JTable(model);
