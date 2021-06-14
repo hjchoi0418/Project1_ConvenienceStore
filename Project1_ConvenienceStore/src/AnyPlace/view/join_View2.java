@@ -8,7 +8,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import javax.print.DocFlavor.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,10 +22,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
 
-public class Login_View extends JFrame {
+public class join_View2 extends JFrame {
 	ImageIcon icon;
 	JTextField id_field = new JTextField();
-	private JTextField textField;
+	JTextField textField1;
+	JTextField textField2;
 	
 		
 
@@ -35,7 +35,7 @@ public class Login_View extends JFrame {
         return largeBtnSz;
     }
 
-	     public Login_View() {
+	     public join_View2() {
 	    	
 	    	 setTitle("Any Place");
 	    	 
@@ -58,7 +58,7 @@ public class Login_View extends JFrame {
 //	             }
 //	    	 };
 	    	 try {	
-	    			final Image backgroundImage = javax.imageio.ImageIO.read(new File("./img/·Î±×ÀÎ_¹è°æ.jpg"));
+	    			final Image backgroundImage = javax.imageio.ImageIO.read(new File("./img/¹éº¸µå.jpg"));
 	    		    setContentPane(new JPanel(new BorderLayout()) {
 	    		        @Override public void paintComponent(Graphics g) {
 	    		            g.drawImage(backgroundImage, 0, 0, null);
@@ -79,11 +79,10 @@ public class Login_View extends JFrame {
 		setSize(1467,902);
 		getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("login");
+		JButton btnNewButton = new JButton("CREATE ACCOUNT");
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setFont(new Font("³ª´®°íµñ", Font.BOLD, 15));
 		btnNewButton.setBackground(new Color(255, 204, 51));
-		btnNewButton.setFocusPainted(false);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -91,34 +90,49 @@ public class Login_View extends JFrame {
 		btnNewButton.setBounds(557, 498, 353, 55);
 		getContentPane().add(btnNewButton);
 		
-		
-		JButton joinButton = new JButton("join");
-		//joinButton.setIcon(new ImageIcon("./img/°¡ÀÔ¹öÆ°.jpg"));
-	//	joinButton.setSelectedIcon(new ImageIcon("./img/°¡ÀÔ¹öÆ°.jpg"));
-		joinButton.setForeground(new Color(255, 204, 51));
-		joinButton.setFont(new Font("³ª´®°íµñ", Font.PLAIN, 12));
-		joinButton.setBorderPainted(false);
-		joinButton.setContentAreaFilled(false);
-		joinButton.setFocusPainted(false);
-	
-		joinButton.setBounds(850, 550, 74, 58);
-		getContentPane().add(joinButton);
-	     
-	    
-	     
-		textField = new JTextField();
-		textField.setToolTipText("ID");
-		textField.setHorizontalAlignment(SwingConstants.LEFT);
-		textField.setFont(new Font("³ª´®°íµñ", Font.BOLD, 15));
-		textField.setBounds(557, 421, 353, 55);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		textField1 = new JTextField();
+		textField1.setToolTipText("NAME");
+		textField1.setHorizontalAlignment(SwingConstants.LEFT);
+		textField1.setFont(new Font("³ª´®°íµñ", Font.BOLD, 15));
+		textField1.setBounds(557, 421, 353, 55);
+		getContentPane().add(textField1);
+		textField1.setColumns(10);
 		setVisible(true);
 		
-	     }
+		textField2 = new JTextField();
+		textField2.setToolTipText("ID");
+		textField2.setHorizontalAlignment(SwingConstants.LEFT);
+		textField2.setFont(new Font("³ª´®°íµñ", Font.BOLD, 15));
+		textField2.setBounds(557, 354, 353, 55);
+		getContentPane().add(textField2);
+		textField2.setColumns(10);
+		setVisible(true);
+		
+		
+		
+		
+	}
+//	     class ImagePanel extends JPanel{
+//	    	 private Image img;
+//
+//	    	 public ImagePanel (Image img) {
+//	    	 	this.img = img;
+//	    	 	setSize(new Dimension(img.getWidth(null),img.getHeight(null)));
+//	    	 	setPreferredSize(new Dimension(img.getWidth(null),img.getHeight(null)));
+//	    	 	setLayout(null);
+//	    	 }
+//	    	 public void paintComponent(Graphics g) {
+//	    	 	g.drawImage(img, 0, 0, null);
+//	    	 	
+//	    	 	ImagePanel panel = new ImagePanel(new ImageIcon("./img/·Î±×ÀÎ_¹è°æ.jpg").getImage());
+//	    		add(panel);
+//	    	 	pack();
+	    	 
+	     
+
 
 	public static void main(String[] args) {
-		new Login_View();
+		new join_View2();
 		
 	}
 }
