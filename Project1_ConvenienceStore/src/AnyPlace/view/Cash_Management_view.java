@@ -1,12 +1,13 @@
 package AnyPlace.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,11 +18,13 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import AnyPlace.controller.Cash_Management;
+import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import java.awt.Dimension;
 
 public class Cash_Management_view extends JPanel implements TableModelListener {
 
-	// 표 제목줄
-	String[] colNames = new String[] { "권종", "수량", "금액" };
 	// 표에 들어갈 데이터들 / 처음엔 빈 테이블 만들기 위해 데이터관리객체 생성
 	private Object[][] data = {
             {"50,000원", 0, 0},
@@ -49,17 +52,35 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 	};
     private JScrollPane scrollPane;
     private JTable table;
-	JPanel bottomPanel;
+	JPanel topPanel, centerPanel, bottomPanel;
+	JLabel label;
 	JButton btnPrint;
+	private JPanel panel;
+	private JLabel lblNewLabel;
 	
 	public Cash_Management_view() {
+		setBackground(Color.WHITE);
 		
 		table = new JTable(model);
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		table.setRowHeight(76);
+		table.getTableHeader().setReorderingAllowed(false);
 		scrollPane = new JScrollPane(table);
+		scrollPane.setBackground(Color.WHITE);
+		topPanel = new JPanel();
+		topPanel.setBackground(Color.WHITE);
+		topPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
+		centerPanel = new JPanel();
+		centerPanel.setBackground(Color.WHITE);
 		bottomPanel = new JPanel();
+		bottomPanel.setBorder(new EmptyBorder(5, 0, 5, 0));
+		bottomPanel.setBackground(Color.WHITE);
+		label = new JLabel("POS 현금");
+		label.setForeground(Color.BLACK);
+		label.setFont(new Font("맑은 고딕", Font.BOLD, 28));
 		btnPrint = new JButton("발행");
-
-		add(scrollPane, BorderLayout.CENTER);
+		btnPrint.setPreferredSize(new Dimension(57, 40));
+		setLayout(new BorderLayout(0, 0));
 
 		table.getModel().addTableModelListener(this);
 
@@ -67,13 +88,48 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Cash_Management.main(null);
+				String str = String.format("[시재점검표]\n"
+						+ "50,000\t %d개\t %d\n", get50000(), get50000() * 50000
+						+ "10,000\t %d개\t %d\n", get10000(), get10000() * 10000
+						+ "5,000\t %d개 \t %d\n", get5000(), get5000() * 5000
+						+ "1,000\t %d개 \t %d\n", get1000(), get1000() * 1000
+						+ "500\t %d개 \t %d\n", get500(), get500() * 500
+						+ "100\t %d개 \t %d\n", get100(), get100() * 100
+						+ "50\t %d개 \t %d\n", get50(), get50() * 50
+						+ "10\t %d개 \t %d\n", get10(), get10() * 10
+						+ "-------------------"
+						+ "점검계\t\t : %d", Cash_Management.getDbCash()
+						+ "POS기 현금\t\t : %d", Cash_Management.getPosCash()
+						+ "\n"
+						+ "차이\t\t : %d", Cash_Management.getPosCash() - Cash_Management.getDbCash()
+						);
+				JOptionPane.showMessageDialog(null, str);
 			}
 		});
+		topPanel.setLayout(new BorderLayout(0, 0));
 
-		bottomPanel.setLayout(new GridLayout());
+		topPanel.add(label);
+
+		centerPanel.setLayout(new GridLayout(0, 2, 0, 0));
+		centerPanel.add(scrollPane);
+
+		bottomPanel.setLayout(new GridLayout(0, 3, 0, 0));
+		JPanel empty_panel = new JPanel();
+		empty_panel.setBackground(Color.WHITE);
+		bottomPanel.add(empty_panel);
 		bottomPanel.add(btnPrint);
-
+		
+		add(topPanel, BorderLayout.NORTH);
+		add(centerPanel, BorderLayout.CENTER);
+		
+		panel = new JPanel();
+		centerPanel.add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		lblNewLabel = new JLabel("\uC5EC\uBC31\uC758 \uBBF8");
+		lblNewLabel.setFont(new Font("궁서체", Font.BOLD, 20));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblNewLabel);
 		add(bottomPanel, BorderLayout.SOUTH);
 		setVisible(true);
 	}

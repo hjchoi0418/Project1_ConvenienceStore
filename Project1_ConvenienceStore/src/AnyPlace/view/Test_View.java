@@ -24,7 +24,7 @@ import javax.swing.table.TableModel;
 
 import AnyPlace.controller.Cash_Management;
 
-public class Main_View extends JFrame implements Runnable, TableModelListener {
+public class Test_View extends JFrame implements Runnable, TableModelListener {
 
 	private JFrame frame;
 	private JTable table;
@@ -64,7 +64,7 @@ public class Main_View extends JFrame implements Runnable, TableModelListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main_View window = new Main_View();
+					Test_View window = new Test_View();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -73,7 +73,7 @@ public class Main_View extends JFrame implements Runnable, TableModelListener {
 		});
 	}
 
-	public Main_View() {
+	public Test_View() {
 		initialize();
 	}
 
