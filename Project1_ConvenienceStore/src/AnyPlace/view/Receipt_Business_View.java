@@ -9,6 +9,10 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,7 +26,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
+import AnyPlace.controller.Receipt_Business;
 
 public class Receipt_Business_View extends JFrame{
 	ImageIcon icon;
@@ -35,6 +42,8 @@ public class Receipt_Business_View extends JFrame{
 	}
 
 	     public Receipt_Business_View() {
+	    	 
+	    	 
 	    	
 	    	 setTitle("Any Place");
 	    	 
@@ -152,20 +161,35 @@ public class Receipt_Business_View extends JFrame{
 
 	     
 	    public static void addtalbe(Container pane) {
-
-	        String [] [] data_data = {{"3","3","3","3","3"},{"3","3","3","3","3"}};     
-	        String [] data_title = {"일자","영수증","시간","금액","거래구분"};        
-	        JTable table = new JTable(data_data,data_title);
+	    
+	    	String [] title = {"일자","영수증","금액","거래구분"};
+	        DefaultTableModel model = new DefaultTableModel(title,0);
+	        JTable table = new JTable(model);
 	        table.setRowSelectionAllowed(true);
+	        
 	        EtchedBorder eborder =  new EtchedBorder();   
 	        table.setBorder(eborder); 
-	 
+	        
 	    	JScrollPane panel = new JScrollPane(table);
-	        panel.setBounds(420, 269, 400, 380);
-
+	    	panel.setBounds(420, 269, 400, 380);
+	    	
+	    	Receipt_Business rb = new Receipt_Business();
+	    	ResultSet rs = rb.all_Receipt();
+	    	String[] data;
+	    	
+	    	try {
+	    	while(rs.next()) {
+	    		data = new String[] {"1","1","1","1"};
+	    	//data = new String[]{rs.getString(1), rs.getString(1), rs.getString(1), rs.getString(1)};
+	    		model.addRow(data);
+	    	}
+	    	} catch (SQLException e) {
+	    		e.printStackTrace();
+	    	}
 	        pane.add(panel);
+	        //메서드 말고 밖으로 빼야할듯..
+	    } 
 
-	    }
 
 	 	public static void create_serch_button(Container pane) {
 			ImageIcon icon = new ImageIcon("./image/serch.png");

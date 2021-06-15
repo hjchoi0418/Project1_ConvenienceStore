@@ -10,8 +10,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class Receipt_Business {
 	
-	static HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
-	static HikariDataSource ds = new HikariDataSource(config);
+
 
 	public static void main(String[] args) {
 
@@ -28,10 +27,13 @@ public class Receipt_Business {
 		반품 업무 : Return service ( db에 들어가서 delete)
 		*/
 		ResultSet ors;
-		ors = trading_period("21/06/09");
+
+		ors = all_Receipt();
 		
 	}
 	static public ResultSet Return_resale(String search_Options) { //반품 재판매 : Return resale ( 영수증 번호로 영수증을 찾아서 rs를 반환한다음 상품판매로 넘기고 영수증을 삭제함.)
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
@@ -54,7 +56,8 @@ public class Receipt_Business {
 	}
 	
 	static public void return_service (String search_Options) { // 제품 판매상태 0으로 바꾸고 영수증, 상세 영수증 삭제
-		
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		Connection con;
 		try {
 			con = ds.getConnection();
@@ -73,6 +76,8 @@ public class Receipt_Business {
 	
 	
 	static public ResultSet receipt_number(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
@@ -91,6 +96,8 @@ public class Receipt_Business {
 	}
 	
 	static public ResultSet product_code(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
@@ -110,6 +117,8 @@ public class Receipt_Business {
 		}
 	}
 	static public ResultSet sale_price(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
@@ -128,6 +137,8 @@ public class Receipt_Business {
 	}
 	
 	static public ResultSet method_of_payment(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
@@ -146,11 +157,32 @@ public class Receipt_Business {
 	}
 	
 	static public ResultSet trading_period(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_ WHERE to_date(order_date, 'yy/mm/dd') = ?");
 			pstmt.setString(1, search_Options);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
+						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
+			}
+			return rs;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	static public ResultSet all_Receipt() { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
+		ResultSet rs;
+		try {
+			Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_");
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",

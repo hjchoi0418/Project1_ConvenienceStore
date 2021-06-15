@@ -47,7 +47,7 @@ public class Join_View extends JFrame{
          @Override
          public void actionPerformed(ActionEvent e) {
             String n = name.getText();
-            String i = name.getText();
+            String i = id.getText();
             Join.setNew_employee_id(i);
             Join.setNew_employee_name(n);
             Join.main(null);

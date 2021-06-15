@@ -15,9 +15,8 @@ import com.zaxxer.hikari.HikariDataSource;
 import AnyPlace.model.Order_Detail;
 
 public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return 
-	
-	static HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
-	static HikariDataSource ds = new HikariDataSource(config);
+
+
 
 
 	public static void main(String[] args) {
@@ -35,6 +34,8 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 	}
 	
 	static public ResultSet receipt_number(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
@@ -52,6 +53,8 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 		}
 	}
 	static public ResultSet product_code(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
@@ -72,6 +75,8 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 	}
 	
 	static public ResultSet sale_price(String search_Options) { //판매금액: sale price ( 오더의 총액을 통해서 주문번호를 가져와 상세 영수증을 출력한다)
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
@@ -93,6 +98,8 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 	}
 	
 	static public ResultSet method_of_payment(String search_Options) { // method of payment (오더의 결재방식을 통해서 주문번호를 가져와 상세 영수증을 출력한다)
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
@@ -114,6 +121,8 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 	}
 	
 	static public ResultSet trading_period(String search_Options) { // trading period ( 오더의 주문날짜를 통해서 주문번호를 가져와 상세 영수증을 출력한다)
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
