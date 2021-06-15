@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class View extends JFrame implements Runnable {
-	private ImageIcon icon;
 	private JPanel main_panel;
 	JButton menu1, menu2, menu3, menu4, menu5, logoutBtn;
 	private JLabel time_label, user_label;
