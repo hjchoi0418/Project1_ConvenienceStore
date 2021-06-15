@@ -18,7 +18,7 @@ import javax.swing.table.TableModel;
 
 import AnyPlace.controller.Cash_Management;
 
-public class Cash_Management_view extends JFrame implements TableModelListener {
+public class Cash_Management_view extends JPanel implements TableModelListener {
 
 	// 표 제목줄
 	String[] colNames = new String[] { "권종", "수량", "금액" };
@@ -53,11 +53,6 @@ public class Cash_Management_view extends JFrame implements TableModelListener {
 	JButton btnPrint;
 	
 	public Cash_Management_view() {
-		setTitle("시재점검");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setAlwaysOnTop(true);
-		setBounds(100, 100, 1000, 500);
-		setResizable(false);
 		
 		table = new JTable(model);
 		scrollPane = new JScrollPane(table);
