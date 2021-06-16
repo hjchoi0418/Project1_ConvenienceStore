@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import AnyPlace.controller.DisposalCont;
+import AnyPlace.mouseEventListener.DisposalView_MouseEventListener;
 
 import java.awt.Font;
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
@@ -41,7 +43,7 @@ public class PaymentManagementDisposal_View extends JFrame {
 	private JButton button_1;
 
 	int row;
-	MouseEventListener mel = new MouseEventListener(table);
+	DisposalView_MouseEventListener mel = new DisposalView_MouseEventListener(table);
 
 	PaymentManagementDisposal_View() {
 		getContentPane().setLayout(null);
@@ -60,7 +62,8 @@ public class PaymentManagementDisposal_View extends JFrame {
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // ¥‹¿œº±≈√
 		table.setRowSelectionAllowed(true);	// ºø º±≈√µ«¥¬ ªˆ¿Ã .. 
-		table.addMouseListener(new MouseEventListener(table));
+		table.getTableHeader().setReorderingAllowed(false);
+		table.addMouseListener(new DisposalView_MouseEventListener(table));
 //		table.setForeground(new Color(75, 0, 130));
 //		table.setBackground(new Color(192, 192, 192));
 //		table.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 12));
@@ -103,14 +106,19 @@ public class PaymentManagementDisposal_View extends JFrame {
 		JButton btnNewButton_1 = new JButton("∆Û±‚ µÓ∑œ");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("§∑§∑");
+				System.out.println("ssss : " + Arrays.toString(mel.str_arr));
+				disposalCont.delData(mel.str_arr);
+				dispose();
+				new PaymentManagementDisposal_View();
 			}
 		});
 		btnNewButton_1.setBounds(528, 10, 97, 43);
 		getContentPane().add(btnNewButton_1);
 
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(850, 600);
 		setVisible(true);
+		
 	}
 
 	public static void main(String[] args) {
