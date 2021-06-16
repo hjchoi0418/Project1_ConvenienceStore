@@ -28,7 +28,8 @@ public class Receipt_Business {
 		*/
 		ResultSet ors;
 
-		ors = all_Receipt();
+		return_service("2");
+		
 		
 	}
 	static public ResultSet Return_resale(String search_Options) { //반품 재판매 : Return resale ( 영수증 번호로 영수증을 찾아서 rs를 반환한다음 상품판매로 넘기고 영수증을 삭제함.)
@@ -41,11 +42,8 @@ public class Receipt_Business {
 					+ " payment_method, order_amount FROM order_detail od INNER JOIN  order_ o ON od.order_no = o.order_no");
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				System.out.printf("order_detail_no : %-10s order_no : %-10s serial_no : %-10s order_detail_price : %-10s payment_method : %-10s order_amount : %-10s ",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));	
-			}
-			pstmt = con.prepareStatement("DELETE FROM order_detail WHERE order_no = ?;");
+
+			pstmt = con.prepareStatement("DELETE FROM order_detail WHERE order_no = ?");
 			pstmt.setString(1, search_Options);
 			pstmt.executeUpdate();
 			return rs;
@@ -61,10 +59,13 @@ public class Receipt_Business {
 		Connection con;
 		try {
 			con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("UPDATE all_porducts SET product_state = "+1+" WHERE seiral_no IN "
-					+ "(SELECT seiral_no FROM order_detail WHERE order no = ?) ");
+			PreparedStatement pstmt = con.prepareStatement("UPDATE all_products SET product_state = 1 WHERE serial_no IN"
+					+ "(SELECT serial_no FROM order_detail WHERE order_no = ?)");
+			pstmt.setString(1, search_Options);
 			pstmt.executeUpdate();
-			pstmt = con.prepareStatement("DELETE FROM order_detail WHERE order_no = ?;");
+			pstmt = con.prepareStatement("DELETE FROM order_detail WHERE order_no = ?");
+			pstmt.setString(1, search_Options);
+			pstmt = con.prepareStatement("DELETE FROM order_ WHERE order_no = ?");
 			pstmt.setString(1, search_Options);
 			pstmt.executeUpdate();
 		
@@ -84,10 +85,7 @@ public class Receipt_Business {
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_ WHERE order_no = ?");
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
-			}
+
 			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -105,10 +103,7 @@ public class Receipt_Business {
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
 			
-			while(rs.next()){
-				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
-			}
+
 			return rs;		
 			
 		} catch (SQLException e) {
@@ -125,10 +120,7 @@ public class Receipt_Business {
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_ WHERE order_amount = ?");
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
-			}
+
 			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -145,10 +137,7 @@ public class Receipt_Business {
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_ WHERE payment_method = ?");
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
-			}
+
 			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -165,10 +154,7 @@ public class Receipt_Business {
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_ WHERE to_date(order_date, 'yy/mm/dd') = ?");
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
-			}
+
 			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -184,10 +170,6 @@ public class Receipt_Business {
 			Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_");
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
-			}
 			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
