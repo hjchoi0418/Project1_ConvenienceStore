@@ -1,16 +1,23 @@
 package AnyPlace.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -18,10 +25,8 @@ import javax.swing.table.TableModel;
 
 import AnyPlace.controller.Cash_Management;
 
-public class Cash_Management_view extends JFrame implements TableModelListener {
+public class Cash_Management_view extends JPanel implements TableModelListener {
 
-	// 표 제목줄
-	String[] colNames = new String[] { "권종", "수량", "금액" };
 	// 표에 들어갈 데이터들 / 처음엔 빈 테이블 만들기 위해 데이터관리객체 생성
 	private Object[][] data = {
             {"50,000원", 0, 0},
@@ -47,72 +52,171 @@ public class Cash_Management_view extends JFrame implements TableModelListener {
 			return columnEditables[column];
 		}
 	};
-    private JScrollPane scrollPane;
-    private JTable table;
-	JPanel bottomPanel;
+    private JScrollPane l_scrollPane;
+    private JTable l_table;
+	JPanel topPanel, centerPanel, bottomPanel;
+	JLabel label;
 	JButton btnPrint;
+	private JScrollPane r_scrollPane;
+	private JTable r_table;
 	
 	public Cash_Management_view() {
-		setTitle("시재점검");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setAlwaysOnTop(true);
-		setBounds(100, 100, 1000, 500);
-		setResizable(false);
+		setBorder(new EmptyBorder(20, 50, 20, 50));
+		setBackground(Color.WHITE);
 		
-		table = new JTable(model);
-		scrollPane = new JScrollPane(table);
+		l_table = new JTable(new DefaultTableModel(
+			new Object[][] {
+				{"50,000\uC6D0", new Integer(0), new Integer(0)},
+				{"10,000\uC6D0", new Integer(0), new Integer(0)},
+				{"5,000\uC6D0", new Integer(0), new Integer(0)},
+				{"1,000\uC6D0", new Integer(0), new Integer(0)},
+			},
+			new String[] {
+				"\uAD8C\uC885", "\uC218\uB7C9", "\uAE08\uC561"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, Integer.class, Integer.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+
+			boolean[] columnEditables = new boolean[] { false, true, false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		l_table.setIntercellSpacing(new Dimension(10, 1));
+		l_table.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		l_table.setRowHeight(134);
+		l_table.getTableHeader().setReorderingAllowed(false);
+		l_scrollPane = new JScrollPane(l_table);
+		l_scrollPane.setBorder(new LineBorder(new Color(0, 0, 0)));
+		l_scrollPane.setBackground(Color.WHITE);
+		topPanel = new JPanel();
+		topPanel.setBackground(Color.WHITE);
+		topPanel.setBorder(new EmptyBorder(0, 10, 15, 10));
+		centerPanel = new JPanel();
+		centerPanel.setBackground(Color.WHITE);
 		bottomPanel = new JPanel();
-		btnPrint = new JButton("발행");
+		bottomPanel.setBorder(new EmptyBorder(5, 0, 5, 0));
+		bottomPanel.setBackground(Color.WHITE);
+		label = new JLabel("POS 현금");
+		label.setForeground(new Color(22, 56, 81));
+		label.setFont(new Font("맑은 고딕", Font.BOLD, 28));
+		btnPrint = new JButton("발행", null);
+		btnPrint.setPreferredSize(new Dimension(57, 40));
+		setLayout(new BorderLayout(0, 0));
 
-		add(scrollPane, BorderLayout.CENTER);
-
-		table.getModel().addTableModelListener(this);
+		l_table.getModel().addTableModelListener(this);
 
 		btnPrint.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Cash_Management.main(null);
+				String str = String.format("[시재점검표]\n"
+						+ "50,000\t %d개\t %d\n", get50000(), get50000() * 50000
+						+ "10,000\t %d개\t %d\n", get10000(), get10000() * 10000
+						+ "5,000\t %d개 \t %d\n", get5000(), get5000() * 5000
+						+ "1,000\t %d개 \t %d\n", get1000(), get1000() * 1000
+						+ "500\t %d개 \t %d\n", get500(), get500() * 500
+						+ "100\t %d개 \t %d\n", get100(), get100() * 100
+						+ "50\t %d개 \t %d\n", get50(), get50() * 50
+						+ "10\t %d개 \t %d\n", get10(), get10() * 10
+						+ "-------------------"
+						+ "점검계\t\t : %d", Cash_Management.getDbCash()
+						+ "POS기 현금\t\t : %d", Cash_Management.getPosCash()
+						+ "\n"
+						+ "차이\t\t : %d", Cash_Management.getPosCash() - Cash_Management.getDbCash()
+						);
+				JOptionPane.showMessageDialog(null, str);
 			}
 		});
+		topPanel.setLayout(new BorderLayout(0, 0));
 
-		bottomPanel.setLayout(new GridLayout());
+		topPanel.add(label);
+
+		centerPanel.setLayout(new GridLayout(0, 2, 0, 0));
+		centerPanel.add(l_scrollPane);
+
+		bottomPanel.setLayout(new GridLayout(0, 3, 0, 0));
+		JPanel empty_panel = new JPanel();
+		empty_panel.setBackground(Color.WHITE);
+		bottomPanel.add(empty_panel);
 		bottomPanel.add(btnPrint);
+		
+		add(topPanel, BorderLayout.NORTH);
+		add(centerPanel, BorderLayout.CENTER);
+		
+		r_scrollPane = new JScrollPane((Component) null);
+		r_scrollPane.setBorder(new LineBorder(new Color(0, 0, 0)));
+		r_scrollPane.setBackground(Color.WHITE);
+		centerPanel.add(r_scrollPane);
+		
+		r_table = new JTable(new DefaultTableModel(
+			new Object[][] {
+				{"500\uC6D0", new Integer(0), new Integer(0)},
+				{"100\uC6D0", new Integer(0), new Integer(0)},
+				{"50\uC6D0", new Integer(0), new Integer(0)},
+				{"10\uC6D0", new Integer(0), new Integer(0)},
+			},
+			new String[] {
+				"\uAD8C\uC885", "\uC218\uB7C9", "\uAE08\uC561"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, Integer.class, Integer.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
 
+			boolean[] columnEditables = new boolean[] { false, true, false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		r_table.setIntercellSpacing(new Dimension(10, 1));
+		r_scrollPane.setViewportView(r_table);
+		r_table.setRowHeight(134);
+		r_table.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		add(bottomPanel, BorderLayout.SOUTH);
 		setVisible(true);
 	}
 
 	public int get50000() {
-		return Integer.parseInt("" + table.getValueAt(0, 1));
+		return Integer.parseInt("" + l_table.getValueAt(0, 1));
 	}
 	
 	public int get10000() {
-		return Integer.parseInt("" + table.getValueAt(1, 1));
+		return Integer.parseInt("" + l_table.getValueAt(1, 1));
 	}
 	
 	public int get5000() {
-		return Integer.parseInt("" + table.getValueAt(2, 1));
+		return Integer.parseInt("" + l_table.getValueAt(2, 1));
 	}
 	
 	public int get1000() {
-		return Integer.parseInt("" + table.getValueAt(3, 1));
+		return Integer.parseInt("" + l_table.getValueAt(3, 1));
 	}
 	
 	public int get500() {
-		return Integer.parseInt("" + table.getValueAt(4, 1));
+		return Integer.parseInt("" + r_table.getValueAt(0, 1));
 	}
 	
 	public int get100() {
-		return Integer.parseInt("" + table.getValueAt(5, 1));
+		return Integer.parseInt("" + r_table.getValueAt(1, 1));
 	}
 	
 	public int get50() {
-		return Integer.parseInt("" + table.getValueAt(6, 1));
+		return Integer.parseInt("" + r_table.getValueAt(2, 1));
 	}
 	
 	public int get10() {
-		return Integer.parseInt("" + table.getValueAt(7, 1));
+		return Integer.parseInt("" + r_table.getValueAt(3, 1));
 	}
 
 	@Override
