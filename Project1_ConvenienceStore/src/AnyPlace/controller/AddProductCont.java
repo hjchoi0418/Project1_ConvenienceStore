@@ -1,13 +1,16 @@
 package AnyPlace.controller;
 
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import AnyPlace.DBConnector;
-import AnyPlace.model.Product;
+import AnyPlace.JPool;
+import AnyPlace.main;
+import AnyPlace.model.*;
 
 public class AddProductCont {
 /*
@@ -64,7 +67,7 @@ public class AddProductCont {
 	}
 	public static void main(String[] args) {
 		
-		try (Connection conn = DBConnector.getConnection();
+		try (Connection conn = JPool.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt_insert = conn.prepareStatement(sql_insert);
 				ResultSet rs = pstmt.executeQuery();) {
