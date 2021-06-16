@@ -115,7 +115,7 @@ public class PaymentManagementMain_View extends JFrame {
 
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocation(400, 400);
+		setLocation(370, 50);
 		setSize(1467, 902);
 		getContentPane().setLayout(null);
 		setVisible(true);
