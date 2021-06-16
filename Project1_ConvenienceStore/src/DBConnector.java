@@ -15,7 +15,7 @@ public class DBConnector {
 
 	
 	static {
-		try (BufferedReader in = new BufferedReader(new FileReader("./HR2.txt"))) {
+		try (BufferedReader in = new BufferedReader(new FileReader(".db.txt"))) {
 			url = in.readLine();
 			id = in.readLine();
 			password = in.readLine();

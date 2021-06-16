@@ -9,7 +9,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -117,20 +116,30 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String str = String.format("[시재점검표]\n"
-						+ "50,000\t %d개\t %d\n", get50000(), get50000() * 50000
-						+ "10,000\t %d개\t %d\n", get10000(), get10000() * 10000
-						+ "5,000\t %d개 \t %d\n", get5000(), get5000() * 5000
-						+ "1,000\t %d개 \t %d\n", get1000(), get1000() * 1000
-						+ "500\t %d개 \t %d\n", get500(), get500() * 500
-						+ "100\t %d개 \t %d\n", get100(), get100() * 100
-						+ "50\t %d개 \t %d\n", get50(), get50() * 50
-						+ "10\t %d개 \t %d\n", get10(), get10() * 10
-						+ "-------------------"
-						+ "점검계\t\t : %d", Cash_Management.getDbCash()
-						+ "POS기 현금\t\t : %d", Cash_Management.getPosCash()
+						+ "50,000\t %d개\t %d\n"
+						+ "10,000\t %d개\t %d\n"
+						+ "5,000\t %d개 \t %d\n"
+						+ "1,000\t %d개 \t %d\n"
+						+ "500\t %d개 \t %d\n"
+						+ "100\t %d개 \t %d\n"
+						+ "50\t %d개 \t %d\n"
+						+ "10\t %d개 \t %d\n"
+						+ "-------------------\n"
+						+ "점검계\t\t : %d\n"
+						+ "POS기 현금\t\t : %d\n"
 						+ "\n"
-						+ "차이\t\t : %d", Cash_Management.getPosCash() - Cash_Management.getDbCash()
-						);
+						+ "차이\t\t : %d"
+						, get50000(), get50000() * 50000
+						, get10000(), get10000() * 10000
+						, get5000(), get5000() * 5000
+						, get1000(), get1000() * 1000
+						, get500(), get500() * 500
+						, get100(), get100() * 100
+						, get50(), get50() * 50
+						, get10(), get10() * 10
+						, Cash_Management.getDbCash()
+						, getPosCash()
+						, getPosCash() - Cash_Management.getDbCash());
 				JOptionPane.showMessageDialog(null, str);
 			}
 		});
@@ -217,6 +226,17 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 	
 	public int get10() {
 		return Integer.parseInt("" + r_table.getValueAt(3, 1));
+	}
+	
+	public int getPosCash() {
+		return Integer.parseInt("" + l_table.getValueAt(0, 2)) +
+				Integer.parseInt("" + l_table.getValueAt(1, 2)) +
+				Integer.parseInt("" + l_table.getValueAt(2, 2)) +
+				Integer.parseInt("" + l_table.getValueAt(3, 2)) +
+				Integer.parseInt("" + r_table.getValueAt(0, 2)) +
+				Integer.parseInt("" + r_table.getValueAt(1, 2)) +
+				Integer.parseInt("" + r_table.getValueAt(2, 2)) +
+				Integer.parseInt("" + r_table.getValueAt(3, 2));
 	}
 
 	@Override

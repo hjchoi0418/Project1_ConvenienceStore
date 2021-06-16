@@ -1,6 +1,7 @@
 package AnyPlace.view;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -123,6 +124,9 @@ public class View extends JFrame implements Runnable {
 				btnEnable();
 				menu4.setEnabled(false);
 				main_panel.removeAll();
+				
+				Container pd_panel = new PaymentManagementDisposal_View().getContentPane();
+				main_panel.add(pd_panel);
 				
 				main_panel.updateUI();
 			}
