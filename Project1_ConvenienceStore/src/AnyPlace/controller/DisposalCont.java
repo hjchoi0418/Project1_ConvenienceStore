@@ -41,6 +41,7 @@ public class DisposalCont {
 	// 테이블 데이터
 	public String[][] getData() {
 
+		System.out.println(sql);
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
