@@ -63,20 +63,20 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		
 		table = new JTable(model);
 		table.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
-		table.setRowHeight(76);
+		table.setRowHeight(72);
 		table.getTableHeader().setReorderingAllowed(false);
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBackground(Color.WHITE);
 		topPanel = new JPanel();
 		topPanel.setBackground(Color.WHITE);
-		topPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
+		topPanel.setBorder(new EmptyBorder(0, 10, 20, 10));
 		centerPanel = new JPanel();
 		centerPanel.setBackground(Color.WHITE);
 		bottomPanel = new JPanel();
 		bottomPanel.setBorder(new EmptyBorder(5, 0, 5, 0));
 		bottomPanel.setBackground(Color.WHITE);
 		label = new JLabel("POS Çö±Ý");
-		label.setForeground(Color.BLACK);
+		label.setForeground(new Color(22, 56, 81));
 		label.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 28));
 		btnPrint = new JButton("¹ßÇà");
 		btnPrint.setPreferredSize(new Dimension(57, 40));
