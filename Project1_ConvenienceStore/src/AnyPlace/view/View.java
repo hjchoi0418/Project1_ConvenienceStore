@@ -125,7 +125,7 @@ public class View extends JFrame implements Runnable {
 				menu4.setEnabled(false);
 				main_panel.removeAll();
 				
-				Container pd_panel = new PaymentManagementDisposal_View().getContentPane();
+				Container pd_panel = new PaymentManagementMain_View();//.getContentPane();
 				main_panel.add(pd_panel);
 				
 				main_panel.updateUI();

@@ -16,7 +16,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 
-public class PaymentManagementMain_View extends JFrame {
+public class PaymentManagementMain_View extends JPanel {
 	ImageIcon icon;
 
 	public Dimension getPreferredSize() {
@@ -26,25 +26,25 @@ public class PaymentManagementMain_View extends JFrame {
 
 	public PaymentManagementMain_View() {
 
-		setTitle("Any Place");
+//		setTitle("Any Place");
+//
+//		 setLayout(null);
+//
+//		try {
+//			final Image backgroundImage = javax.imageio.ImageIO.read(new File("./img/애니플_보드.jpg"));
+//			setContentPane(new JPanel(new BorderLayout()) {
+//				@Override
+//				public void paintComponent(Graphics g) {
+//					g.drawImage(backgroundImage, 0, 0, null);
+//					setOpaque(false);
+//					super.paintComponent(g);
+//				}
+//			});
+//		} catch (IOException e) {
+//			throw new RuntimeException(e);
+//		}
 
-		getContentPane().setLayout(null);
-
-		try {
-			final Image backgroundImage = javax.imageio.ImageIO.read(new File("./img/애니플_보드.jpg"));
-			setContentPane(new JPanel(new BorderLayout()) {
-				@Override
-				public void paintComponent(Graphics g) {
-					g.drawImage(backgroundImage, 0, 0, null);
-					setOpaque(false);
-					super.paintComponent(g);
-				}
-			});
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-
-		JFrame frame = new JFrame();
+//		JFrame frame = new JFrame();
 
 		// 메뉴버튼
 
@@ -56,7 +56,7 @@ public class PaymentManagementMain_View extends JFrame {
 		menu1.setContentAreaFilled(false);
 		menu1.setFocusPainted(false);
 		menu1.setBounds(95, 269, 239, 86);
-		getContentPane().add(menu1);
+		 add(menu1);
 
 		JButton menu2 = new JButton(new ImageIcon("./img/menu_A/메뉴_02.png"));
 		menu2.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_02.png"));
@@ -65,7 +65,7 @@ public class PaymentManagementMain_View extends JFrame {
 		menu2.setContentAreaFilled(false);
 		menu2.setFocusPainted(false);
 		menu2.setBounds(95, 355, 239, 86);
-		getContentPane().add(menu2);
+		 add(menu2);
 
 		JButton menu3 = new JButton(new ImageIcon("./img/menu_A/메뉴_03.png"));
 		menu3.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_03.png"));
@@ -74,7 +74,7 @@ public class PaymentManagementMain_View extends JFrame {
 		menu3.setContentAreaFilled(false);
 		menu3.setFocusPainted(false);
 		menu3.setBounds(95, 441, 239, 86);
-		getContentPane().add(menu3);
+		 add(menu3);
 
 		JButton menu4 = new JButton(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
 		menu4.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
@@ -83,7 +83,7 @@ public class PaymentManagementMain_View extends JFrame {
 		menu4.setContentAreaFilled(false);
 		menu4.setFocusPainted(false);
 		menu4.setBounds(95, 527, 239, 86);
-		getContentPane().add(menu4);
+		 add(menu4);
 
 		JButton menu5 = new JButton(new ImageIcon("./img/menu_A/메뉴_05.png"));
 		menu5.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_05.png"));
@@ -92,7 +92,7 @@ public class PaymentManagementMain_View extends JFrame {
 		menu5.setContentAreaFilled(false);
 		menu5.setFocusPainted(false);
 		menu5.setBounds(95, 613, 239, 86);
-		getContentPane().add(menu5);
+		 add(menu5);
 
 		// 그 외 버튼
 
@@ -102,7 +102,7 @@ public class PaymentManagementMain_View extends JFrame {
 		폐기등록.setContentAreaFilled(false);
 		폐기등록.setFocusPainted(false);
 		폐기등록.setBounds(450, 230, 249, 348);
-		getContentPane().add(폐기등록);
+		 add(폐기등록);
 
 		JButton 배송주문 = new JButton(new ImageIcon("./img/menu_C/배송주문.png"));
 		배송주문.setPressedIcon(new ImageIcon("./img/menu_C/배송주문_over.png"));
@@ -110,14 +110,14 @@ public class PaymentManagementMain_View extends JFrame {
 		배송주문.setContentAreaFilled(false);
 		배송주문.setFocusPainted(false);
 		배송주문.setBounds(750, 230, 249, 348);
-		getContentPane().add(배송주문);
+		 add(배송주문);
 
 
 
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(370, 50);
 		setSize(1467, 902);
-		getContentPane().setLayout(null);
+//		 setLayout(null);
 		setVisible(true);
 
 	}
