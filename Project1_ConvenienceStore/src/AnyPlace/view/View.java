@@ -178,6 +178,7 @@ public class View extends JFrame implements Runnable {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(200, 100);
 		setSize(1467, 902);
+		setResizable(false);
 		getContentPane().setLayout(null);
 		setVisible(true);
 		
@@ -203,12 +204,6 @@ public class View extends JFrame implements Runnable {
 		menu3.setEnabled(true);
 		menu4.setEnabled(true);
 		menu5.setEnabled(true);
-		
-		menu1.setIcon(new ImageIcon("./img/menu_A/메뉴_01.png"));
-		menu2.setIcon(new ImageIcon("./img/menu_A/메뉴_02.png"));
-		menu3.setIcon(new ImageIcon("./img/menu_A/메뉴_03.png"));
-		menu4.setIcon(new ImageIcon("./img/menu_A/메뉴_04.png"));
-		menu5.setIcon(new ImageIcon("./img/menu_A/메뉴_05.png"));
 	}
 
 	public static void main(String[] args) {

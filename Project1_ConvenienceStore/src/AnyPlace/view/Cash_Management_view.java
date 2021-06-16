@@ -59,11 +59,12 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 	private JLabel lblNewLabel;
 	
 	public Cash_Management_view() {
+		setBorder(new EmptyBorder(20, 50, 20, 50));
 		setBackground(Color.WHITE);
 		
 		table = new JTable(model);
 		table.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
-		table.setRowHeight(72);
+		table.setRowHeight(67);
 		table.getTableHeader().setReorderingAllowed(false);
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBackground(Color.WHITE);
