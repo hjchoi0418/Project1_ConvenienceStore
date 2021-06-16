@@ -2,26 +2,28 @@ package AnyPlace.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import AnyPlace.controller.Cash_Management;
-import javax.swing.border.EmptyBorder;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.Dimension;
 
 public class Cash_Management_view extends JPanel implements TableModelListener {
 
@@ -50,27 +52,52 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 			return columnEditables[column];
 		}
 	};
-    private JScrollPane scrollPane;
-    private JTable table;
+    private JScrollPane l_scrollPane;
+    private JTable l_table;
 	JPanel topPanel, centerPanel, bottomPanel;
 	JLabel label;
 	JButton btnPrint;
-	private JPanel panel;
-	private JLabel lblNewLabel;
+	private JScrollPane r_scrollPane;
+	private JTable r_table;
 	
 	public Cash_Management_view() {
 		setBorder(new EmptyBorder(20, 50, 20, 50));
 		setBackground(Color.WHITE);
 		
-		table = new JTable(model);
-		table.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
-		table.setRowHeight(67);
-		table.getTableHeader().setReorderingAllowed(false);
-		scrollPane = new JScrollPane(table);
-		scrollPane.setBackground(Color.WHITE);
+		l_table = new JTable(new DefaultTableModel(
+			new Object[][] {
+				{"50,000\uC6D0", new Integer(0), new Integer(0)},
+				{"10,000\uC6D0", new Integer(0), new Integer(0)},
+				{"5,000\uC6D0", new Integer(0), new Integer(0)},
+				{"1,000\uC6D0", new Integer(0), new Integer(0)},
+			},
+			new String[] {
+				"\uAD8C\uC885", "\uC218\uB7C9", "\uAE08\uC561"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, Integer.class, Integer.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+
+			boolean[] columnEditables = new boolean[] { false, true, false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		l_table.setIntercellSpacing(new Dimension(10, 1));
+		l_table.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
+		l_table.setRowHeight(134);
+		l_table.getTableHeader().setReorderingAllowed(false);
+		l_scrollPane = new JScrollPane(l_table);
+		l_scrollPane.setBorder(new LineBorder(new Color(0, 0, 0)));
+		l_scrollPane.setBackground(Color.WHITE);
 		topPanel = new JPanel();
 		topPanel.setBackground(Color.WHITE);
-		topPanel.setBorder(new EmptyBorder(0, 10, 20, 10));
+		topPanel.setBorder(new EmptyBorder(0, 10, 15, 10));
 		centerPanel = new JPanel();
 		centerPanel.setBackground(Color.WHITE);
 		bottomPanel = new JPanel();
@@ -79,11 +106,11 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		label = new JLabel("POS Çö±Ý");
 		label.setForeground(new Color(22, 56, 81));
 		label.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 28));
-		btnPrint = new JButton("¹ßÇà");
+		btnPrint = new JButton("¹ßÇà", null);
 		btnPrint.setPreferredSize(new Dimension(57, 40));
 		setLayout(new BorderLayout(0, 0));
 
-		table.getModel().addTableModelListener(this);
+		l_table.getModel().addTableModelListener(this);
 
 		btnPrint.addActionListener(new ActionListener() {
 
@@ -112,7 +139,7 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		topPanel.add(label);
 
 		centerPanel.setLayout(new GridLayout(0, 2, 0, 0));
-		centerPanel.add(scrollPane);
+		centerPanel.add(l_scrollPane);
 
 		bottomPanel.setLayout(new GridLayout(0, 3, 0, 0));
 		JPanel empty_panel = new JPanel();
@@ -123,48 +150,73 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		add(topPanel, BorderLayout.NORTH);
 		add(centerPanel, BorderLayout.CENTER);
 		
-		panel = new JPanel();
-		centerPanel.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		r_scrollPane = new JScrollPane((Component) null);
+		r_scrollPane.setBorder(new LineBorder(new Color(0, 0, 0)));
+		r_scrollPane.setBackground(Color.WHITE);
+		centerPanel.add(r_scrollPane);
 		
-		lblNewLabel = new JLabel("\uC5EC\uBC31\uC758 \uBBF8");
-		lblNewLabel.setFont(new Font("±Ã¼­Ã¼", Font.BOLD, 20));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel);
+		r_table = new JTable(new DefaultTableModel(
+			new Object[][] {
+				{"500\uC6D0", new Integer(0), new Integer(0)},
+				{"100\uC6D0", new Integer(0), new Integer(0)},
+				{"50\uC6D0", new Integer(0), new Integer(0)},
+				{"10\uC6D0", new Integer(0), new Integer(0)},
+			},
+			new String[] {
+				"\uAD8C\uC885", "\uC218\uB7C9", "\uAE08\uC561"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, Integer.class, Integer.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+
+			boolean[] columnEditables = new boolean[] { false, true, false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		r_table.setIntercellSpacing(new Dimension(10, 1));
+		r_scrollPane.setViewportView(r_table);
+		r_table.setRowHeight(134);
+		r_table.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
 		add(bottomPanel, BorderLayout.SOUTH);
 		setVisible(true);
 	}
 
 	public int get50000() {
-		return Integer.parseInt("" + table.getValueAt(0, 1));
+		return Integer.parseInt("" + l_table.getValueAt(0, 1));
 	}
 	
 	public int get10000() {
-		return Integer.parseInt("" + table.getValueAt(1, 1));
+		return Integer.parseInt("" + l_table.getValueAt(1, 1));
 	}
 	
 	public int get5000() {
-		return Integer.parseInt("" + table.getValueAt(2, 1));
+		return Integer.parseInt("" + l_table.getValueAt(2, 1));
 	}
 	
 	public int get1000() {
-		return Integer.parseInt("" + table.getValueAt(3, 1));
+		return Integer.parseInt("" + l_table.getValueAt(3, 1));
 	}
 	
 	public int get500() {
-		return Integer.parseInt("" + table.getValueAt(4, 1));
+		return Integer.parseInt("" + r_table.getValueAt(0, 1));
 	}
 	
 	public int get100() {
-		return Integer.parseInt("" + table.getValueAt(5, 1));
+		return Integer.parseInt("" + r_table.getValueAt(1, 1));
 	}
 	
 	public int get50() {
-		return Integer.parseInt("" + table.getValueAt(6, 1));
+		return Integer.parseInt("" + r_table.getValueAt(2, 1));
 	}
 	
 	public int get10() {
-		return Integer.parseInt("" + table.getValueAt(7, 1));
+		return Integer.parseInt("" + r_table.getValueAt(3, 1));
 	}
 
 	@Override
