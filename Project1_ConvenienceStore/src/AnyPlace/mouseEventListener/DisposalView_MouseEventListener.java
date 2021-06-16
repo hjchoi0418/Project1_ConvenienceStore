@@ -1,4 +1,4 @@
-package AnyPlace.view;
+package AnyPlace.mouseEventListener;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -9,16 +9,17 @@ import java.util.HashSet;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class MouseEventListener extends MouseAdapter {
+public class DisposalView_MouseEventListener extends MouseAdapter {
 	private JTable table;
 	private int row;
 	private String serial_no;
+	public static String[] str_arr;
 
 	public int getRow() {
 		return row;
 	}
 
-	public MouseEventListener(JTable table) {
+	public DisposalView_MouseEventListener(JTable table) {
 		this.table = table;
 	}
 
@@ -44,7 +45,7 @@ public class MouseEventListener extends MouseAdapter {
 			// serial_no 받아오기 (여러개선택후 set에 담기)
 			int[] nSelectedRow = table.getSelectedRows(); // 선택된 행
 
-			String[] str_arr = null;
+			str_arr = null;
 			String strTemp = "";
 
 			// 선택된 행들의 상품코드(s_no)들을 #을 붙혀서 strTemp에 담아줌
@@ -55,11 +56,11 @@ public class MouseEventListener extends MouseAdapter {
 
 			// #이 들어간 갯수 구함 (총 선택된 상품 갯수)
 			int str_cnt = strTemp.length() - strTemp.replace(String.valueOf('#'), "").length();
-			str_arr = new String[nSelectedRow.length];
+			this.str_arr = new String[nSelectedRow.length];
 
 			// substring을 사용하여 s_no하나하나 배열에 담아줌 
 			for (int i = 0; i < str_cnt; i++) {
-				str_arr[i] = strTemp.substring(strTemp.indexOf("#") + 1,(strTemp.substring(strTemp.indexOf("#")).indexOf("A")));
+				this.str_arr[i] = strTemp.substring(strTemp.indexOf("#") + 1,(strTemp.substring(strTemp.indexOf("#")).indexOf("A")));
 				strTemp = strTemp.substring(strTemp.indexOf("#") + 1);
 				try {
 					strTemp = strTemp.substring(strTemp.indexOf("#"));
@@ -76,6 +77,7 @@ public class MouseEventListener extends MouseAdapter {
 			this.serial_no = (String) table.getValueAt(row, 1);
 			System.out.println("더블클릭 row : " + this.row);
 			System.out.println("더블클릭 sno : " + this.serial_no);
+			
 		} 
 
 		if (e.getButton() == 3) {

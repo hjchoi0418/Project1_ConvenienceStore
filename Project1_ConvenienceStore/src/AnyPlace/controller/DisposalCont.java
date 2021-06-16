@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import AnyPlace.DBConnector;
 import AnyPlace.model.Product;
@@ -17,37 +18,29 @@ public class DisposalCont {
 	private ArrayList<String> del_list = new ArrayList<>();
 	private ArrayList<Product> pro_list = new ArrayList<>();
 	private String[][] data;
-	
-	public int waste_count; // 총 폐기수량
-	public int total_waste_price;	// 총 폐기제품원가
 
-	
-	// 테이블 데이터 
+	public int waste_count; // 총 폐기수량
+	public int total_waste_price; // 총 폐기제품원가
+
+	// 유통기한 30분 남은 제품들 목록
+	String sql = "SELECT * FROM(SELECT\r\n" + "C.CATEGORY_NO||'.'||C.CATEGORY_NAME 중분류,\r\n"
+			+ "AP.SERIAL_NO||'A00'||P.PRODUCT_NO 상품코드,P.PRODUCT_NAME 상품명,\r\n"
+			+ "TO_CHAR(EXPIRATION_DATE,'MMDD HH24:MI') \"폐기 일시\"\r\n" + "FROM\r\n"
+			+ "ALL_PRODUCTS AP, PRODUCT P, CATEGORY C\r\n" + "WHERE\r\n"
+			+ "TO_CHAR(EXPIRATION_DATE,'yyyymmdd hh24:mi:ss') < TO_CHAR(SYSDATE -30/(24*60),'yyyymmdd hh24:mi:ss')\r\n"
+			+ "AND AP.PRODUCT_NO = P.PRODUCT_NO\r\n" + "AND C.CATEGORY_NO = P.CATEGORY_NO\r\n"
+			+ "ORDER BY AP.EXPIRATION_DATE ASC)";
+	// 종 카운트, 총원가
+	String sql2 = "SELECT COUNT(*), SUM(P.PRODUCT_COST)\r\n" + "    FROM ALL_PRODUCTS AP, PRODUCT P\r\n"
+			+ "    WHERE TO_CHAR(EXPIRATION_DATE,'yyyymmdd hh24:mi:ss') < TO_CHAR(SYSDATE -30/(24*60),'yyyymmdd hh24:mi:ss')\r\n"
+			+ "    AND AP.PRODUCT_NO = P.PRODUCT_NO";
+
+	// 폐기 처리
+	String delete_sql = "DELETE ALL_PRODUCTS WHERE SERIAL_NO = ?";
+
+	// 테이블 데이터
 	public String[][] getData() {
 
-		Product product = new Product();
-		// 유통기한 30분 남은 제품들 목록
-		String sql = "SELECT * FROM(SELECT\r\n" + 
-				"C.CATEGORY_NO||'.'||C.CATEGORY_NAME 중분류,\r\n" + 
-				"AP.SERIAL_NO||'A00'||P.PRODUCT_NO 상품코드,P.PRODUCT_NAME 상품명,\r\n" + 
-				"TO_CHAR(EXPIRATION_DATE,'MMDD HH24:MI') \"폐기 일시\"\r\n" + 
-				"FROM\r\n" + 
-				"ALL_PRODUCTS AP, PRODUCT P, CATEGORY C\r\n" + 
-				"WHERE\r\n" + 
-				"TO_CHAR(EXPIRATION_DATE,'yyyymmdd hh24:mi:ss') < TO_CHAR(SYSDATE -30/(24*60),'yyyymmdd hh24:mi:ss')\r\n" + 
-				"AND AP.PRODUCT_NO = P.PRODUCT_NO\r\n" + 
-				"AND C.CATEGORY_NO = P.CATEGORY_NO\r\n" + 
-				"ORDER BY AP.EXPIRATION_DATE ASC)";
-		// 종 카운트, 총원가
-		String sql2 = "SELECT COUNT(*), SUM(P.PRODUCT_COST)\r\n" + 
-				"    FROM ALL_PRODUCTS AP, PRODUCT P\r\n" + 
-				"    WHERE TO_CHAR(EXPIRATION_DATE,'yyyymmdd hh24:mi:ss') < TO_CHAR(SYSDATE -30/(24*60),'yyyymmdd hh24:mi:ss')\r\n" + 
-				"    AND AP.PRODUCT_NO = P.PRODUCT_NO";
-
-		
-		// 폐기 처리
-		String delete_sql = "DELETE ALL_PRODUCTS WHERE SERIAL_NO = ?";
-		
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
@@ -55,22 +48,21 @@ public class DisposalCont {
 				ResultSet rs = pstmt.executeQuery();
 				ResultSet rs2 = pstmt2.executeQuery();) {
 
-			System.out.println(sql);
 			ResultSetMetaData rsmd = rs.getMetaData();
-			
+
 			rs2.next();
 			data = new String[rs2.getInt(1)][4];
-			
+
 			waste_count = rs2.getInt(1);
 			total_waste_price = rs2.getInt(2);
-			
-			int j=0;
+
+			int j = 0;
 			while (rs.next()) {
 				data[j][0] = rs.getString(1);
 				data[j][1] = rs.getString(2);
 				data[j][2] = rs.getString(3);
 				data[j][3] = rs.getString(4);
-				
+
 				j++;
 			}
 			int col_cnt = rsmd.getColumnCount();
@@ -82,16 +74,6 @@ public class DisposalCont {
 				System.out.println();
 			}
 
-			// 폐기할 제품 s_no 찍으면 del_list에 추가되고 size 만큼 반복해서 del
-//			del_list.add("9");
-//			del_list.add("10");
-//			del_list.add("11");
-			
-			for(int i=0; i<del_list.size();i++) {
-				delete_pstmt.setString(1, del_list.get(i));
-				delete_pstmt.execute();
-			}
-			
 			return data;
 
 		} catch (SQLException e) {
@@ -99,7 +81,28 @@ public class DisposalCont {
 			return null;
 		}
 	}
-	public void delData() {
-		
+
+	public void delData(String[] str_arr) {
+
+		try (Connection conn = DBConnector.getConnection();
+			PreparedStatement delete_pstmt = conn.prepareStatement(delete_sql);
+			){
+			
+//			del_list.add("9");
+//			del_list.add("10");
+//			del_list.add("11");
+
+			System.out.println(Arrays.toString(str_arr));
+			try {
+				for (int i = 0; i < str_arr.length; i++) {
+					delete_pstmt.setString(1,str_arr[i]);
+					delete_pstmt.execute();
+				}
+			}catch(Exception e) {
+				System.out.println("[NULL] DisposalCont");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
