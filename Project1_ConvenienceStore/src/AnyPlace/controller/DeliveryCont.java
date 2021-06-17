@@ -16,7 +16,7 @@ public class DeliveryCont {
 	String sql = "SELECT C.CATEGORY_NO||'.'||C.CATEGORY_NAME 중분류,p.product_no||'.'||p.product_name 제품, COUNT(ap.serial_no) 수량\r\n"
 			+ "  FROM product p\r\n" + "  LEFT JOIN all_products ap ON p.product_no = ap.product_no\r\n"
 			+ "  LEFT JOIN CATEGORY C ON C.CATEGORY_no = P.CATEGORY_NO\r\n"
-			+ " GROUP BY p.product_no, p.product_name, C.CATEGORY_NO,C.CATEGORY_NAME\r\n" + " order by C.CATEGORY_NO";
+			+ " GROUP BY p.product_no, p.product_name, C.CATEGORY_NO,C.CATEGORY_NAME\r\n" + " order by C.CATEGORY_NO, P.PRODUCT_NO";
 
 	// 카테고리 별 품목 수량
 	String sql2 = "SELECT P.PRODUCT_NAME,COUNT(*) \r\n" + "    FROM PRODUCT P, ALL_PRODUCTS AP, CATEGORY C\r\n"
@@ -175,24 +175,24 @@ public class DeliveryCont {
 		}
 	}
 
-	public static void main(String[] args) {
-//		HashMap<String, Integer> order_map = new HashMap<>();
-//		
-//		try (Connection conn = DBConnector.getConnection();
-//				PreparedStatement pstmt = conn.prepareStatement(sql);
-//				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-//				PreparedStatement pstmt3 = conn.prepareStatement(sql3);
-//				PreparedStatement pstmt_insert = conn.prepareStatement(insert_sql);
-//				ResultSet rs = pstmt.executeQuery();
-//				) {
-//			
-//			allProductsCount(pstmt, rs);
-//
-//			String category = "유제품";
-//			cateProductsCount(pstmt2, rs, category);
-//			deliveryOrder(pstmt3, pstmt_insert, rs, order_map);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-	}
+//	public static void main(String[] args) {
+////		HashMap<String, Integer> order_map = new HashMap<>();
+////		
+////		try (Connection conn = DBConnector.getConnection();
+////				PreparedStatement pstmt = conn.prepareStatement(sql);
+////				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+////				PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+////				PreparedStatement pstmt_insert = conn.prepareStatement(insert_sql);
+////				ResultSet rs = pstmt.executeQuery();
+////				) {
+////			
+////			allProductsCount(pstmt, rs);
+////
+////			String category = "유제품";
+////			cateProductsCount(pstmt2, rs, category);
+////			deliveryOrder(pstmt3, pstmt_insert, rs, order_map);
+////		} catch (SQLException e) {
+////			e.printStackTrace();
+////		}
+//	}
 }
