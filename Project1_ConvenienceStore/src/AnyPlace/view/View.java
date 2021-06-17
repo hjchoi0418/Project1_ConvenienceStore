@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class View extends JFrame implements Runnable {
-	public JPanel main_panel;
+	private JPanel main_panel;
 	JButton menu1, menu2, menu3, menu4, menu5, logoutBtn;
 	private JLabel time_label, user_label;
 	private Thread thread;

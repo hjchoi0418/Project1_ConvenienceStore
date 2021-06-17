@@ -106,9 +106,9 @@ public class sale_View extends JFrame {
 		getContentPane().add(조회업무);
 		
 		JButton 판매보류=new JButton(new ImageIcon("./img/상품판매btn/판매보류.png"));
-//		판매보류.setBorderPainted(false);
-//		판매보류.setContentAreaFilled(false);
-//		판매보류.setFocusPainted(false);
+		판매보류.setBorderPainted(false);
+		판매보류.setContentAreaFilled(false);
+		판매보류.setFocusPainted(false);
 		판매보류.setBounds(1196, 88, 121, 46);    
 		getContentPane().add(판매보류);
 		
@@ -162,7 +162,7 @@ public class sale_View extends JFrame {
 		
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocation(400,400);
+		setLocation(1300,700);
 		setSize(1467,902);
 		getContentPane().setLayout(null);
 		setVisible(true);

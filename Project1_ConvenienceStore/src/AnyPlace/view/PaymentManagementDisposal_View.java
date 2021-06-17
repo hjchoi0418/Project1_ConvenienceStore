@@ -1,40 +1,24 @@
 package AnyPlace.view;
 
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.border.LineBorder;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import AnyPlace.controller.DisposalCont;
 import AnyPlace.mouseEventListener.DisposalView_MouseEventListener;
-
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
-import javax.swing.border.BevelBorder;
+import java.awt.FlowLayout;
 
 // ∆Û±‚ µÓ∑œ
 public class PaymentManagementDisposal_View extends JPanel {
@@ -115,6 +99,7 @@ public class PaymentManagementDisposal_View extends JPanel {
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // ¥‹¿œº±≈√
 		table.setRowSelectionAllowed(true);	// ºø º±≈√µ«¥¬ ªˆ¿Ã .. 
 		table.getTableHeader().setReorderingAllowed(false);
+		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		table.addMouseListener(new DisposalView_MouseEventListener(table));
 //		table.setForeground(new Color(75, 0, 130));
 //		table.setBackground(new Color(192, 192, 192));
@@ -123,7 +108,6 @@ public class PaymentManagementDisposal_View extends JPanel {
 
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		scroll = new JScrollPane(table);
-		scroll.setBounds(500, 220, 760, 350);
 		add(scroll);
 //
 		// textarea
@@ -134,7 +118,6 @@ public class PaymentManagementDisposal_View extends JPanel {
 		textArea.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 19));
 		textArea.setEditable(false);
 		textArea.setBackground(new Color(72, 61, 139));
-		textArea.setBounds(500, 570, 560 ,46);
 		add(textArea);
 
 		JButton btnNewButton_1 = new JButton(new ImageIcon("./img/menu_C/∆Û±‚µÓ∑œ2.png"));
@@ -153,29 +136,7 @@ public class PaymentManagementDisposal_View extends JPanel {
 		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.setContentAreaFilled(false);
 		btnNewButton_1.setFocusPainted(false);
-		btnNewButton_1.setBounds(1100, 570, 200, 46);
 		add(btnNewButton_1);
-//		button_1 = new JButton("¿˙¿Â");
-//		button_1.setBackground(new Color(72, 61, 139));
-//		button_1.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 12));
-//		button_1.setBounds(640, 469, 112, 57);
-//		getContentPane().add(button_1);
-		
-//		btnNewButton = new JButton("¿Ø≈Î±‚«— ¿”π⁄ ªÛ«∞ ¡∂»∏");
-//		btnNewButton.setSelectedIcon(new ImageIcon(PaymentManagementDisposal_View.class
-//				.getResource("/GUI/page_view/icon/\uC720\uD1B5\uAE30\uD55C\uC870\uD68C\uBC84\uD2BC.png")));
-//		btnNewButton.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 12));
-//		btnNewButton.setBackground(new Color(255, 165, 0));
-//		btnNewButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//			}
-//		});
-//		btnNewButton.setBounds(407, 469, 191, 57);
-//		getContentPane().add(btnNewButton);
-
-		setLocation(370, 50);
-		setSize(1467, 902);
-		setLayout(null);
 		setVisible(true);
 	}
 }
