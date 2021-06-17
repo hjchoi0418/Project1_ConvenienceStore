@@ -51,7 +51,7 @@ public class Login_View extends JFrame implements ActionListener{
 				}
 			});
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			
 		}
 
 		JFrame frame = new JFrame();

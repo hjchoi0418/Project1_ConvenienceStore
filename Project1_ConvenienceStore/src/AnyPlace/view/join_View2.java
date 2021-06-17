@@ -67,7 +67,7 @@ public class join_View2 extends JFrame {
 	    		        }
 	    		    });
 	    			} catch (IOException e) {
-	    			    throw new RuntimeException(e);
+	    				
 	    			}
 	    	 
 		JFrame frame = new JFrame();
