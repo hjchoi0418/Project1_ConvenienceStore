@@ -16,7 +16,6 @@ public class Default_JTable extends JFrame {
 	String col_name[] = { "중분류", "상품코드", "상품명", "폐기일시" };
 	String data[][] ;//{{ "1.도시락", "1", "알찬도시락", "1", "06-11 00:00" }};
 			
-
 	// 생성자
 	public Default_JTable() {
 		final JFrame f = new JFrame();

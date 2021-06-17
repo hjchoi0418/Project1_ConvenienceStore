@@ -39,133 +39,60 @@ import javax.swing.table.JTableHeader;
 import AnyPlace.controller.Receipt_Business;
 import AnyPlace.controller.Receipt_Lookup;
 import AnyPlace.model.Order_;
+import AnyPlace.view.receipt_business_output_view.Receipt_issuance_view;
 import AnyPlace.view.receipt_business_output_view.Return_service_view;
 
-public class Receipt_Business_View extends JFrame{
+public class Receipt_Business_View extends JPanel{
 	
 	public Receipt_Business_View() {
 		
-		setTitle("Any Place");
-	   	getContentPane().setLayout(null);
-	   	
-	   	try {	
-			Image backgroundImage = javax.imageio.ImageIO.read(new File("./img/애니플_보드.jpg"));
-		    setContentPane(
-		    		new JPanel() {
-		    			@Override 
-		    			public void paintComponent(Graphics g) {
-		    				g.drawImage(backgroundImage, 0, 0, null);
-
-		    			}
-		    		});
-			} catch (IOException e) {
-			    throw new RuntimeException(e);
-			}
-	   	
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocation(1300,700);
+		setLayout(null);
+		setLocation(0,0);
 		setSize(1467,902);
-		getContentPane().setLayout(null);
 		setVisible(true);
- 
+		setBackground(Color.WHITE);
 	   	JFrame frame = new JFrame();   
 			
 		 // 메뉴버튼
 		    
-	   	JButton menu1=new JButton();
-	   	menu1.setIcon(new ImageIcon("./img/menu_A/메뉴_01.png"));
-	   	menu1.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_01.png"));
-	   	menu1.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_01.png"));
-	   	menu1.setBorderPainted(false);
-	   	menu1.setContentAreaFilled(false);
-	   	menu1.setFocusPainted(false);
-	   	menu1.setBounds(95,269,239, 86);    
-	   	getContentPane().add(menu1);
-		
-	   	JButton menu2=new JButton(new ImageIcon("./img/menu_A/메뉴_02.png"));  
-	   	menu2.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_02.png"));
-	   	menu2.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_02.png"));
-	   	menu2.setBorderPainted(false);
-	   	menu2.setContentAreaFilled(false);
-	   	menu2.setFocusPainted(false);
-	   	menu2.setBounds(95,355,239, 86);    
-	   	getContentPane().add(menu2);
 	   	
-	   	JButton menu3=new JButton(new ImageIcon("./img/menu_A/메뉴_03.png"));
-	   	menu3.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_03.png"));
-	   	menu3.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_03.png"));
-	   	menu3.setBorderPainted(false);
-	   	menu3.setContentAreaFilled(false);
-	   	menu3.setFocusPainted(false);
-	   	menu3.setBounds(95, 441 ,239, 86);    
-	   	getContentPane().add(menu3);
-	   	
-	   	JButton menu4=new JButton(new ImageIcon("./img/menu_A/메뉴_04.png"));  
-	   	menu4.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
-	   	menu4.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
-	   	menu4.setBorderPainted(false);
-	   	menu4.setContentAreaFilled(false);
-	   	menu4.setFocusPainted(false);
-	   	menu4.setBounds(95, 527, 239, 86);    
-	   	getContentPane().add(menu4);
-	   	
-	   	JButton menu5=new JButton(new ImageIcon("./img/menu_A/메뉴_05.png"));   
-	   	menu5.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_05.png"));
-	   	menu5.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_05.png"));
-	   	menu5.setBorderPainted(false);
-	   	menu5.setContentAreaFilled(false);
-	   	menu5.setFocusPainted(false);
-	   	menu5.setBounds(95, 613, 239, 86);    
-	   	getContentPane().add(menu5);
-	   	
-	   	setDefaultCloseOperation(EXIT_ON_CLOSE);
-	   	setLocation(0,0);
-	   	setSize(1467,902);
-	   	getContentPane().setLayout(null);
-	   	setVisible(true);
-	   	
-	   	
+		JTable order_table = table_set_data(this); // 테이블 초기 주문서 
+		JTable detail_table = table2_set_data(this); // 영수증 상세
 
 		
-		JTable order_table = table_set_data(getContentPane()); // 테이블 초기 주문서 
-		JTable detail_table = table2_set_data(getContentPane()); // 영수증 상세
-
+		JLabel option_label1 = create_option_label("매출구분", 1, this);
+		JLabel option_label2 = create_option_label("거래기간", 2, this);
+		JLabel option_label3 = create_option_label("결제수단", 3, this);
+		JLabel option_label4 = create_option_label("판매금액", 4, this);
+		JLabel option_label5 = create_option_label("상품코드", 5, this);
+		JLabel option_label6 = create_option_label("영수증번호", 6, this);
 		
-		JLabel option_label1 = create_option_label("매출구분", 1, getContentPane());
-		JLabel option_label2 = create_option_label("거래기간", 2, getContentPane());
-		JLabel option_label3 = create_option_label("결제수단", 3, getContentPane());
-		JLabel option_label4 = create_option_label("판매금액", 4, getContentPane());
-		JLabel option_label5 = create_option_label("상품코드", 5, getContentPane());
-		JLabel option_label6 = create_option_label("영수증번호", 6, getContentPane());
-		
-		JTextArea option_text1 = create_option_text_area(getContentPane(),1);
+		JTextArea option_text1 = create_option_text_area(this,1);
 		option_text1.setText(null);
-		JTextArea option_text2 = create_option_text_area(getContentPane(),2);
-		JTextArea option_text3 = create_option_text_area(getContentPane(),3);
-		JTextArea option_text4 = create_option_text_area(getContentPane(),4);
-		JTextArea option_text5 = create_option_text_area(getContentPane(),5);
-		JTextArea option_text6 = create_option_text_area(getContentPane(),6);
+		JTextArea option_text2 = create_option_text_area(this,2);
+		JTextArea option_text3 = create_option_text_area(this,3);
+		JTextArea option_text4 = create_option_text_area(this,4);
+		JTextArea option_text5 = create_option_text_area(this,5);
+		JTextArea option_text6 = create_option_text_area(this,6);
 		
-		JButton issuance_button = add_Issuance_button(getContentPane()); // 영수증발행 버튼
-		JButton resale_button = add_Resale_button(getContentPane()); // 반품재판매 버튼
-		JButton return_button = add_Return_button(getContentPane()); // 반품 버튼
-		JButton serch_button = create_serch_button(getContentPane()); // 검색버튼
+		JButton issuance_button = add_Issuance_button(this); // 영수증발행 버튼
+		JButton return_button = add_Return_button(this); // 반품 버튼
+		JButton serch_button = create_serch_button(this); // 검색버튼
+		JButton refresh = create_Refresh_btn(this);
 		
-		resale_button.addActionListener(new ActionListener() {
+		
+		issuance_button.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+			public void actionPerformed(ActionEvent e) { //영수증 출력
 				int row = order_table.getSelectedRow();
-				Object value = order_table.getValueAt(row, 1); // 상품판매로 rs를 넘겨야됨.. 판매에 쓰이는 컬럼을 알아야됨..
+				Object value = order_table.getValueAt(row, 1); // order_no 를 가져옴
 				Receipt_Business rb = new Receipt_Business();
-				ResultSet rs;
-				try {
-					rs = rb.Return_resale((String) value); // 
-				} catch (Exception e2) {
-					// TODO: handle exception
-					e2.printStackTrace();
-				} 
+				ResultSet rs = rb.receipt_number((String) value);
+				Receipt_issuance_view riv = new Receipt_issuance_view();
+				riv.set_text(rs);
+
+				
 			}
 		});
 		
@@ -178,14 +105,13 @@ public class Receipt_Business_View extends JFrame{
 				Object value = order_table.getValueAt(row, 1); // order_no 를 가져옴
 				Receipt_Business rb = new Receipt_Business();
 				try {
-					rb.return_service((String) value); // 영수증 테이블 클릭한다음 버튼 클릭하면 삭제됨
+					Receipt_Business.return_service((String) value); // 영수증 테이블 클릭한다음 버튼 클릭하면 삭제됨
 				} catch (Exception e2) {
 					// TODO: handle exception
 					e2.printStackTrace();
 				} 
-				Return_service_view rsv = new Return_service_view();
-				
-
+				Return_service_view  rsv = new Return_service_view();
+				new Receipt_Business_View();
 			}
 		});
 		
@@ -344,33 +270,47 @@ public class Receipt_Business_View extends JFrame{
 		//-------------------------------------------------------------------------------- serch_button 클릭이벤트
 		
 	    }
+	
+	public static JButton create_Refresh_btn(Container pane) {
+		JButton btn = new JButton("Refresh");
+		btn.setBounds(350, 170, 100, 30);
+		btn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				table_set_data(pane);
+			}
+		});
+		pane.add(btn);
+		return btn;
+	}
 
 	public static JTextArea create_option_text_area(Container pane, int option_num) {
 		JTextArea text_area = new JTextArea();
 		JScrollPane panel = new JScrollPane(text_area);
 		switch(option_num) {
 		case 1:
-			panel.setBounds(450, 140, 100, 60);
+			panel.setBounds(50, 90, 100, 60);
 			pane.add(panel);
 			break;
 		case 2:
-			panel.setBounds(565, 140, 100, 60);
+			panel.setBounds(165, 90, 100, 60);
 			pane.add(panel);
 			break;
 		case 3:
-			panel.setBounds(675, 140, 100, 60);
+			panel.setBounds(280, 90, 100, 60);
 			pane.add(panel);
 			break;
 		case 4:
-			panel.setBounds(785, 140, 100, 60);
+			panel.setBounds(395, 90, 100, 60);
 			pane.add(panel);
 			break;
 		case 5:
-			panel.setBounds(895, 140, 100, 60);
+			panel.setBounds(510, 90, 100, 60);
 			pane.add(panel);
 			break;
 		case 6:
-			panel.setBounds(1005, 140, 100, 60);
+			panel.setBounds(625, 90, 100, 60);
 			pane.add(panel);
 			break;
 	}
@@ -380,27 +320,27 @@ public class Receipt_Business_View extends JFrame{
  		JLabel label = new JLabel(menu);
 		switch(option_num) {
 			case 1:
-				label.setBounds(450, 100, 100, 40);
+				label.setBounds(50, 50, 100, 40);
 				pane.add(label);
 				break;
 			case 2:
-				label.setBounds(565, 100, 100, 40);
+				label.setBounds(165, 50, 100, 40);
 				pane.add(label);
 				break;
 			case 3:
-				label.setBounds(675, 100, 100, 40);
+				label.setBounds(280, 50, 100, 40);
 				pane.add(label);
 				break;
 			case 4:
-				label.setBounds(785, 100, 100, 40);
+				label.setBounds(395, 50, 100, 40);
 				pane.add(label);
 				break;
 			case 5:
-				label.setBounds(895, 100, 100, 40);
+				label.setBounds(510, 50, 100, 40);
 				pane.add(label);
 				break;
 			case 6:
-				label.setBounds(1005, 100, 100, 40);
+				label.setBounds(625, 50, 100, 40);
 				pane.add(label);
 				break;
 		}
@@ -409,12 +349,12 @@ public class Receipt_Business_View extends JFrame{
 	     
  	  public static JTable table2_set_data(Container pane) {
 			JTable table;
-	    	String [] title = {"상세영수증번호","영수증번호","제품시리얼번호","제품가격","제품번호"};
+	    	String [] title = {"상세영수증번호","영수증번호","제품시리얼번호","제품가격","제품이름"};
 			DefaultTableModel model = new DefaultTableModel(title,0);
 			table = new JTable(model);
 
 			JScrollPane scroll_panel = new JScrollPane(table);
-			scroll_panel.setBounds(850, 269, 450, 380);
+			scroll_panel.setBounds(480, 200, 450, 380);
 
 			pane.add(scroll_panel);  
 			return table;
@@ -430,7 +370,7 @@ public class Receipt_Business_View extends JFrame{
 	            table.getColumnModel().getColumn(0).setPreferredWidth(200);
 
 	        	JScrollPane scroll_panel = new JScrollPane(table);
-	        	scroll_panel.setBounds(420, 269, 400, 380);
+	        	scroll_panel.setBounds(50, 200, 400, 380);
 
 	            Receipt_Business rb = new Receipt_Business();
 	        	ResultSet rs = rb.all_Receipt();
@@ -452,35 +392,27 @@ public class Receipt_Business_View extends JFrame{
 
 		}
 
-
-
 	 	public static JButton create_serch_button(Container pane) {
 			ImageIcon icon = new ImageIcon("./image/serch.png");
 			JButton btn = new JButton(icon);
 			btn.setBackground(Color.white);
-			btn.setBounds(1150,100,160,100);
+			btn.setBounds(760,50,160,100);
 			pane.add(btn);
 			return btn;
 		}
 	 	
-	 	
 	    public static JButton add_Issuance_button(Container pane) {
 	    	JButton issuance_btn = new JButton("영수증발행");
-	    	issuance_btn.setBounds(550, 720, 200, 65);
+	    	issuance_btn.setBounds(165, 610, 200, 50);
 	    	pane.add(issuance_btn);
 			return issuance_btn;
 	    }
-	    public static JButton add_Resale_button(Container pane) {
-	    	JButton issuance_btn = new JButton("반품재판매");
-	    	issuance_btn.setBounds(770, 720, 200, 65);
-	    	pane.add(issuance_btn);
-			return issuance_btn;
-	    }
+
 	    public static JButton add_Return_button(Container pane) {
-	    	JButton issuance_btn = new JButton("반품업무");
-	    	issuance_btn.setBounds(990, 720, 200, 65);
-	    	pane.add(issuance_btn);
-			return issuance_btn;
+	    	JButton return_btn = new JButton("반품업무");
+	    	return_btn.setBounds(605, 610, 200, 50);
+	    	pane.add(return_btn);
+			return return_btn;
 	    }
 	 	
 	public static void main(String[] args) {
