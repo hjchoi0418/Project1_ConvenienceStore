@@ -30,8 +30,7 @@ public class PaymentManagementMain_View extends JPanel {
 				removeAll();
 				
 				PaymentManagementDisposal_View pmd_panel = new PaymentManagementDisposal_View();
-				getParent().add(pmd_panel);
-				
+				add(pmd_panel);
 				updateUI();
 			}
 		});

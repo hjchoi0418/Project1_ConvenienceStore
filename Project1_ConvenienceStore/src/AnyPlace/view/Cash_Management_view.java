@@ -2,13 +2,18 @@ package AnyPlace.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -57,7 +62,6 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 	JLabel label;
 	JButton btnPrint;
 	private JScrollPane r_scrollPane;
-	private JTable r_table;
 	
 	public Cash_Management_view() {
 		setBorder(new EmptyBorder(20, 50, 20, 50));
@@ -69,6 +73,10 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 				{"10,000\uC6D0", new Integer(0), new Integer(0)},
 				{"5,000\uC6D0", new Integer(0), new Integer(0)},
 				{"1,000\uC6D0", new Integer(0), new Integer(0)},
+				{"500\uC6D0", new Integer(0), new Integer(0)},
+				{"100\uC6D0", new Integer(0), new Integer(0)},
+				{"50\uC6D0", new Integer(0), new Integer(0)},
+				{"10\uC6D0", new Integer(0), new Integer(0)},
 			},
 			new String[] {
 				"\uAD8C\uC885", "\uC218\uB7C9", "\uAE08\uC561"
@@ -89,7 +97,7 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		});
 		l_table.setIntercellSpacing(new Dimension(10, 1));
 		l_table.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		l_table.setRowHeight(134);
+		l_table.setRowHeight(67);
 		l_table.getTableHeader().setReorderingAllowed(false);
 		l_scrollPane = new JScrollPane(l_table);
 		l_scrollPane.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -116,14 +124,14 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String str = String.format("[시재점검표]\n"
-						+ "50,000\t %d개\t %d\n"
-						+ "10,000\t %d개\t %d\n"
-						+ "5,000\t %d개 \t %d\n"
-						+ "1,000\t %d개 \t %d\n"
-						+ "500\t %d개 \t %d\n"
-						+ "100\t %d개 \t %d\n"
-						+ "50\t %d개 \t %d\n"
-						+ "10\t %d개 \t %d\n"
+						+ "50,000 / %d개 / %d\n"
+						+ "10,000 / %d개 / %d\n"
+						+ "5,000 / %d개 / %d\n"
+						+ "1,000 / %d개 / %d\n"
+						+ "500 / %d개 / %d\n"
+						+ "100 / %d개 / %d\n"
+						+ "50 / %d개 / %d\n"
+						+ "10 / %d개 / %d\n"
 						+ "-------------------\n"
 						+ "점검계\t\t : %d\n"
 						+ "POS기 현금\t\t : %d\n"
@@ -147,7 +155,7 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 
 		topPanel.add(label);
 
-		centerPanel.setLayout(new GridLayout(0, 2, 0, 0));
+		centerPanel.setLayout(new GridLayout(0, 2, 20, 0));
 		centerPanel.add(l_scrollPane);
 
 		bottomPanel.setLayout(new GridLayout(0, 3, 0, 0));
@@ -159,39 +167,27 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		add(topPanel, BorderLayout.NORTH);
 		add(centerPanel, BorderLayout.CENTER);
 		
-		r_scrollPane = new JScrollPane((Component) null);
-		r_scrollPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-		r_scrollPane.setBackground(Color.WHITE);
-		centerPanel.add(r_scrollPane);
+//		BufferedImage img = null;
+//		try {
+//		    img = ImageIO.read(new File("./img/logo.jpg"));
+//		} catch (IOException e) {
+//		    e.printStackTrace();
+//		}
+//		
+//		Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(),
+//		        Image.SCALE_SMOOTH);
+//		
+//		ImageIcon imageIcon = new ImageIcon(dimg);
 		
-		r_table = new JTable(new DefaultTableModel(
-			new Object[][] {
-				{"500\uC6D0", new Integer(0), new Integer(0)},
-				{"100\uC6D0", new Integer(0), new Integer(0)},
-				{"50\uC6D0", new Integer(0), new Integer(0)},
-				{"10\uC6D0", new Integer(0), new Integer(0)},
-			},
-			new String[] {
-				"\uAD8C\uC885", "\uC218\uB7C9", "\uAE08\uC561"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, Integer.class, Integer.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-
-			boolean[] columnEditables = new boolean[] { false, true, false };
-
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		r_table.setIntercellSpacing(new Dimension(10, 1));
-		r_scrollPane.setViewportView(r_table);
-		r_table.setRowHeight(134);
-		r_table.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		JPanel logo_panel = new JPanel();
+		logo_panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel logo = new JLabel();
+		logo.setIcon(new ImageIcon("./img/logo.jpg"));
+		
+		logo_panel.add(logo);
+		centerPanel.add(logo_panel);
+		
 		add(bottomPanel, BorderLayout.SOUTH);
 		setVisible(true);
 	}
@@ -213,19 +209,19 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 	}
 	
 	public int get500() {
-		return Integer.parseInt("" + r_table.getValueAt(0, 1));
+		return Integer.parseInt("" + l_table.getValueAt(4, 1));
 	}
 	
 	public int get100() {
-		return Integer.parseInt("" + r_table.getValueAt(1, 1));
+		return Integer.parseInt("" + l_table.getValueAt(5, 1));
 	}
 	
 	public int get50() {
-		return Integer.parseInt("" + r_table.getValueAt(2, 1));
+		return Integer.parseInt("" + l_table.getValueAt(6, 1));
 	}
 	
 	public int get10() {
-		return Integer.parseInt("" + r_table.getValueAt(3, 1));
+		return Integer.parseInt("" + l_table.getValueAt(7, 1));
 	}
 	
 	public int getPosCash() {
@@ -233,10 +229,10 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 				Integer.parseInt("" + l_table.getValueAt(1, 2)) +
 				Integer.parseInt("" + l_table.getValueAt(2, 2)) +
 				Integer.parseInt("" + l_table.getValueAt(3, 2)) +
-				Integer.parseInt("" + r_table.getValueAt(0, 2)) +
-				Integer.parseInt("" + r_table.getValueAt(1, 2)) +
-				Integer.parseInt("" + r_table.getValueAt(2, 2)) +
-				Integer.parseInt("" + r_table.getValueAt(3, 2));
+				Integer.parseInt("" + l_table.getValueAt(4, 2)) +
+				Integer.parseInt("" + l_table.getValueAt(5, 2)) +
+				Integer.parseInt("" + l_table.getValueAt(6, 2)) +
+				Integer.parseInt("" + l_table.getValueAt(7, 2));
 	}
 
 	@Override
