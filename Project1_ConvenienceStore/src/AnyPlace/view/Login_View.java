@@ -104,7 +104,7 @@ public class Login_View extends JFrame implements ActionListener{
 		joinButton.setForeground(new Color(255, 204, 51));
 		joinButton.setFont(new Font("³ª´®°íµñ", Font.PLAIN, 12));
 		joinButton.setBorderPainted(false);
-//		joinButton.setContentAreaFilled(false);
+		joinButton.setContentAreaFilled(false);
 		joinButton.setFocusPainted(false);
 
 		joinButton.addActionListener(new ActionListener() {
