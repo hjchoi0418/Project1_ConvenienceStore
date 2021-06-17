@@ -77,7 +77,7 @@ public class join_View2 extends JFrame {
 
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocation(1300,700);
+		setLocation(200,100);
 		setSize(1467,902);
 		getContentPane().setLayout(null);
 	
