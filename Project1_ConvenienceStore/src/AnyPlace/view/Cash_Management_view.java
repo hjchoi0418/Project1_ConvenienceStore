@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.TableModelEvent;
@@ -57,7 +58,7 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		}
 	};
     private JScrollPane l_scrollPane;
-    private JTable l_table;
+    private JTable table;
 	JPanel topPanel, centerPanel, bottomPanel;
 	JLabel label;
 	JButton btnPrint;
@@ -67,7 +68,7 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		setBorder(new EmptyBorder(20, 50, 20, 50));
 		setBackground(Color.WHITE);
 		
-		l_table = new JTable(new DefaultTableModel(
+		table = new JTable(new DefaultTableModel(
 			new Object[][] {
 				{"50,000\uC6D0", new Integer(0), new Integer(0)},
 				{"10,000\uC6D0", new Integer(0), new Integer(0)},
@@ -95,11 +96,23 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 				return columnEditables[column];
 			}
 		});
-		l_table.setIntercellSpacing(new Dimension(10, 1));
-		l_table.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		l_table.setRowHeight(67);
-		l_table.getTableHeader().setReorderingAllowed(false);
-		l_scrollPane = new JScrollPane(l_table);
+		
+		table.getTableHeader().setFont(new Font("나눔고딕", Font.BOLD, 20)); // 컬럼 폰트 
+		table.getTableHeader().setBackground(new Color(22,56,81)); 	// 컬럼 배경색
+		table.getTableHeader().setForeground(new Color(255,255,255)); // 컬럼 폰트색
+		table.getTableHeader().setPreferredSize(new Dimension(0, 60)); // 컬럼 너비, 높이
+		table.getTableHeader().setReorderingAllowed(false); // 컬럼 이동 안되게
+		table.setRowSelectionAllowed(true);
+		table.getTableHeader().setReorderingAllowed(false);
+
+		table.setIntercellSpacing(new Dimension(10, 1));
+		table.setRowHeight(62);
+		table.setFont(new Font("나눔고딕", Font.BOLD, 18)); // 행 폰트
+		table.setBackground(new Color(235,235,235)); // 행 배경색
+ 		table.setForeground(new Color(22,56,81)); // 행 폰트색
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // 단일선택
+		
+		l_scrollPane = new JScrollPane(table);
 		l_scrollPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		l_scrollPane.setBackground(Color.WHITE);
 		topPanel = new JPanel();
@@ -117,7 +130,7 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		btnPrint.setPreferredSize(new Dimension(57, 40));
 		setLayout(new BorderLayout(0, 0));
 
-		l_table.getModel().addTableModelListener(this);
+		table.getModel().addTableModelListener(this);
 
 		btnPrint.addActionListener(new ActionListener() {
 
@@ -180,6 +193,7 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 //		ImageIcon imageIcon = new ImageIcon(dimg);
 		
 		JPanel logo_panel = new JPanel();
+		logo_panel.setBackground(new Color(235, 235, 235));
 		logo_panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JLabel logo = new JLabel();
@@ -193,46 +207,46 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 	}
 
 	public int get50000() {
-		return Integer.parseInt("" + l_table.getValueAt(0, 1));
+		return Integer.parseInt("" + table.getValueAt(0, 1));
 	}
 	
 	public int get10000() {
-		return Integer.parseInt("" + l_table.getValueAt(1, 1));
+		return Integer.parseInt("" + table.getValueAt(1, 1));
 	}
 	
 	public int get5000() {
-		return Integer.parseInt("" + l_table.getValueAt(2, 1));
+		return Integer.parseInt("" + table.getValueAt(2, 1));
 	}
 	
 	public int get1000() {
-		return Integer.parseInt("" + l_table.getValueAt(3, 1));
+		return Integer.parseInt("" + table.getValueAt(3, 1));
 	}
 	
 	public int get500() {
-		return Integer.parseInt("" + l_table.getValueAt(4, 1));
+		return Integer.parseInt("" + table.getValueAt(4, 1));
 	}
 	
 	public int get100() {
-		return Integer.parseInt("" + l_table.getValueAt(5, 1));
+		return Integer.parseInt("" + table.getValueAt(5, 1));
 	}
 	
 	public int get50() {
-		return Integer.parseInt("" + l_table.getValueAt(6, 1));
+		return Integer.parseInt("" + table.getValueAt(6, 1));
 	}
 	
 	public int get10() {
-		return Integer.parseInt("" + l_table.getValueAt(7, 1));
+		return Integer.parseInt("" + table.getValueAt(7, 1));
 	}
 	
 	public int getPosCash() {
-		return Integer.parseInt("" + l_table.getValueAt(0, 2)) +
-				Integer.parseInt("" + l_table.getValueAt(1, 2)) +
-				Integer.parseInt("" + l_table.getValueAt(2, 2)) +
-				Integer.parseInt("" + l_table.getValueAt(3, 2)) +
-				Integer.parseInt("" + l_table.getValueAt(4, 2)) +
-				Integer.parseInt("" + l_table.getValueAt(5, 2)) +
-				Integer.parseInt("" + l_table.getValueAt(6, 2)) +
-				Integer.parseInt("" + l_table.getValueAt(7, 2));
+		return Integer.parseInt("" + table.getValueAt(0, 2)) +
+				Integer.parseInt("" + table.getValueAt(1, 2)) +
+				Integer.parseInt("" + table.getValueAt(2, 2)) +
+				Integer.parseInt("" + table.getValueAt(3, 2)) +
+				Integer.parseInt("" + table.getValueAt(4, 2)) +
+				Integer.parseInt("" + table.getValueAt(5, 2)) +
+				Integer.parseInt("" + table.getValueAt(6, 2)) +
+				Integer.parseInt("" + table.getValueAt(7, 2));
 	}
 
 	@Override

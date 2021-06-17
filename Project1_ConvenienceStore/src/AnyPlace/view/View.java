@@ -22,8 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import AnyPlace.model.Employee;
-
 public class View extends JFrame implements Runnable {
 	private JPanel main_panel;
 	JButton menu1, menu2, menu3, menu4, menu5, logoutBtn;
