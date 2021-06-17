@@ -1,21 +1,28 @@
 package AnyPlace.controller.BuyProduct;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
-import AnyPlace.DBConnector;
 import AnyPlace.model.Product;
 
 public class Lookup_method {
-   
+	public static Connection getConnection() {
+		try {
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+			String user = "c##gs25";
+			String pass = "1234";
+			Connection con = DriverManager.getConnection(url, user, pass);
+			return con;
+		}catch(Exception e) {
+			return null;
+		}
+	}
+	
 	public static String[][] getproduct(){
 		String sql = "SELECT "
 				+ "product_no, "
@@ -37,7 +44,7 @@ public class Lookup_method {
 				+ "FROM "
 				+ "product ";
 	
-		try (Connection conn = DBConnector.getConnection();
+		try (Connection conn = getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement state_pstmt = conn.prepareStatement(state_sql);
 				PreparedStatement product_pstmt = conn.prepareStatement(product_sql);
@@ -89,6 +96,7 @@ public class Lookup_method {
 			return null;
 		} 
 	}
+	
 	
 	
 }

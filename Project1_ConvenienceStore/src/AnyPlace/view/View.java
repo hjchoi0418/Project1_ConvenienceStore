@@ -87,6 +87,9 @@ public class View extends JFrame implements Runnable {
 				menu2.setEnabled(false);
 				main_panel.removeAll();
 				
+				Sell_product_view sp_panel = new Sell_product_view();
+				main_panel.add(sp_panel);
+				
 				main_panel.updateUI();
 			}
 		});

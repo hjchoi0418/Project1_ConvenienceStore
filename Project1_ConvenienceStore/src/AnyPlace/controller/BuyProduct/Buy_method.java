@@ -1,6 +1,7 @@
 package AnyPlace.controller.BuyProduct;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,6 +12,18 @@ import AnyPlace.DBConnector;
 
 public class Buy_method {
 	
+	public static Connection getConnection() {
+		try {
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+			String user = "c##gs25";
+			String pass = "1234";
+			Connection con = DriverManager.getConnection(url, user, pass);
+			return con;
+		}catch(Exception e) {
+			return null;
+		}
+	}
+	
 	// 1.¿”Ω√∑Œ order_ ∏∏µÎ
 	public static int Temporary_order() {
 		int result = 0;
@@ -19,7 +32,7 @@ public class Buy_method {
 				+ "SYSDATE, "
 				+ "1, "
 				+ "2)";
-		try (Connection conn = DBConnector.getConnection();
+		try (Connection conn = getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				){	
 			pstmt.executeUpdate();
@@ -49,7 +62,7 @@ public class Buy_method {
 				+ "all_products INNER JOIN product USING ( product_no ) "
 				+ "where product_name = '" + product_name + "' AND product_state = 1 AND rownum <= 1";
 		
-		try (Connection conn = DBConnector.getConnection();
+		try (Connection conn = getConnection();
 				PreparedStatement pstmt_insert = conn.prepareStatement(sql_insert);
 				PreparedStatement pstmt_update = conn.prepareStatement(sql_update);
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -88,7 +101,7 @@ public class Buy_method {
 				+ "FROM order_detail "
 				+ "WHERE order_no = (SELECT MAX(order_no)FROM ORDER_detail)";
 		
-		try (Connection conn = DBConnector.getConnection();
+		try (Connection conn = getConnection();
 				PreparedStatement pstmt_update = conn.prepareStatement(sql_update);
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				){
@@ -115,7 +128,7 @@ public class Buy_method {
 				+ "FROM "
 				+ "product WHERE product_no = "+ order +"";	
 	
-		try (Connection conn = DBConnector.getConnection();
+		try (Connection conn = getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 		        ){	
 			ResultSet rs = pstmt.executeQuery();		
@@ -138,7 +151,7 @@ public class Buy_method {
 				+ "All_products INNER JOIN product USING (product_no) "
 				+ "where product_name LIKE '%" + name +"%' "
 						+ "AND product_state = 1";	
-		try (Connection conn = DBConnector.getConnection();
+		try (Connection conn = getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 		    ){
 			ResultSet rs = pstmt.executeQuery();				
