@@ -26,13 +26,12 @@ public class PaymentManagementMain_View extends JPanel {
 		폐기등록 = new JButton(new ImageIcon("./img/menu_C/폐기등록.png"));
 		폐기등록.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getParent().removeAll();
-				System.out.println(폐기등록.getParent());
+				removeAll();
 				
 				PaymentManagementDisposal_View pmd_panel = new PaymentManagementDisposal_View();
 				getParent().add(pmd_panel);
 				
-				getParent().repaint();
+				updateUI();
 			}
 		});
 		폐기등록.setPressedIcon(new ImageIcon("./img/menu_C/폐기등록_over.png"));
@@ -45,7 +44,12 @@ public class PaymentManagementMain_View extends JPanel {
 		배송주문 = new JButton(new ImageIcon("./img/menu_C/배송주문.png"));
 		배송주문.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				removeAll();
+
+				PaymentManagementDisposal_View pmd_panel = new PaymentManagementDisposal_View();
+				getParent().add(pmd_panel);
 				
+				updateUI();
 			}
 		});
 		배송주문.setPressedIcon(new ImageIcon("./img/menu_C/배송주문_over.png"));

@@ -18,13 +18,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class View extends JFrame implements Runnable {
 	private JPanel main_panel;
-	private JLayeredPane layered_pane;
 	JButton menu1, menu2, menu3, menu4, menu5, logoutBtn;
 	private JLabel time_label, user_label;
 	private Thread thread;
@@ -178,15 +176,11 @@ public class View extends JFrame implements Runnable {
 		logoutBtn.setBounds(1340, 10, 40, 40);
 		getContentPane().add(logoutBtn);
 		
-		layered_pane = new JLayeredPane();
-		layered_pane.setLayout(new GridLayout());
-		layered_pane.setBounds(350, 100, 1030, 700);
-		
 		main_panel = new JPanel();
 		main_panel.setLayout(new GridLayout());
+		main_panel.setBounds(350, 100, 1030, 700);
 		
-		layered_pane.add(main_panel);
-		getContentPane().add(layered_pane);
+		getContentPane().add(main_panel);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(200, 100);
