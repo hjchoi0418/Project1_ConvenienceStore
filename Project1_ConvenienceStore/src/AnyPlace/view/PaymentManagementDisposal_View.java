@@ -98,23 +98,6 @@ public class PaymentManagementDisposal_View extends JPanel {
 //		getContentPane().add(scroll);
 	}
 	PaymentManagementDisposal_View() {
-//		setTitle("Any Place");
-//		getContentPane().setLayout(null);
-//		try {
-//			final Image backgroundImage = javax.imageio.ImageIO.read(new File("./img/애니플_보드.jpg"));
-//			setContentPane(new JPanel(new BorderLayout()) {
-//				@Override
-//				public void paintComponent(Graphics g) {
-//					g.drawImage(backgroundImage, 0, 0, null);
-//					setOpaque(false);
-//					super.paintComponent(g);
-//				}
-//			});
-//		} catch (IOException e) {
-//			throw new RuntimeException(e);
-//		}
-
-//		setTable();
 		
 		// 테이블
 		data = disposalCont.getData();
@@ -141,7 +124,6 @@ public class PaymentManagementDisposal_View extends JPanel {
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		scroll = new JScrollPane(table);
 		scroll.setBounds(500, 220, 760, 350);
-//		getContentPane().add(scroll);
 		add(scroll);
 //
 		// textarea
@@ -153,7 +135,6 @@ public class PaymentManagementDisposal_View extends JPanel {
 		textArea.setEditable(false);
 		textArea.setBackground(new Color(72, 61, 139));
 		textArea.setBounds(500, 570, 560 ,46);
-//		getContentPane().add(textArea);
 		add(textArea);
 
 		JButton btnNewButton_1 = new JButton(new ImageIcon("./img/menu_C/폐기등록2.png"));
@@ -174,7 +155,6 @@ public class PaymentManagementDisposal_View extends JPanel {
 		btnNewButton_1.setFocusPainted(false);
 		btnNewButton_1.setBounds(1100, 570, 200, 46);
 		add(btnNewButton_1);
-		
 //		button_1 = new JButton("저장");
 //		button_1.setBackground(new Color(72, 61, 139));
 //		button_1.setFont(new Font("맑은 고딕", Font.BOLD, 12));
@@ -193,63 +173,9 @@ public class PaymentManagementDisposal_View extends JPanel {
 //		btnNewButton.setBounds(407, 469, 191, 57);
 //		getContentPane().add(btnNewButton);
 
-		JButton menu1 = new JButton();
-		menu1.setIcon(new ImageIcon("./img/menu_A/메뉴_01.png"));
-		menu1.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_01.png"));
-		menu1.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_01.png"));
-		menu1.setBorderPainted(false);
-		menu1.setContentAreaFilled(false);
-		menu1.setFocusPainted(false);
-		menu1.setBounds(95, 269, 239, 86);
-		add(menu1);
-
-		JButton menu2 = new JButton(new ImageIcon("./img/menu_A/메뉴_02.png"));
-		menu2.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_02.png"));
-		menu2.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_02.png"));
-		menu2.setBorderPainted(false);
-		menu2.setContentAreaFilled(false);
-		menu2.setFocusPainted(false);
-		menu2.setBounds(95, 355, 239, 86);
-		add(menu2);
-
-		JButton menu3 = new JButton(new ImageIcon("./img/menu_A/메뉴_03.png"));
-		menu3.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_03.png"));
-		menu3.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_03.png"));
-		menu3.setBorderPainted(false);
-		menu3.setContentAreaFilled(false);
-		menu3.setFocusPainted(false);
-		menu3.setBounds(95, 441, 239, 86);
-		add(menu3);
-
-		JButton menu4 = new JButton(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
-		menu4.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
-		menu4.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
-		menu4.setBorderPainted(false);
-		menu4.setContentAreaFilled(false);
-		menu4.setFocusPainted(false);
-		menu4.setBounds(95, 527, 239, 86);
-		add(menu4);
-
-		JButton menu5 = new JButton(new ImageIcon("./img/menu_A/메뉴_05.png"));
-		menu5.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_05.png"));
-		menu5.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_05.png"));
-		menu5.setBorderPainted(false);
-		menu5.setContentAreaFilled(false);
-		menu5.setFocusPainted(false);
-		menu5.setBounds(95, 613, 239, 86);
-		add(menu5);
-		
-		
-//		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(370, 50);
 		setSize(1467, 902);
-//		getContentPane().setLayout(null);
+		setLayout(null);
 		setVisible(true);
-		
 	}
-
-	public static void main(String[] args) {
-		new PaymentManagementDisposal_View();
-	}
-
 }

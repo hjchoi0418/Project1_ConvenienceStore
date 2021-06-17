@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class View extends JFrame implements Runnable {
-	private JPanel main_panel;
+	public JPanel main_panel;
 	JButton menu1, menu2, menu3, menu4, menu5, logoutBtn;
 	private JLabel time_label, user_label;
 	private Thread thread;
@@ -106,6 +106,9 @@ public class View extends JFrame implements Runnable {
 				menu3.setEnabled(false);
 				main_panel.removeAll();
 				
+				Receipt_Business_View rb_panel = new Receipt_Business_View();
+				main_panel.add(rb_panel);
+				
 				main_panel.updateUI();
 			}
 		});
@@ -125,7 +128,7 @@ public class View extends JFrame implements Runnable {
 				menu4.setEnabled(false);
 				main_panel.removeAll();
 				
-				Container pd_panel = new PaymentManagementMain_View();//.getContentPane();
+				Container pd_panel = new PaymentManagementMain_View();
 				main_panel.add(pd_panel);
 				
 				main_panel.updateUI();

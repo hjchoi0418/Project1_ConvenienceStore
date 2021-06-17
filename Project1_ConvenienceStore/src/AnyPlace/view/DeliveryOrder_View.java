@@ -30,7 +30,7 @@ import AnyPlace.controller.DeliveryCont;
 import AnyPlace.controller.DisposalCont;
 import AnyPlace.mouseEventListener.DeliveryView_MouseEventListener;
 
-public class DeliveryOrder_View extends JFrame {
+public class DeliveryOrder_View extends JPanel {
 //	ImageIcon icon;
 //
 //	public Dimension getPreferredSize() {
@@ -54,21 +54,21 @@ public class DeliveryOrder_View extends JFrame {
 	DeliveryView_MouseEventListener dvm = new DeliveryView_MouseEventListener(table);
 
 	public DeliveryOrder_View() {
-		setTitle("Any Place");
-		getContentPane().setLayout(null);
-		try {
-			final Image backgroundImage = javax.imageio.ImageIO.read(new File("./img/애니플_보드.jpg"));
-			setContentPane(new JPanel(new BorderLayout()) {
-				@Override
-				public void paintComponent(Graphics g) {
-					g.drawImage(backgroundImage, 0, 0, null);
-					setOpaque(false);
-					super.paintComponent(g);
-				}
-			});
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+//		setTitle("Any Place");
+//		getContentPane().setLayout(null);
+//		try {
+//			final Image backgroundImage = javax.imageio.ImageIO.read(new File("./img/애니플_보드.jpg"));
+//			setContentPane(new JPanel(new BorderLayout()) {
+//				@Override
+//				public void paintComponent(Graphics g) {
+//					g.drawImage(backgroundImage, 0, 0, null);
+//					setOpaque(false);
+//					super.paintComponent(g);
+//				}
+//			});
+//		} catch (IOException e) {
+//			throw new RuntimeException(e);
+//		}
 
 		// 테이블
 		data = deliveryCont.allProductsCount();
@@ -90,7 +90,7 @@ public class DeliveryOrder_View extends JFrame {
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		scroll = new JScrollPane(table);
 		scroll.setBounds(500, 220, 760, 350);
-		getContentPane().add(scroll);
+		add(scroll);
 
 		// textarea
 //		waste_count = disposalCont.waste_count;
@@ -106,7 +106,7 @@ public class DeliveryOrder_View extends JFrame {
 		textArea.setEditable(false);
 		textArea.setBackground(new Color(72, 61, 139));
 		textArea.setBounds(500, 570, 560 ,46);
-		getContentPane().add(textArea);
+		add(textArea);
 
 		button_1 = new JButton("주문");
 		button_1.addActionListener(new ActionListener() {
@@ -121,7 +121,7 @@ public class DeliveryOrder_View extends JFrame {
 		button_1.setContentAreaFilled(false);
 		button_1.setFocusPainted(false);
 		button_1.setBounds(1109, 570, 150, 46);
-		getContentPane().add(button_1);
+		add(button_1);
 		
 		JButton btnNewButton_2 = new JButton("+");
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -140,7 +140,7 @@ public class DeliveryOrder_View extends JFrame {
 			}
 		});
 		btnNewButton_2.setBounds(700, 650, 70, 70);
-		getContentPane().add(btnNewButton_2);
+		add(btnNewButton_2);
 		
 		JButton button_2 = new JButton("+10");
 		button_2.addActionListener(new ActionListener() {
@@ -158,7 +158,7 @@ public class DeliveryOrder_View extends JFrame {
 			}
 		});
 		button_2.setBounds(790, 650, 70, 70);
-		getContentPane().add(button_2);
+		add(button_2);
 		
 		JButton button_3 = new JButton("+100");
 		button_3.addActionListener(new ActionListener() {
@@ -176,7 +176,7 @@ public class DeliveryOrder_View extends JFrame {
 			}
 		});
 		button_3.setBounds(880, 650, 70, 70);
-		getContentPane().add(button_3);
+		add(button_3);
 		
 		JButton button_4 = new JButton("-");
 		button_4.addActionListener(new ActionListener() {
@@ -196,7 +196,7 @@ public class DeliveryOrder_View extends JFrame {
 			}
 		});
 		button_4.setBounds(700, 740, 70, 70);
-		getContentPane().add(button_4);
+		add(button_4);
 		
 		JButton button_5 = new JButton("-10");
 		button_5.addActionListener(new ActionListener() {
@@ -225,7 +225,7 @@ public class DeliveryOrder_View extends JFrame {
 			}
 		});
 		button_5.setBounds(790, 740, 70, 70);
-		getContentPane().add(button_5);
+		add(button_5);
 		
 		JButton button_6 = new JButton("-100");
 		button_6.addActionListener(new ActionListener() {
@@ -250,7 +250,7 @@ public class DeliveryOrder_View extends JFrame {
 			}
 		});
 		button_6.setBounds(880, 740, 70, 70);
-		getContentPane().add(button_6);
+		add(button_6);
 
 		JButton menu1 = new JButton();
 		menu1.setIcon(new ImageIcon("./img/menu_A/메뉴_01.png"));
@@ -260,7 +260,7 @@ public class DeliveryOrder_View extends JFrame {
 		menu1.setContentAreaFilled(false);
 		menu1.setFocusPainted(false);
 		menu1.setBounds(95, 269, 239, 86);
-		getContentPane().add(menu1);
+		add(menu1);
 
 		JButton menu2 = new JButton(new ImageIcon("./img/menu_A/메뉴_02.png"));
 		menu2.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_02.png"));
@@ -269,7 +269,7 @@ public class DeliveryOrder_View extends JFrame {
 		menu2.setContentAreaFilled(false);
 		menu2.setFocusPainted(false);
 		menu2.setBounds(95, 355, 239, 86);
-		getContentPane().add(menu2);
+		add(menu2);
 
 		JButton menu3 = new JButton(new ImageIcon("./img/menu_A/메뉴_03.png"));
 		menu3.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_03.png"));
@@ -278,7 +278,7 @@ public class DeliveryOrder_View extends JFrame {
 		menu3.setContentAreaFilled(false);
 		menu3.setFocusPainted(false);
 		menu3.setBounds(95, 441, 239, 86);
-		getContentPane().add(menu3);
+		add(menu3);
 
 		JButton menu4 = new JButton(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
 		menu4.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
@@ -287,7 +287,7 @@ public class DeliveryOrder_View extends JFrame {
 		menu4.setContentAreaFilled(false);
 		menu4.setFocusPainted(false);
 		menu4.setBounds(95, 527, 239, 86);
-		getContentPane().add(menu4);
+		add(menu4);
 
 		JButton menu5 = new JButton(new ImageIcon("./img/menu_A/메뉴_05.png"));
 		menu5.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_05.png"));
@@ -296,12 +296,12 @@ public class DeliveryOrder_View extends JFrame {
 		menu5.setContentAreaFilled(false);
 		menu5.setFocusPainted(false);
 		menu5.setBounds(95, 613, 239, 86);
-		getContentPane().add(menu5);
+		add(menu5);
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(370, 50);
 		setSize(1467, 902);
-		getContentPane().setLayout(null);
+//		getContentPane().setLayout(null);
 		setVisible(true);
 
 //		setTitle("Any Place");
