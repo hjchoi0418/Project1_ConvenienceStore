@@ -51,11 +51,7 @@ public class Login_View extends JFrame implements ActionListener{
 				}
 			});
 		} catch (IOException e) {
-<<<<<<< HEAD
 			throw new RuntimeException(e);
-=======
-			
->>>>>>> refs/remotes/origin/Wonhyeyoung
 		}
 
 		JFrame frame = new JFrame();

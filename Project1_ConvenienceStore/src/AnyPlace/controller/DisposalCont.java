@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import AnyPlace.JPool;
+import AnyPlace.DBConnector;
 import AnyPlace.model.Product;
 
 public class DisposalCont {
@@ -22,7 +22,6 @@ public class DisposalCont {
 	public int waste_count; // 총 폐기수량
 	public int total_waste_price; // 총 폐기제품원가
 
-<<<<<<< HEAD
 	// 유통기한 30분 남은 제품들 목록
 	String sql = "SELECT * FROM(SELECT\r\n" + "C.CATEGORY_NO||'.'||C.CATEGORY_NAME 중분류,\r\n"
 			+ "AP.SERIAL_NO||'A00'||P.PRODUCT_NO 상품코드,P.PRODUCT_NAME 상품명,\r\n"
@@ -44,11 +43,6 @@ public class DisposalCont {
 
 		System.out.println(sql);
 		try (Connection conn = DBConnector.getConnection();
-=======
-		// 폐기 처리
-		String delete_sql = "DELETE ALL_PRODUCTS WHERE SERIAL_NO = ?";
-		try (Connection conn = JPool.getConnection();
->>>>>>> refs/remotes/origin/Wonhyeyoung
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 				PreparedStatement delete_pstmt = conn.prepareStatement(delete_sql);

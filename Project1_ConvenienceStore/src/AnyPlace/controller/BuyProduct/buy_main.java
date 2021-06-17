@@ -1,8 +1,11 @@
 package AnyPlace.controller.BuyProduct;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -10,8 +13,11 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,16 +31,6 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import AnyPlace.controller.lookup.Lookup_method;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-
-import java.awt.SystemColor;
-import java.awt.Color;
-import java.awt.FlowLayout;
-
-import javax.swing.BorderFactory;
 public class buy_main {
 
 	private JFrame frame;
@@ -73,7 +69,7 @@ public class buy_main {
 		frame.getContentPane().setLayout(null);
 		
 		// 메인 패널
-		ImagePanel mainpanel = new ImagePanel(new ImageIcon("./image/애니플_보드.jpg").getImage());
+		ImagePanel mainpanel = new ImagePanel(new ImageIcon("./kimage/애니플_보드.jpg").getImage());
 		mainpanel.setLocation(0, 0);
 		mainpanel.setVisible(true);
 		frame.setSize(mainpanel.getDim());
@@ -83,7 +79,7 @@ public class buy_main {
 		currPanel = mainpanel;  //패널 이동할 때 쓰임
 		
 		// 조회 패널
-		ImagePanel lookup_panel = new ImagePanel(new ImageIcon("./image/애니플_보드.jpg").getImage());
+		ImagePanel lookup_panel = new ImagePanel(new ImageIcon("./kimage/애니플_보드.jpg").getImage());
 		lookup_panel.setLocation(0, 0);
 		lookup_panel.setVisible(false);
 		frame.setSize(lookup_panel.getDim());
@@ -151,11 +147,11 @@ public class buy_main {
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(520, 580, 1000, 200);
 		lookup_panel.add(lblNewLabel);
-		lblNewLabel.setIcon(new ImageIcon("./image/검색.PNG"));
+		lblNewLabel.setIcon(new ImageIcon("./kimage/검색.PNG"));
 		
 		// 뒤로가기(조회 패널)
 		JButton btnback1 = new JButton("");
-		btnback1.setIcon(new ImageIcon("./image/뒤로가기.PNG"));
+		btnback1.setIcon(new ImageIcon("./kimage/뒤로가기.PNG"));
 		btnback1.setBounds(1210, 80, 160, 60);
 		lookup_panel.add(btnback1);
 		btnback1.setBorder(BorderFactory.createLineBorder(Color.WHITE));  //테두리 색깔 변경
@@ -168,7 +164,7 @@ public class buy_main {
 		});
 		
 		// 상품 구매 패널
-		ImagePanel buypanel = new ImagePanel(new ImageIcon("./image/애니플_보드.jpg").getImage());
+		ImagePanel buypanel = new ImagePanel(new ImageIcon("./kimage/애니플_보드.jpg").getImage());
 		buypanel.setLocation(0, 0);
 		buypanel.setVisible(false);
 		frame.setSize(buypanel.getDim());
@@ -221,11 +217,11 @@ public class buy_main {
 		JLabel productLabel = new JLabel("");
 		productLabel.setBounds(500, 120, 350, 80);
 		buypanel.add(productLabel);
-		productLabel.setIcon(new ImageIcon("./image/상품목록.PNG"));
+		productLabel.setIcon(new ImageIcon("./kimage/상품목록.PNG"));
 
 		// 뒤로가기(구매 패널)
 		JButton btnback2 = new JButton("");
-		btnback2.setIcon(new ImageIcon("./image/뒤로가기.PNG"));
+		btnback2.setIcon(new ImageIcon("./kimage/뒤로가기.PNG"));
 		btnback2.setBounds(1210, 80, 160, 60);
 		buypanel.add(btnback2);
 		btnback2.setBorder(BorderFactory.createLineBorder(Color.WHITE));
@@ -299,7 +295,7 @@ public class buy_main {
 		ArrayList<Order_receipt> order_receipt = new ArrayList<Order_receipt>();
 		// 장바구니 추가
 		JButton btnadd = new JButton("");
-		btnadd.setIcon(new ImageIcon("./image/장바구니추가.PNG"));
+		btnadd.setIcon(new ImageIcon("./kimage/장바구니추가.PNG"));
 		btnadd.setBounds(380, 650, 185, 128);
 		btnadd.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		buypanel.add(btnadd);
@@ -329,7 +325,7 @@ public class buy_main {
 		});
 		// 초기화
 		JButton btnclear = new JButton("");
-		btnclear.setIcon(new ImageIcon("./image/장바구니초기화.PNG"));
+		btnclear.setIcon(new ImageIcon("./kimage/장바구니초기화.PNG"));
 		btnclear.setBounds(780, 650, 185, 128);
 		btnclear.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		buypanel.add(btnclear);
@@ -343,7 +339,7 @@ public class buy_main {
 		
 		// 결제 버튼
 		JButton btnbuy = new JButton("");
-		btnbuy.setIcon(new ImageIcon("./image/카드결제.PNG"));
+		btnbuy.setIcon(new ImageIcon("./kimage/카드결제.PNG"));
 		btnbuy.setBounds(1070, 580, 220, 80);
 		btnbuy.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		buypanel.add(btnbuy);
@@ -370,11 +366,11 @@ public class buy_main {
 		JLabel orderLabel = new JLabel("");
 		orderLabel.setBounds(370, 520, 1000, 200);
 		buypanel.add(orderLabel);
-		orderLabel.setIcon(new ImageIcon("./image/주문판.PNG"));
+		orderLabel.setIcon(new ImageIcon("./kimage/주문판.PNG"));
 
 		// 상품조회 버튼
 		JButton btnlookup = new JButton("");
-		btnlookup.setIcon(new ImageIcon("./image/상품조회.PNG"));
+		btnlookup.setIcon(new ImageIcon("./kimage/상품조회.PNG"));
 		btnlookup.setBounds(460, 280, 360, 320);
 		btnlookup.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		mainpanel.add(btnlookup);
@@ -387,7 +383,7 @@ public class buy_main {
 		});
 		// 상품구매 버튼
 		JButton btnproductbuy = new JButton("");
-		btnproductbuy.setIcon(new ImageIcon("./image/물품구매.PNG"));
+		btnproductbuy.setIcon(new ImageIcon("./kimage/물품구매.PNG"));
 		btnproductbuy.setBounds(950, 280, 360, 320);
 		btnproductbuy.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		mainpanel.add(btnproductbuy);

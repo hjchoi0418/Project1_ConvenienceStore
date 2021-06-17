@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import AnyPlace.controller.DBConnector;
+import AnyPlace.DBConnector;
 
 public class Buy_method {
 	
