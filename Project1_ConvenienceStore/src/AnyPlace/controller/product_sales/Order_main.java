@@ -10,7 +10,8 @@ public class Order_main {
 		Order_product order = new Order_product();
 		
 		order.Temporary_order();
-		while(true) {			
+		while(true) {
+						
 			order.detail_order();	
 			System.out.println("계속 구매하시겠습니까?");
 			System.out.println("1 : 구매 2 : 구매종료\n>>");
@@ -21,6 +22,5 @@ public class Order_main {
 			}
 		}
 		order.update_order();
-		order.stock_minus();	
 	}
 }

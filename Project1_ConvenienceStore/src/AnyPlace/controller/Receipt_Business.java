@@ -10,8 +10,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class Receipt_Business {
 	
-	static HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
-	static HikariDataSource ds = new HikariDataSource(config);
+
 
 	public static void main(String[] args) {
 
@@ -22,22 +21,71 @@ public class Receipt_Business {
 		판매금액: sale price ( 오더의 총액을 통해서 주문번호를 가져와 영수증을 출력한다)
 		상품코드: Product Code ( 오더 디테일의 prodcut_no 를 이용해서 영수증을 출력한다)
 		영수증 번호: receipt number ( 오더 디테일의 order_no 를 이용해서 영수증을 출력한다)
+		
+		영수증 발행 : receipt issue ( 딱히 할게 없다. receipt_number 기능으로 써도됨)
+		반품 재판매 : Return resale ( 영수증 번호로 영수증을 찾아서 rs를 반환한다음 상품판매로 넘기고 영수증을 삭제함.)
+		반품 업무 : Return service ( db에 들어가서 delete)
 		*/
 		ResultSet ors;
-		ors = trading_period("21/06/09");
+
+		return_service("2");
+		
+		
+	}
+	static public ResultSet Return_resale(String search_Options) { //반품 재판매 : Return resale ( 영수증 번호로 영수증을 찾아서 rs를 반환한다음 상품판매로 넘기고 영수증을 삭제함.)
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
+		ResultSet rs;
+		try {
+			Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT order_detail_no, o.order_no, serial_no, order_detail_price,"
+					+ " payment_method, order_amount FROM order_detail od INNER JOIN  order_ o ON od.order_no = o.order_no");
+			pstmt.setString(1, search_Options);
+			rs = pstmt.executeQuery();
+
+			pstmt = con.prepareStatement("DELETE FROM order_detail WHERE order_no = ?");
+			pstmt.setString(1, search_Options);
+			pstmt.executeUpdate();
+			return rs;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	static public void return_service (String search_Options) { // 제품 판매상태 0으로 바꾸고 영수증, 상세 영수증 삭제
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
+		Connection con;
+		try {
+			con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("UPDATE all_products SET product_state = 1 WHERE serial_no IN"
+					+ "(SELECT serial_no FROM order_detail WHERE order_no = ?)");
+			pstmt.setString(1, search_Options);
+			pstmt.executeUpdate();
+			pstmt = con.prepareStatement("DELETE FROM order_detail WHERE order_no = ?");
+			pstmt.setString(1, search_Options);
+			pstmt = con.prepareStatement("DELETE FROM order_ WHERE order_no = ?");
+			pstmt.setString(1, search_Options);
+			pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
+	
+	
 	static public ResultSet receipt_number(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_ WHERE order_no = ?");
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
-			}
+
 			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -46,6 +94,8 @@ public class Receipt_Business {
 	}
 	
 	static public ResultSet product_code(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
@@ -53,10 +103,7 @@ public class Receipt_Business {
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
 			
-			while(rs.next()){
-				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
-			}
+
 			return rs;		
 			
 		} catch (SQLException e) {
@@ -65,16 +112,15 @@ public class Receipt_Business {
 		}
 	}
 	static public ResultSet sale_price(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_ WHERE order_amount = ?");
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
-			}
+
 			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -83,16 +129,15 @@ public class Receipt_Business {
 	}
 	
 	static public ResultSet method_of_payment(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_ WHERE payment_method = ?");
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
-			}
+
 			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -101,16 +146,30 @@ public class Receipt_Business {
 	}
 	
 	static public ResultSet trading_period(String search_Options) { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_ WHERE to_date(order_date, 'yy/mm/dd') = ?");
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				System.out.printf("order_no : %-10s order_date : %-30s payment_method : %-10s order_amount : %-10s \n",
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));	
-			}
+
+			return rs;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	static public ResultSet all_Receipt() { 
+		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
+		HikariDataSource ds = new HikariDataSource(config);
+		ResultSet rs;
+		try {
+			Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_");
+			rs = pstmt.executeQuery();
 			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();

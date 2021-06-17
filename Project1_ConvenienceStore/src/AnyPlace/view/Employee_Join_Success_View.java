@@ -11,8 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import AnyPlace.main;
-
 public class Employee_Join_Success_View extends JFrame {
 	
 	public Employee_Join_Success_View() {

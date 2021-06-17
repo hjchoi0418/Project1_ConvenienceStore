@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import AnyPlace.DBConnector;
+import AnyPlace.JPool;
 
 public class RemoveProductCont {
 /*
@@ -17,7 +17,7 @@ public class RemoveProductCont {
 		String sql = "SELECT PRODUCT_NAME FROM PRODUCT";
 		String update_sql = "UPDATE PRODUCT SET PRODUCT_ON_SALE = 0 WHERE PRODUCT_NAME = ?";
 
-		try (Connection conn = DBConnector.getConnection();
+		try (Connection conn = JPool.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement update_pstmt = conn.prepareStatement(update_sql);
 				ResultSet rs = pstmt.executeQuery();) {

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import AnyPlace.DBConnector;
+import AnyPlace.JPool;
 import AnyPlace.model.Product;
 
 public class AddProductCont {
@@ -16,7 +16,7 @@ public class AddProductCont {
  */
 	static ArrayList<Product> product_list= new ArrayList<>();
 	static ArrayList<String> category_list= new ArrayList<>();
-	
+	static String[] category_arr;
 	static String sql = "SELECT CATEGORY_NAME FROM CATEGORY";
 	
 	static String sql_insert = "INSERT INTO PRODUCT VALUES\r\n" + 
@@ -29,7 +29,7 @@ public class AddProductCont {
 			"?)";
 	
 	// 카테고리 목록
-	public static void getCategoryList(PreparedStatement pstmt,ResultSet rs) {
+	public static String[] getCategoryList(PreparedStatement pstmt,ResultSet rs) {
 		System.out.println("-- 카테고리 목록 --");
 		try {
 			while(rs.next()) {
@@ -41,6 +41,12 @@ public class AddProductCont {
 		}
 	
 		System.out.println(category_list);
+		
+		category_arr = new String[category_list.size()];
+		for(int i=0; i<category_arr.length; i++) {
+			category_arr[i] = category_list.get(i);
+		}
+		return category_arr;
 	}
 	// 새로운 상품추가
 	public static void addProduct(PreparedStatement pstmt_insert,String[] product_info) {
@@ -64,7 +70,7 @@ public class AddProductCont {
 	}
 	public static void main(String[] args) {
 		
-		try (Connection conn = DBConnector.getConnection();
+		try (Connection conn = JPool.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt_insert = conn.prepareStatement(sql_insert);
 				ResultSet rs = pstmt.executeQuery();) {

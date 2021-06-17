@@ -17,6 +17,10 @@ public class Product{
 	
 	private String product_count;
 	
+	private String medium_category; // 중분류
+	private String barcode;	// 상품코드
+	
+	
     public String getProduct_no() {
         return product_no;
     }
@@ -89,6 +93,19 @@ public class Product{
 	}
 	public void setProduct_count(String product_count) {
 		this.product_count = product_count;
+	}
+	
+	public String getMedium_category() {
+		return medium_category;
+	}
+	public void setMedium_category(String medium_category) {
+		this.medium_category = medium_category;
+	}
+	public String getBarcode() {
+		return barcode;
+	}
+	public void setBarcode(String barcode) {
+		this.barcode = barcode;
 	}
 	@Override
 	public String toString() {
