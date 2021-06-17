@@ -115,7 +115,7 @@ public class Login_View extends JFrame implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new join_View2();
+				new Join_View();
 				dispose();
 			}
 		});
