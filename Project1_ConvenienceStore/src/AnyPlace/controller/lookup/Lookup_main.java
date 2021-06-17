@@ -17,7 +17,7 @@ public class Lookup_main {
 			System.out.print(">>");
 			int menu = Integer.parseInt(sc.nextLine());
 			if (menu == 1) {
-				System.out.println("no.   제품번호        카테고리번호\t  상품이름\t상품가격 \t\t 유통기한");
+				System.out.println("카테고리번호\t   상품이름\t\t상품가격");
 				lookup.selectMethod();
 				System.out.println("----------------------------");	
 			}

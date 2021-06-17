@@ -15,7 +15,11 @@ public class DBConnector {
 
 	
 	static {
+<<<<<<< HEAD
 		try (BufferedReader in = new BufferedReader(new FileReader(".db.txt"))) {
+=======
+		try (BufferedReader in = new BufferedReader(new FileReader("./HR2.txt"))) {
+>>>>>>> refs/remotes/origin/Wonhyeyoung
 			url = in.readLine();
 			id = in.readLine();
 			password = in.readLine();
