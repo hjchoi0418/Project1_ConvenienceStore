@@ -26,14 +26,19 @@ public class Receipt_Lookup { //영수증 조건별로 검색 ResultSet을 return
 		ResultSet odrs;
 		odrs = receipt_number("2");
 	}
-	
+	/*
+
+	 */
 	static public ResultSet receipt_number(String search_Options) { 
 		HikariConfig config = new HikariConfig("./Hikari_Sehyeon.properties");
 		HikariDataSource ds = new HikariDataSource(config);
 		ResultSet rs;
 		try {
 			Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM order_detail WHERE order_no = ?");
+			PreparedStatement pstmt = con.prepareStatement("SELECT order_detail_no, order_.order_no, order_detail.serial_no, order_detail.order_detail_price, product.product_name "
+					+ "FROM order_detail, order_, product, all_products "
+					+ "WHERE order_.order_no = ? AND order_.order_no = order_detail.order_no "
+					+ "AND order_detail.serial_no = all_products.serial_no AND all_products.product_no = product.product_no");
 			pstmt.setString(1, search_Options);
 			rs = pstmt.executeQuery();
 

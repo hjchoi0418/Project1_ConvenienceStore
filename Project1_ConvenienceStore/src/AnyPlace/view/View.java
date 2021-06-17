@@ -106,7 +106,7 @@ public class View extends JFrame implements Runnable {
 				menu3.setEnabled(false);
 				main_panel.removeAll();
 				
-				Receipt_Business_View rb_panel = new Receipt_Business_View();
+				Container rb_panel = new Receipt_Business_View();
 				main_panel.add(rb_panel);
 				
 				main_panel.updateUI();
