@@ -308,17 +308,13 @@ public class DeliveryOrder_View extends JPanel {
 		button_6.setBounds(584, 513, 70, 70);
 		add(button_6);
 
-
 		setLocation(70, 50);
 		setSize(1467, 902);
 //		getContentPane().setLayout(null);
 
 		setLayout(null);
 
-
-		
 		setVisible(true);
-
 
 	}
 }

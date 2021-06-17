@@ -395,5 +395,4 @@ public class buy_main {
 			}
 		});
 	}
-	
 }

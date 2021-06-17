@@ -74,14 +74,11 @@ public class join_View2 extends JFrame {
 	    	 
 		JFrame frame = new JFrame();
 		
-
-		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(200,100);
 		setSize(1467,902);
 		getContentPane().setLayout(null);
 	
-		
 		textField1 = new JTextField();
 		textField1.setToolTipText("NAME");
 		textField1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -137,12 +134,8 @@ public class join_View2 extends JFrame {
 //	    		add(panel);
 //	    	 	pack();
 	    	 
-	     
-
-
 	public static void main(String[] args) {
 		new join_View2();
-		
 	}
 }
 

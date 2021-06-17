@@ -48,14 +48,11 @@ public class Join_View extends JFrame {
 	    	 
 		JFrame frame = new JFrame();
 		
-
-		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(200,100);
 		setSize(1467,902);
 		getContentPane().setLayout(null);
 	
-		
 		JTextField textField1 = new JTextField();
 		textField1.setToolTipText("NAME");
 		textField1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -100,12 +97,9 @@ public class Join_View extends JFrame {
 		});
 		btnNewButton.setBounds(557, 498, 353, 55);
 		getContentPane().add(btnNewButton);
-		
-		
 	}
 
 	public static void main(String[] args) {
 		new Join_View();
-		
 	}
 }

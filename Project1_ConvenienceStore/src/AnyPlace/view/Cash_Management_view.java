@@ -97,20 +97,20 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 			}
 		});
 		
-		table.getTableHeader().setFont(new Font("나눔고딕", Font.BOLD, 20)); // 컬럼 폰트 
-		table.getTableHeader().setBackground(new Color(22,56,81)); 	// 컬럼 배경색
-		table.getTableHeader().setForeground(new Color(255,255,255)); // 컬럼 폰트색
-		table.getTableHeader().setPreferredSize(new Dimension(0, 60)); // 컬럼 너비, 높이
-		table.getTableHeader().setReorderingAllowed(false); // 컬럼 이동 안되게
+		table.getTableHeader().setFont(new Font("나눔고딕", Font.BOLD, 20));
+		table.getTableHeader().setBackground(new Color(22,56,81));
+		table.getTableHeader().setForeground(new Color(255,255,255));
+		table.getTableHeader().setPreferredSize(new Dimension(0, 60));
+		table.getTableHeader().setReorderingAllowed(false);
 		table.setRowSelectionAllowed(true);
 		table.getTableHeader().setReorderingAllowed(false);
 
 		table.setIntercellSpacing(new Dimension(10, 1));
 		table.setRowHeight(62);
-		table.setFont(new Font("나눔고딕", Font.BOLD, 18)); // 행 폰트
-		table.setBackground(new Color(235,235,235)); // 행 배경색
- 		table.setForeground(new Color(22,56,81)); // 행 폰트색
-		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // 단일선택
+		table.setFont(new Font("나눔고딕", Font.BOLD, 18));
+		table.setBackground(new Color(235,235,235));
+ 		table.setForeground(new Color(22,56,81));
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		
 		l_scrollPane = new JScrollPane(table);
 		l_scrollPane.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -179,18 +179,6 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		
 		add(topPanel, BorderLayout.NORTH);
 		add(centerPanel, BorderLayout.CENTER);
-		
-//		BufferedImage img = null;
-//		try {
-//		    img = ImageIO.read(new File("./img/logo.jpg"));
-//		} catch (IOException e) {
-//		    e.printStackTrace();
-//		}
-//		
-//		Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(),
-//		        Image.SCALE_SMOOTH);
-//		
-//		ImageIcon imageIcon = new ImageIcon(dimg);
 		
 		JPanel logo_panel = new JPanel();
 		logo_panel.setBackground(new Color(235, 235, 235));

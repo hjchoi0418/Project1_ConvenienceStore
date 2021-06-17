@@ -392,8 +392,6 @@ public class Receipt_Business_View extends JPanel{
 
 		}
 
-
-
 	 	public static JButton create_serch_button(Container pane) {
 			ImageIcon icon = new ImageIcon("./image/serch.png");
 			JButton btn = new JButton(icon);
@@ -402,7 +400,6 @@ public class Receipt_Business_View extends JPanel{
 			pane.add(btn);
 			return btn;
 		}
-	 	
 	 	
 	    public static JButton add_Issuance_button(Container pane) {
 	    	JButton issuance_btn = new JButton("영수증발행");
