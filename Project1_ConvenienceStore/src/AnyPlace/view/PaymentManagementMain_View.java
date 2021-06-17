@@ -1,5 +1,6 @@
 package AnyPlace.view;
 
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,7 +42,11 @@ public class PaymentManagementMain_View extends JPanel {
 		JButton 硅价林巩 = new JButton(new ImageIcon("./img/menu_C/硅价林巩.png"));
 		硅价林巩.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				removeAll();
 				
+				Container dov_panel = new DeliveryOrder_View();
+				add(dov_panel);
+				updateUI();
 			}
 		});
 		硅价林巩.setPressedIcon(new ImageIcon("./img/menu_C/硅价林巩_over.png"));
@@ -49,7 +54,7 @@ public class PaymentManagementMain_View extends JPanel {
 		硅价林巩.setContentAreaFilled(false);
 		硅价林巩.setFocusPainted(false);
 		硅价林巩.setBounds(550, 175, 249, 348);
-		this.add(硅价林巩);
+		add(硅价林巩);
 		
 		setSize(1467, 902);
 		setLayout(null);

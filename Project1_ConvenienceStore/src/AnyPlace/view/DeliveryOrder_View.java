@@ -70,6 +70,8 @@ public class DeliveryOrder_View extends JPanel {
 //			throw new RuntimeException(e);
 //		}
 
+		setLayout(null);
+
 		// 테이블
 		data = deliveryCont.allProductsCount();
 		DefaultTableModel model = new DefaultTableModel(data, col_name) {
@@ -89,7 +91,7 @@ public class DeliveryOrder_View extends JPanel {
 
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		scroll = new JScrollPane(table);
-		scroll.setBounds(500, 220, 760, 350);
+		scroll.setBounds(91, 20, 760, 350);
 		add(scroll);
 
 		// textarea
@@ -105,7 +107,7 @@ public class DeliveryOrder_View extends JPanel {
 		textArea.setFont(new Font("맑은 고딕", Font.PLAIN, 19));
 		textArea.setEditable(false);
 		textArea.setBackground(new Color(72, 61, 139));
-		textArea.setBounds(500, 570, 560 ,46);
+		textArea.setBounds(91, 370, 560 ,46);
 		add(textArea);
 
 		button_1 = new JButton("주문");
@@ -120,7 +122,7 @@ public class DeliveryOrder_View extends JPanel {
 //		button_1.setBorderPainted(false);
 		button_1.setContentAreaFilled(false);
 		button_1.setFocusPainted(false);
-		button_1.setBounds(1109, 570, 150, 46);
+		button_1.setBounds(700, 370, 150, 46);
 		add(button_1);
 		
 		JButton btnNewButton_2 = new JButton("+");
@@ -139,7 +141,7 @@ public class DeliveryOrder_View extends JPanel {
 				}
 			}
 		});
-		btnNewButton_2.setBounds(700, 650, 70, 70);
+		btnNewButton_2.setBounds(367, 447, 70, 70);
 		add(btnNewButton_2);
 		
 		JButton button_2 = new JButton("+10");
@@ -157,7 +159,7 @@ public class DeliveryOrder_View extends JPanel {
 				}
 			}
 		});
-		button_2.setBounds(790, 650, 70, 70);
+		button_2.setBounds(457, 447, 70, 70);
 		add(button_2);
 		
 		JButton button_3 = new JButton("+100");
@@ -175,7 +177,7 @@ public class DeliveryOrder_View extends JPanel {
 				}
 			}
 		});
-		button_3.setBounds(880, 650, 70, 70);
+		button_3.setBounds(547, 447, 70, 70);
 		add(button_3);
 		
 		JButton button_4 = new JButton("-");
@@ -195,7 +197,7 @@ public class DeliveryOrder_View extends JPanel {
 				}
 			}
 		});
-		button_4.setBounds(700, 740, 70, 70);
+		button_4.setBounds(367, 537, 70, 70);
 		add(button_4);
 		
 		JButton button_5 = new JButton("-10");
@@ -224,7 +226,7 @@ public class DeliveryOrder_View extends JPanel {
 				}
 			}
 		});
-		button_5.setBounds(790, 740, 70, 70);
+		button_5.setBounds(457, 537, 70, 70);
 		add(button_5);
 		
 		JButton button_6 = new JButton("-100");
@@ -249,57 +251,57 @@ public class DeliveryOrder_View extends JPanel {
 				}
 			}
 		});
-		button_6.setBounds(880, 740, 70, 70);
+		button_6.setBounds(547, 537, 70, 70);
 		add(button_6);
 
-		JButton menu1 = new JButton();
-		menu1.setIcon(new ImageIcon("./img/menu_A/메뉴_01.png"));
-		menu1.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_01.png"));
-		menu1.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_01.png"));
-		menu1.setBorderPainted(false);
-		menu1.setContentAreaFilled(false);
-		menu1.setFocusPainted(false);
-		menu1.setBounds(95, 269, 239, 86);
-		add(menu1);
-
-		JButton menu2 = new JButton(new ImageIcon("./img/menu_A/메뉴_02.png"));
-		menu2.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_02.png"));
-		menu2.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_02.png"));
-		menu2.setBorderPainted(false);
-		menu2.setContentAreaFilled(false);
-		menu2.setFocusPainted(false);
-		menu2.setBounds(95, 355, 239, 86);
-		add(menu2);
-
-		JButton menu3 = new JButton(new ImageIcon("./img/menu_A/메뉴_03.png"));
-		menu3.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_03.png"));
-		menu3.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_03.png"));
-		menu3.setBorderPainted(false);
-		menu3.setContentAreaFilled(false);
-		menu3.setFocusPainted(false);
-		menu3.setBounds(95, 441, 239, 86);
-		add(menu3);
-
-		JButton menu4 = new JButton(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
-		menu4.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
-		menu4.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
-		menu4.setBorderPainted(false);
-		menu4.setContentAreaFilled(false);
-		menu4.setFocusPainted(false);
-		menu4.setBounds(95, 527, 239, 86);
-		add(menu4);
-
-		JButton menu5 = new JButton(new ImageIcon("./img/menu_A/메뉴_05.png"));
-		menu5.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_05.png"));
-		menu5.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_05.png"));
-		menu5.setBorderPainted(false);
-		menu5.setContentAreaFilled(false);
-		menu5.setFocusPainted(false);
-		menu5.setBounds(95, 613, 239, 86);
-		add(menu5);
+//		JButton menu1 = new JButton();
+//		menu1.setIcon(new ImageIcon("./img/menu_A/메뉴_01.png"));
+//		menu1.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_01.png"));
+//		menu1.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_01.png"));
+//		menu1.setBorderPainted(false);
+//		menu1.setContentAreaFilled(false);
+//		menu1.setFocusPainted(false);
+//		menu1.setBounds(95, 269, 239, 86);
+//		add(menu1);
+//
+//		JButton menu2 = new JButton(new ImageIcon("./img/menu_A/메뉴_02.png"));
+//		menu2.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_02.png"));
+//		menu2.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_02.png"));
+//		menu2.setBorderPainted(false);
+//		menu2.setContentAreaFilled(false);
+//		menu2.setFocusPainted(false);
+//		menu2.setBounds(95, 355, 239, 86);
+//		add(menu2);
+//
+//		JButton menu3 = new JButton(new ImageIcon("./img/menu_A/메뉴_03.png"));
+//		menu3.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_03.png"));
+//		menu3.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_03.png"));
+//		menu3.setBorderPainted(false);
+//		menu3.setContentAreaFilled(false);
+//		menu3.setFocusPainted(false);
+//		menu3.setBounds(95, 441, 239, 86);
+//		add(menu3);
+//
+//		JButton menu4 = new JButton(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
+//		menu4.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
+//		menu4.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_04.png"));
+//		menu4.setBorderPainted(false);
+//		menu4.setContentAreaFilled(false);
+//		menu4.setFocusPainted(false);
+//		menu4.setBounds(95, 527, 239, 86);
+//		add(menu4);
+//
+//		JButton menu5 = new JButton(new ImageIcon("./img/menu_A/메뉴_05.png"));
+//		menu5.setSelectedIcon(new ImageIcon("./img/menu_B/메뉴_over_05.png"));
+//		menu5.setPressedIcon(new ImageIcon("./img/menu_B/메뉴_over_05.png"));
+//		menu5.setBorderPainted(false);
+//		menu5.setContentAreaFilled(false);
+//		menu5.setFocusPainted(false);
+//		menu5.setBounds(95, 613, 239, 86);
+//		add(menu5);
 		
 //		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocation(370, 50);
+		setLocation(70, 50);
 		setSize(1467, 902);
 //		getContentPane().setLayout(null);
 		setVisible(true);
@@ -328,7 +330,7 @@ public class DeliveryOrder_View extends JPanel {
 //		setVisible(true);
 	}
 
-	public static void main(String[] args) {
-		new DeliveryOrder_View();
-	}
+//	public static void main(String[] args) {
+//		new DeliveryOrder_View();
+//	}
 }
