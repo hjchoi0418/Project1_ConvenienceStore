@@ -151,6 +151,24 @@ public class Receipt_Business_View extends JFrame{
 		JButton return_button = add_Return_button(getContentPane()); // 반품 버튼
 		JButton serch_button = create_serch_button(getContentPane()); // 검색버튼
 		
+		resale_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int row = order_table.getSelectedRow();
+				Object value = order_table.getValueAt(row, 1); // order_no 를 가져옴
+				Receipt_Business rb = new Receipt_Business();
+				ResultSet rs;
+				try {
+					rs = rb.Return_resale((String) value); // 영수증 테이블 클릭한다음 버튼 클릭하면 삭제됨
+				} catch (Exception e2) {
+					// TODO: handle exception
+					e2.printStackTrace();
+				} 
+			}
+		});
+		
 		return_button.addActionListener(new ActionListener() {
 			
 			@Override
