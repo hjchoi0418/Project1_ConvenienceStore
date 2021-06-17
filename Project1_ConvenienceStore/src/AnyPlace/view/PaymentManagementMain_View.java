@@ -44,12 +44,7 @@ public class PaymentManagementMain_View extends JPanel {
 		硅价林巩 = new JButton(new ImageIcon("./img/menu_C/硅价林巩.png"));
 		硅价林巩.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				removeAll();
-
-				PaymentManagementDisposal_View pmd_panel = new PaymentManagementDisposal_View();
-				getParent().add(pmd_panel);
 				
-				updateUI();
 			}
 		});
 		硅价林巩.setPressedIcon(new ImageIcon("./img/menu_C/硅价林巩_over.png"));
