@@ -91,12 +91,13 @@ public class Join_View extends JFrame {
 				Join.setNew_employee_name(id);
 				Join.main(null);
 				
-				if(Join.isSuccess()) {				
-					Employee_Join_Success_View jsv = new Employee_Join_Success_View();
+				if(Join.isSuccess()) {	
+
+					new Employee_Join_Success_View();
 					frame.dispose();
 					}
 				else {
-					Error_View ev = new Error_View();
+					new Error_View();
 					frame.dispose();
 				}
 			}

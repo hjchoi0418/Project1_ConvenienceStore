@@ -56,6 +56,6 @@ public class Error_View extends JFrame{
 		c.add(panel);
 	}
 	public static void main(String[] args) {
-		Error_View ev = new Error_View();
+		new Error_View();
 	}
 }

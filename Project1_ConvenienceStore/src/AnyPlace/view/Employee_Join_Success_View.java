@@ -44,6 +44,8 @@ public class Employee_Join_Success_View extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				
 				Login_View lv = new Login_View(); 
 				sv.dispose();
 			}
@@ -55,6 +57,6 @@ public class Employee_Join_Success_View extends JFrame {
 		c.add(panel);
 	}
 	public static void main(String[] args) {
-		Employee_Join_Success_View view = new Employee_Join_Success_View();
+		new Employee_Join_Success_View();
 	}
 }
