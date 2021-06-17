@@ -3,13 +3,18 @@ package AnyPlace.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -22,8 +27,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
+import AnyPlace.controller.Cash_Management;
 import AnyPlace.controller.Login;
 
 import java.awt.Font;
@@ -186,6 +196,9 @@ public class sale_View extends JFrame {
 		getContentPane().add(검색2);
 		
 		
+		
+
+		
 		JLabel label1 = new JLabel("① 장부재고 : 점포경영시스템 재고관리 메뉴에서 조회하는 재고수량으로 폐기수량이 반영되지 않은 재고조사의 기준이 되는 재고");
 		label1.setFont(new Font("나눔고딕", Font.BOLD, 12));
 		label1.setForeground(new Color(22, 56, 81));
@@ -203,35 +216,20 @@ public class sale_View extends JFrame {
 		getContentPane().setVisible(true);
 		
 		
+		 
+	 
 		
-		final JTable table = new JTable(new DefaultTableModel(new String[] {
-		        "title", "info" }, 3));
-		frame.getContentPane().setLayout(
-		        new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(table.getTableHeader());
-		frame.getContentPane().add(table);
-		frame.pack();
-		frame.setVisible(true);
 
-		// listener
-		table.getTableHeader().addMouseListener(new MouseAdapter() {
-		    @Override
-		    public void mouseClicked(MouseEvent e) {
-		        int col = table.columnAtPoint(e.getPoint());
-		        String name = table.getColumnName(col);
-		        System.out.println("Column index selected " + col + " " + name);
-		    }
-		});
-		
-		
+
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(1300,700);
 		setSize(1467,902);
 		getContentPane().setLayout(null);
 		setVisible(true);
-
+	    
+	     
 	     }
-
+	     
 	public static void main(String[] args) {
 		new sale_View();
 		
