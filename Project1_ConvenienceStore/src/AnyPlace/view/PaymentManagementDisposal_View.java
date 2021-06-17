@@ -19,7 +19,6 @@ import javax.swing.table.DefaultTableModel;
 import AnyPlace.controller.DisposalCont;
 import AnyPlace.mouseEventListener.DisposalView_MouseEventListener;
 import java.awt.FlowLayout;
-
 // Æó±â µî·Ï
 public class PaymentManagementDisposal_View extends JPanel {
 	
