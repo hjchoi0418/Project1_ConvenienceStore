@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
+import AnyPlace.controller.Join;
+
 
 public class join_View2 extends JFrame {
 	ImageIcon icon;
@@ -78,17 +80,7 @@ public class join_View2 extends JFrame {
 		setLocation(1300,700);
 		setSize(1467,902);
 		getContentPane().setLayout(null);
-		
-		JButton btnNewButton = new JButton("CREATE ACCOUNT");
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("³ª´®°íµñ", Font.BOLD, 15));
-		btnNewButton.setBackground(new Color(255, 204, 51));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(557, 498, 353, 55);
-		getContentPane().add(btnNewButton);
+	
 		
 		textField1 = new JTextField();
 		textField1.setToolTipText("NAME");
@@ -108,7 +100,24 @@ public class join_View2 extends JFrame {
 		textField2.setColumns(10);
 		setVisible(true);
 		
-		
+		JButton btnNewButton = new JButton("CREATE ACCOUNT");
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setFont(new Font("³ª´®°íµñ", Font.BOLD, 15));
+		btnNewButton.setBackground(new Color(255, 204, 51));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// °èÁ¤»ý¼º ¿¬°á
+				Join join = new Join();
+				JTextField id_input = textField1;
+				JTextField name_input = textField2;
+//				String textField1 = textField1.getText();
+//				String textField2 = textField2.getText();
+				
+				// ÀÌ ºÎºÐ È®ÀÎ ºÎÅ¹µå¸³´Ï´Ù..¤Ð¤Ð
+			}
+		});
+		btnNewButton.setBounds(557, 498, 353, 55);
+		getContentPane().add(btnNewButton);
 		
 		
 	}
