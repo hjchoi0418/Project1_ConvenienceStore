@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class View extends JFrame implements Runnable {
-	private JPanel main_panel;
+	private static JPanel main_panel;
 	JButton menu1, menu2, menu3, menu4, menu5, logoutBtn;
 	private JLabel time_label, user_label;
 	private Thread thread;
@@ -34,6 +34,14 @@ public class View extends JFrame implements Runnable {
 		return largeBtnSz;
 	}
 
+	public static void paymentManagerment_refresh() {
+		main_panel.removeAll();
+		
+		Container pd_panel = new PaymentManagementMain_View();
+		main_panel.add(pd_panel);
+		
+		main_panel.updateUI();
+    }
 	public View() {
 		
 		setTitle("Any Place");
