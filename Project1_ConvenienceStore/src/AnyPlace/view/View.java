@@ -9,6 +9,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -21,11 +23,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class View extends JFrame implements Runnable {
-	private JPanel main_panel;
+	private static JPanel main_panel;
 	JButton menu1, menu2, menu3, menu4, menu5;
 	JLabel logoutBtn;
 	private JLabel time_label, user_label;
@@ -37,6 +37,14 @@ public class View extends JFrame implements Runnable {
 		return largeBtnSz;
 	}
 
+	public static void paymentManagerment_refresh() {
+		main_panel.removeAll();
+		
+		Container pd_panel = new PaymentManagementMain_View();
+		main_panel.add(pd_panel);
+		
+		main_panel.updateUI();
+    }
 	public View() {
 		
 		setTitle("Any Place");

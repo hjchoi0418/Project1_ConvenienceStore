@@ -22,7 +22,7 @@ public class DisposalCont {
 
 	public int waste_count; // 총 폐기수량
 	public int total_waste_price; // 총 폐기제품원가
-
+	
 	// 유통기한 30분 남은 제품들 목록
 	String sql = "SELECT * FROM(SELECT\r\n" + "C.CATEGORY_NO||'.'||C.CATEGORY_NAME 중분류,\r\n"
 			+ "AP.SERIAL_NO||'A00'||P.PRODUCT_NO 상품코드,P.PRODUCT_NAME 상품명,\r\n"

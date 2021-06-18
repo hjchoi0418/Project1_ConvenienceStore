@@ -49,9 +49,9 @@ public class PaymentManagementDisposal_View extends JPanel {
 	public PaymentManagementDisposal_View() {
 		setBackground(Color.WHITE);
 
-		// 테이블
 		data = disposalCont.getData();
 		DefaultTableModel model = new DefaultTableModel(data,col_name) {
+			// 테이블 데이터 수정 X 
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				if(column >= 0) {
@@ -92,7 +92,7 @@ public class PaymentManagementDisposal_View extends JPanel {
 		// textarea
 		waste_count = disposalCont.waste_count;
 		total_waste_price = disposalCont.total_waste_price;
-		JTextArea textArea = new JTextArea("합계수량  "); //+ waste_count + "\t\t폐기 제품 총 원가  " + total_waste_price);
+		JTextArea textArea = new JTextArea(" 합계수량  "); //+ waste_count + "\t\t폐기 제품 총 원가  " + total_waste_price);
 		textArea.setForeground(Color.ORANGE);
 		textArea.setFont(new Font("나눔고딕", Font.BOLD, 30));
 		textArea.setEditable(false);
@@ -128,35 +128,21 @@ public class PaymentManagementDisposal_View extends JPanel {
 		JButton btnNewButton_1 = new JButton(new ImageIcon("./img/menu_C/폐기등록2.png"));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("ssss : " + Arrays.toString(mel.str_arr));
-//				disposalCont.delData(mel.str_arr);
-//				dispose();
-//				new PaymentManagementDisposal_View();
-//				setTable();
-//				waste_count = disposalCont.waste_count;
-//				total_waste_price = disposalCont.total_waste_price;
 				
-//				waste_count = mel.
+				mel.delRecode(model); // table에서 행 삭제
+				disposalCont.delData(mel.str_arr); // db에서 데이터 삭제
 				
-//				System.out.println("waste : " + waste_count);
-//				System.out.println("total_pri : " + total_waste_price);
-				
-				mel.delRecode(model);
-//				mel.delData(table);
-				disposalCont.delData(mel.str_arr);
 				HashMap<String,String> temp_map = new HashMap<>();
-				temp_map = disposalCont.getCountCost();
+				temp_map = disposalCont.getCountCost();  // 전체폐기수량,원가를 key,value로 담은 map 
 				
-				String wcnt = "";
-				String wtotal = "";
+				String wcnt = "";  // 전체 폐기 수량
+				String wtotal = ""; // 전체 폐기 원가
 				for(String key : temp_map.keySet()) {
 					wcnt = key;
 					wtotal = temp_map.get(key);
 				}
-				System.out.println(wcnt);
-				System.out.println(wtotal);
 
-				textArea_1.setText(wcnt);
+				textArea_1.setText(wcnt); // textArea 업데이트
 				textArea_3.setText(wtotal);
 			}
 		});

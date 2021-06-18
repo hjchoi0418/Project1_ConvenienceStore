@@ -1,22 +1,29 @@
 package AnyPlace.view;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import AnyPlace.view.View;
 import AnyPlace.controller.DeliveryCont;
 import AnyPlace.mouseEventListener.DeliveryView_MouseEventListener;
 
@@ -42,7 +49,6 @@ public class DeliveryOrder_View extends JPanel {
 
 	int row;
 	DeliveryView_MouseEventListener dvm = new DeliveryView_MouseEventListener(table);
-
 	public Dimension getPreferredSize() {
 		Dimension largeBtnSz = new Dimension(super.getPreferredSize().width + 30, super.getPreferredSize().height + 30);
 		return largeBtnSz;
@@ -116,7 +122,7 @@ public class DeliveryOrder_View extends JPanel {
 		// 일단 주문하면 팝업창을 띄워서 알림
 		
 //		JTextArea textArea = new JTextArea("합계수량  " + order_count + "\t\t원가 금액 합계  " + total_cost);
-		JTextArea textArea = new JTextArea("합계수량 "); //+ cnt + "\t\t원가 금액 합계  " + total_cost);
+		JTextArea textArea = new JTextArea(" 합계수량 "); //+ cnt + "\t\t원가 금액 합계  " + total_cost);
 		textArea.setForeground(new Color(254,182,63));
 		textArea.setFont(new Font("나눔고딕", Font.BOLD, 30));
 		textArea.setEditable(false);
@@ -148,12 +154,46 @@ public class DeliveryOrder_View extends JPanel {
 		textArea_3.setBounds(679, 416, 172, 91);
 		add(textArea_3);
 		
-		button_1 = new JButton("주문");
-		button_1.addActionListener(new ActionListener() {
+		button_1 = new JButton(new ImageIcon("./img/menu_C/주문.png"));
+		button_1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dvm.addProducts(table);
+
+				JDialog dialog = new JDialog(); // 팝업창
+				JButton btn = new JButton(new ImageIcon ("./img/menu_C/확인.png")); // 확인버튼
+				JTextField tf = new JTextField("합계수량 "+ cnt + "  원가 금액 합계 " + total_cost + " 주문 완료"); // 팝업 text
+				
+				//확인버튼 
+				btn.setBorderPainted(false);
+				btn.setContentAreaFilled(false);
+				btn.setFocusPainted(false);
+				btn.setLocation(24, 34);
+				
+				//text
+				tf.setEditable(false);
+				tf.setBackground(Color.white);
+				tf.setFont(new Font("나눔고딕", Font.BOLD, 15));
+				tf.setEditable(false);
+				tf.setForeground(new Color(22, 56, 81));
+				tf.setBorder(null);
+				// 팝업
+				dialog.setLayout(new FlowLayout());
+				dialog.getContentPane().setBackground(Color.white);
+				dialog.add(tf);
+				dialog.add(btn);
+				dialog.setBounds(500,400,400,100);
+				
+				dialog.setVisible(true);
+				btn.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						dialog.setVisible(false);
+						View.paymentManagerment_refresh();
+					}
+				});
 			}
+			
 		});
 		button_1.setBackground(new Color(72, 61, 139));
 		button_1.setFont(new Font("맑은 고딕", Font.BOLD, 12));
@@ -161,9 +201,12 @@ public class DeliveryOrder_View extends JPanel {
 		button_1.setContentAreaFilled(false);
 		button_1.setFocusPainted(false);
 		button_1.setBounds(701, 513, 150, 68);
+		button_1.setPressedIcon(new ImageIcon("./img/menu_C/주문B.png"));
+		button_1.setBorderPainted(false);
+		button_1.setContentAreaFilled(false);
 		add(button_1);
 		
-		JButton btnNewButton_2 = new JButton("+");
+		JButton btnNewButton_2 = new JButton(new ImageIcon("./img/menu_C/플러스.png"));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -182,9 +225,12 @@ public class DeliveryOrder_View extends JPanel {
 			}
 		});
 		btnNewButton_2.setBounds(0, 513, 70, 70);
+		btnNewButton_2.setPressedIcon(new ImageIcon("./img/menu_C/플러스B.png"));
+		btnNewButton_2.setBorderPainted(false);
+		btnNewButton_2.setContentAreaFilled(false);
 		add(btnNewButton_2);
 		
-		JButton button_2 = new JButton("+10");
+		JButton button_2 = new JButton(new ImageIcon("./img/menu_C/플러스10.png"));
 		button_2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -202,9 +248,12 @@ public class DeliveryOrder_View extends JPanel {
 			}
 		});
 		button_2.setBounds(111, 513, 70, 70);
+		button_2.setPressedIcon(new ImageIcon("./img/menu_C/플러스10B.png"));
+		button_2.setBorderPainted(false);
+		button_2.setContentAreaFilled(false);
 		add(button_2);
 		
-		JButton button_3 = new JButton("+100");
+		JButton button_3 = new JButton(new ImageIcon("./img/menu_C/플러스100.png"));
 		button_3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -222,9 +271,12 @@ public class DeliveryOrder_View extends JPanel {
 			}
 		});
 		button_3.setBounds(230, 513, 70, 70);
+		button_3.setPressedIcon(new ImageIcon("./img/menu_C/플러스100B.png"));
+		button_3.setBorderPainted(false);
+		button_3.setContentAreaFilled(false);
 		add(button_3);
 		
-		JButton button_4 = new JButton("-");
+		JButton button_4 = new JButton(new ImageIcon("./img/menu_C/마이너스.png"));
 		button_4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -244,9 +296,13 @@ public class DeliveryOrder_View extends JPanel {
 			}
 		});
 		button_4.setBounds(357, 513, 70, 70);
+		button_4.setPressedIcon(new ImageIcon("./img/menu_C/마이너스B.png"));
+		button_4.setBorderPainted(false);
+		button_4.setContentAreaFilled(false);
 		add(button_4);
 		
-		JButton button_5 = new JButton("-10");
+//		JButton button_5 = new JButton(new ImageIcon("./img/menu_C/마이너스10.png"));
+		JButton button_5 = new JButton(new ImageIcon("./img/menu_C/마이너스10B.png"));
 		button_5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -277,9 +333,12 @@ public class DeliveryOrder_View extends JPanel {
 			}
 		});
 		button_5.setBounds(474, 513, 70, 70);
+		button_5.setPressedIcon(new ImageIcon("./img/menu_C/마이너스10B.png"));
+		button_5.setBorderPainted(false);
+		button_5.setContentAreaFilled(false);
 		add(button_5);
 		
-		JButton button_6 = new JButton("-100");
+		JButton button_6 = new JButton(new ImageIcon("./img/menu_C/마이너스100B.png"));
 		button_6.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -305,6 +364,9 @@ public class DeliveryOrder_View extends JPanel {
 				}
 			}
 		});
+		button_6.setPressedIcon(new ImageIcon("./img/menu_C/마이너스100B.png"));
+		button_6.setBorderPainted(false);
+		button_6.setContentAreaFilled(false);
 		button_6.setBounds(584, 513, 70, 70);
 		add(button_6);
 
