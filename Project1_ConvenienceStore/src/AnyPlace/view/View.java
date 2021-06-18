@@ -21,10 +21,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class View extends JFrame implements Runnable {
 	private JPanel main_panel;
-	JButton menu1, menu2, menu3, menu4, menu5, logoutBtn;
+	JButton menu1, menu2, menu3, menu4, menu5;
+	JLabel logoutBtn;
 	private JLabel time_label, user_label;
 	private Thread thread;
 	private SimpleDateFormat sf;
@@ -180,9 +183,10 @@ public class View extends JFrame implements Runnable {
 		user_label.setBounds(1230, 10, 100, 40);
 		getContentPane().add(user_label);
 		
-		logoutBtn = new JButton();
-		logoutBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		logoutBtn = new JLabel(new ImageIcon("./img/로그아웃.png"));
+		logoutBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "LogOut", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
 					new Login_View();
@@ -190,7 +194,7 @@ public class View extends JFrame implements Runnable {
 				}
 			}
 		});
-		logoutBtn.setBounds(1340, 10, 40, 40);
+		logoutBtn.setBounds(1340, 15, 32, 32);
 		getContentPane().add(logoutBtn);
 		
 		main_panel = new JPanel();
