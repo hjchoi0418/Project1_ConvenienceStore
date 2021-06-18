@@ -75,10 +75,24 @@ public class Receipt_Business_View extends JPanel{
 		JTextArea option_text5 = create_option_text_area(this,5);
 		JTextArea option_text6 = create_option_text_area(this,6);
 		
+		Color color = new Color(22,56,81);
+		ImageIcon icon = new ImageIcon("./img/상품판매btn/버튼.png");		
 		JButton issuance_button = add_Issuance_button(this); // 영수증발행 버튼
+		issuance_button.setForeground(Color.WHITE);
+		issuance_button.setFont(new Font("나눔고딕", Font.BOLD, 15));
+		issuance_button.setBackground(color);
+		
+		
 		JButton return_button = add_Return_button(this); // 반품 버튼
+		return_button.setForeground(Color.WHITE);
+		return_button.setFont(new Font("나눔고딕", Font.BOLD, 15));
+		return_button.setBackground(color);
+		
 		JButton serch_button = create_serch_button(this); // 검색버튼
 		JButton refresh = create_Refresh_btn(this);
+		refresh.setForeground(Color.WHITE);
+		refresh.setFont(new Font("나눔고딕", Font.BOLD, 15));
+		refresh.setBackground(color);
 		
 		
 		issuance_button.addActionListener(new ActionListener() {
