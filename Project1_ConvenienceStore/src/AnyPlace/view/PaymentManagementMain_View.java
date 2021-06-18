@@ -29,8 +29,9 @@ public class PaymentManagementMain_View extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				removeAll();
 				
-				PaymentManagementDisposal_View pmd_panel = new PaymentManagementDisposal_View();
+				Container pmd_panel = new PaymentManagementDisposal_View();
 				add(pmd_panel);
+				
 				updateUI();
 			}
 		});
