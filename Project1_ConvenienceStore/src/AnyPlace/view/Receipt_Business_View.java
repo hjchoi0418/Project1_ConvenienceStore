@@ -52,7 +52,8 @@ public class Receipt_Business_View extends JPanel{
 		setVisible(true);
 		setBackground(Color.WHITE);
 	   	JFrame frame = new JFrame();   
-			
+			 
+	   	
 		 // 메뉴버튼
 		    
 	   	

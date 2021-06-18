@@ -220,7 +220,8 @@ public class View extends JFrame implements Runnable {
 		
 		main_panel.updateUI();
 	}
-
+ 
+	
 	public void run() {
 		while (true) {
 			time_label.setText(sf.format(new Date()));

@@ -28,7 +28,7 @@ public class Join_View extends JFrame {
     }
 
 	     public Join_View() {
-	    	
+	    	 
 	    	 setTitle("Any Place");
 	    	 
 	    	 getContentPane().setLayout(null);
