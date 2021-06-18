@@ -86,18 +86,20 @@ public class Login_View extends JFrame implements ActionListener{
 				JTextField id_input = textField;
 				String id = textField.getText();
 
-				if (id.equals(Login.getID(id))) {
-					JOptionPane.showMessageDialog(null, "You have logged in successfully");
-					emp = new Employee();
-					emp.setEmployee_id(id);
-					new View();
-					dispose();
+				if (id.length() <= 0) {
+					JOptionPane.showMessageDialog(null, "ID를 입력해주세요.");
 				} else {
-					JOptionPane.showMessageDialog(null, "You failed to log In");
+					if (id.equals(Login.getID(id))) {
+						JOptionPane.showMessageDialog(null, "You have logged in successfully");
+						emp = new Employee();
+						emp.setEmployee_id(id);
+						new View();
+						dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "You failed to log In");
+					}
 				}
-
 			}
-
 		});
 		btnNewButton.setBounds(557, 498, 353, 55);
 		getContentPane().add(btnNewButton);

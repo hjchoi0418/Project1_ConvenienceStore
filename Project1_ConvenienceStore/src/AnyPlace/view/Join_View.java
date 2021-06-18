@@ -28,7 +28,7 @@ public class Join_View extends JFrame {
     }
 
 	     public Join_View() {
-	    	
+	    	 
 	    	 setTitle("Any Place");
 	    	 
 	    	 getContentPane().setLayout(null);
@@ -84,11 +84,14 @@ public class Join_View extends JFrame {
 				Join.setNew_employee_name(id);
 				Join.main(null);
 				
-				if(Join.isSuccess()) {	
+				if (id.length() <= 0) {
+					JOptionPane.showMessageDialog(null, "ID를 입력해주세요.");
+				} else if (name.length() <= 0) {
+					JOptionPane.showMessageDialog(null, "이름을 입력해주세요.");
+				} else if(Join.isSuccess()) {
 					new Employee_Join_Success_View();
 					dispose();
-					}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(null, 
 							"중복된 아이디입니다.", "경고",
 							JOptionPane.ERROR_MESSAGE);
@@ -98,7 +101,7 @@ public class Join_View extends JFrame {
 		btnNewButton.setBounds(557, 498, 353, 55);
 		getContentPane().add(btnNewButton);
 		
-		JButton btnBack = new JButton("<<");
+		JButton btnBack = new JButton("<");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Login_View();
@@ -106,7 +109,7 @@ public class Join_View extends JFrame {
 			}
 		});
 		btnBack.setForeground(Color.WHITE);
-		btnBack.setFont(new Font("나눔고딕", Font.BOLD, 15));
+		btnBack.setFont(new Font("나눔고딕", Font.BOLD, 30));
 		btnBack.setBackground(new Color(255, 204, 51));
 		btnBack.setBounds(120, 120, 60, 60);
 		getContentPane().add(btnBack);

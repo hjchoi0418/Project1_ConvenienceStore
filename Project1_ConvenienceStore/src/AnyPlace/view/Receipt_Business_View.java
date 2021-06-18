@@ -315,7 +315,9 @@ public class Receipt_Business_View extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				table_set_data(pane);
+
+				View.refresh();
+				
 			}
 		});
 		pane.add(btn);
