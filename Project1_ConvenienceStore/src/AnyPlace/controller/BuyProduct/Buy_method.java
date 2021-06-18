@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import AnyPlace.DBConnector;
-
 public class Buy_method {
 	
 	public static Connection getConnection() {
@@ -17,20 +15,37 @@ public class Buy_method {
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 			String user = "c##gs25";
 			String pass = "1234";
-			Connection con = DriverManager.getConnection(url, user, pass);
-			return con;
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			return conn;
 		}catch(Exception e) {
 			return null;
 		}
 	}
 	
-	// 1.임시로 order_ 만듬
-	public static int Temporary_order() {
+	// 1-1.임시로 카드 order_ 만듬
+	public static int Temporary_order_card() {
 		int result = 0;
 		String sql = "INSERT INTO order_ (order_no, order_date, payment_method, order_amount)"
 				+ "VALUES((SELECT MAX(order_no)+1 FROM order_), "
 				+ "SYSDATE, "
 				+ "1, "
+				+ "2)";
+		try (Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){	
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 		
+		return result;
+	}
+	// 1-2 임시로 현금 order_ 만듬
+	public static int Temporary_order_cash() {
+		int result = 0;
+		String sql = "INSERT INTO order_ (order_no, order_date, payment_method, order_amount)"
+				+ "VALUES((SELECT MAX(order_no)+1 FROM order_), "
+				+ "SYSDATE, "
+				+ "2, "
 				+ "2)";
 		try (Connection conn = getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
