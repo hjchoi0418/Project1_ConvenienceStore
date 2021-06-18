@@ -11,13 +11,14 @@ import java.util.List;
 import AnyPlace.model.Product;
 
 public class Lookup_method {
+	
 	public static Connection getConnection() {
 		try {
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 			String user = "gs25";
 			String pass = "1234";
-			Connection con = DriverManager.getConnection(url, user, pass);
-			return con;
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			return conn;
 		}catch(Exception e) {
 			return null;
 		}

@@ -345,7 +345,7 @@ public class buy_main {
 		buypanel.add(btnbuy);
 		btnbuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Buy_method.Temporary_order();
+//				Buy_method.Temporary_order();
 				for(int i = 0; i < order_receipt.size(); ++i) {
 					for(int j = 0; j < order_receipt.get(i).getOrder_count(); ++j) {
 						Buy_method.detail_order(order_receipt.get(i).getProduct_name());

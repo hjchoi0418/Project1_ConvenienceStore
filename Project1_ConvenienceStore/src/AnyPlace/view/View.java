@@ -154,6 +154,9 @@ public class View extends JFrame implements Runnable {
 				menu5.setEnabled(false);
 				main_panel.removeAll();
 				
+				Inventory_view iv_panel = new Inventory_view();
+				main_panel.add(iv_panel);
+				
 				main_panel.updateUI();
 			}
 		});
