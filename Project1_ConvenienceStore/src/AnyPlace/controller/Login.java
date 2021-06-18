@@ -17,7 +17,7 @@ public class Login {
 
 		HikariConfig config = new HikariConfig();
 
-		config.setJdbcUrl("jdbc:oracle:thin:@localhost:1521/XE");
+		config.setJdbcUrl("jdbc:oracle:thin:@localhost:1521/XEPDB1");
 		config.setUsername("gs25");
 		config.setPassword("1234");
 		config.addDataSourceProperty("cachePrepStmts", "true");
@@ -57,7 +57,7 @@ public class Login {
 		String id = null;
 		
 		HikariConfig config = new HikariConfig();
-		config.setJdbcUrl("jdbc:oracle:thin:@localhost:1521/XE");
+		config.setJdbcUrl("jdbc:oracle:thin:@localhost:1521/XEPDB1");
 		config.setUsername("gs25");
 		config.setPassword("1234");
 		config.addDataSourceProperty("cachePrepStmts", "true");

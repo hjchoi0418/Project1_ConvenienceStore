@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import AnyPlace.controller.Login;
-import AnyPlace.model.Employee;
 
 
 public class Login_View extends JFrame implements ActionListener{
@@ -29,7 +28,6 @@ public class Login_View extends JFrame implements ActionListener{
 	ImageIcon icon;
 	JTextField id_field = new JTextField();
 	private JTextField textField;
-	public static Employee emp = new Employee();
 
 	public Dimension getPreferredSize(){
         Dimension largeBtnSz = new Dimension(super.getPreferredSize().width+30, super.getPreferredSize().height+30);
@@ -59,7 +57,7 @@ public class Login_View extends JFrame implements ActionListener{
 		JFrame frame = new JFrame();
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocation(200,100);
+		setLocation(200,200);
 		setSize(1467,902);
 		getContentPane().setLayout(null);
 		
@@ -88,10 +86,8 @@ public class Login_View extends JFrame implements ActionListener{
 
 				if (id.equals(Login.getID(id))) {
 					JOptionPane.showMessageDialog(null, "You have logged in successfully");
-					emp = new Employee();
-					emp.setEmployee_id(id);
 					new View();
-					dispose();
+					setVisible(false);
 				} else {
 					JOptionPane.showMessageDialog(null, "You failed to log In");
 				}
@@ -115,12 +111,12 @@ public class Login_View extends JFrame implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Join_View();
-				dispose();
+				new join_View2();
+				setVisible(false);
 			}
 		});
 
-		joinButton.setBounds(833, 570, 74, 58);
+		joinButton.setBounds(850, 550, 74, 58);
 		getContentPane().add(joinButton);
 
 		//
@@ -131,6 +127,7 @@ public class Login_View extends JFrame implements ActionListener{
 
 	public static void main(String[] args) throws Exception {
 		new Login_View();
+
 	}
 
 	@Override
