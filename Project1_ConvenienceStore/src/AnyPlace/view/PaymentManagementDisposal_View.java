@@ -28,7 +28,7 @@ public class PaymentManagementDisposal_View extends JPanel {
 	JTable table;
 	JScrollPane scroll; // 테이블 위에 열 라벨을 넣어주자~ scroll
 	String col_name[] = { "중분류", "상품코드", "상품명", "폐기일시" };
-	String data[][];// {{ "1.도시락", "1", "알찬도시락", "1", "06-11 00:00" }};
+	String data[][];
 	DisposalCont disposalCont = new DisposalCont();
 	
 	int waste_count;
@@ -156,7 +156,6 @@ public class PaymentManagementDisposal_View extends JPanel {
 
 		setLocation(70, 50);
 		setSize(1467, 902);
-//		getContentPane().setLayout(null);
 		setLayout(null);
 		setVisible(true);
 

@@ -31,22 +31,6 @@ public class RemoveProductCont {
 			
 			update_pstmt.setString(1, product_name);
 			update_pstmt.executeUpdate();
-			
-//			ResultSetMetaData rsmd = rs.getMetaData();
-			
-//			int col_cnt = rsmd.getColumnCount();
-//			System.out.println("컬럼 갯수 : " + col_cnt);
-//			for (int i = 1; i <= col_cnt; i++) {
-//				System.out.println("-----------------------------------");
-//				System.out.println(i + "번째 컬럼 이름 : " + rsmd.getColumnLabel(i));
-//				System.out.println(i + "번째 컬럼 타입 : " + rsmd.getColumnTypeName(i));
-//				System.out.println(i + "번째 컬럼 크기 : " + rsmd.getPrecision(i));
-//			}
-//			while(rs.next()) {
-//				for(int i=1; i<=col_cnt; i++) 
-//					System.out.print(rs.getString(i) + " | ");
-//				System.out.println();
-//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -30,17 +30,17 @@ public class AddProductCont {
 	
 	// 카테고리 목록
 	public static String[] getCategoryList(PreparedStatement pstmt,ResultSet rs) {
-		System.out.println("-- 카테고리 목록 --");
+//		System.out.println("-- 카테고리 목록 --");
 		try {
 			while(rs.next()) {
 				category_list.add(rs.getString(1));
-				System.out.println(rs.getString(1));
+//				System.out.println(rs.getString(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	
-		System.out.println(category_list);
+//		System.out.println(category_list);
 		
 		category_arr = new String[category_list.size()];
 		for(int i=0; i<category_arr.length; i++) {
@@ -56,14 +56,10 @@ public class AddProductCont {
 		for(int i=1; i<=product_info.length; i++) {
 		
 				pstmt_insert.setString(i, product_info[i-1]);
-				System.out.println(product_info[i-1]);
+//				System.out.println(product_info[i-1]);
 			
 		}
 		pstmt_insert.executeUpdate();
-//		
-//		pstmt_insert.setString(2, product_name);
-//		pstmt_insert.setString(3, product_price);
-//		pstmt_insert.setString(4, product_cost);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

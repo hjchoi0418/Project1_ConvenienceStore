@@ -86,7 +86,6 @@ public class DeliveryOrder_View extends JPanel {
 			}
 		};
 		table = new JTable(model);
-//		table.setBorder(new EmptyBorder(0, 0, 0, 0)); 
 
 		table.getTableHeader().setFont(new Font("나눔고딕", Font.BOLD, 20)); // 컬럼 폰트 
 		table.getTableHeader().setBackground(new Color(22,56,81)); 	// 컬럼 배경색
@@ -100,7 +99,6 @@ public class DeliveryOrder_View extends JPanel {
 		TableColumnModel tcm = table.getColumnModel();
 		for(int i=0; i<table.getColumnCount(); i++) {
 			tcm.getColumn(i).setCellRenderer(dtcr);
-//			tcm.getColumn(i).set
 		}
 		table.setRowHeight(40);  // 행 높이
 		table.setFont(new Font("나눔고딕", Font.BOLD, 15)); // 행 폰트
@@ -108,21 +106,13 @@ public class DeliveryOrder_View extends JPanel {
  		table.setForeground(new Color(22,56,81)); // 행 폰트색
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // 단일선택
 		table.setRowSelectionAllowed(true); // 셀 선택되는 색이 ..
-		table.addMouseListener(new DeliveryView_MouseEventListener(table));
+		table.addMouseListener(new DeliveryView_MouseEventListener(table)); // table전용 MouseListener
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		scroll = new JScrollPane(table);
 		scroll.setBounds(0, 20, 851, 392);
 		add(scroll);
 
-		// textarea
-//		waste_count = disposalCont.waste_count;
-//		total_waste_price = disposalCont.total_waste_price;
-		// #################
-		// 실시간으로 textArea 수량 + 원가금액 표시 나중에 처리
-		// 일단 주문하면 팝업창을 띄워서 알림
-		
-//		JTextArea textArea = new JTextArea("합계수량  " + order_count + "\t\t원가 금액 합계  " + total_cost);
-		JTextArea textArea = new JTextArea(" 합계수량 "); //+ cnt + "\t\t원가 금액 합계  " + total_cost);
+		JTextArea textArea = new JTextArea(" 합계수량 "); 
 		textArea.setForeground(new Color(254,182,63));
 		textArea.setFont(new Font("나눔고딕", Font.BOLD, 30));
 		textArea.setEditable(false);
@@ -197,10 +187,9 @@ public class DeliveryOrder_View extends JPanel {
 		});
 		button_1.setBackground(new Color(72, 61, 139));
 		button_1.setFont(new Font("맑은 고딕", Font.BOLD, 12));
-//		button_1.setBorderPainted(false);
 		button_1.setContentAreaFilled(false);
 		button_1.setFocusPainted(false);
-		button_1.setBounds(701, 513, 150, 68);
+		button_1.setBounds(661, 513, 200, 68);
 		button_1.setPressedIcon(new ImageIcon("./img/menu_C/주문B.png"));
 		button_1.setBorderPainted(false);
 		button_1.setContentAreaFilled(false);
@@ -247,7 +236,7 @@ public class DeliveryOrder_View extends JPanel {
 				}
 			}
 		});
-		button_2.setBounds(111, 513, 70, 70);
+		button_2.setBounds(115, 513, 70, 70);
 		button_2.setPressedIcon(new ImageIcon("./img/menu_C/플러스10B.png"));
 		button_2.setBorderPainted(false);
 		button_2.setContentAreaFilled(false);
@@ -295,14 +284,13 @@ public class DeliveryOrder_View extends JPanel {
 				}
 			}
 		});
-		button_4.setBounds(357, 513, 70, 70);
+		button_4.setBounds(345, 513, 70, 70);
 		button_4.setPressedIcon(new ImageIcon("./img/menu_C/마이너스B.png"));
 		button_4.setBorderPainted(false);
 		button_4.setContentAreaFilled(false);
 		add(button_4);
 		
-//		JButton button_5 = new JButton(new ImageIcon("./img/menu_C/마이너스10.png"));
-		JButton button_5 = new JButton(new ImageIcon("./img/menu_C/마이너스10B.png"));
+		JButton button_5 = new JButton(new ImageIcon("./img/menu_C/마이너스10.png"));
 		button_5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -332,13 +320,13 @@ public class DeliveryOrder_View extends JPanel {
 				}
 			}
 		});
-		button_5.setBounds(474, 513, 70, 70);
+		button_5.setBounds(460, 513, 70, 70);
 		button_5.setPressedIcon(new ImageIcon("./img/menu_C/마이너스10B.png"));
 		button_5.setBorderPainted(false);
 		button_5.setContentAreaFilled(false);
 		add(button_5);
 		
-		JButton button_6 = new JButton(new ImageIcon("./img/menu_C/마이너스100B.png"));
+		JButton button_6 = new JButton(new ImageIcon("./img/menu_C/마이너스100.png"));
 		button_6.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -367,16 +355,12 @@ public class DeliveryOrder_View extends JPanel {
 		button_6.setPressedIcon(new ImageIcon("./img/menu_C/마이너스100B.png"));
 		button_6.setBorderPainted(false);
 		button_6.setContentAreaFilled(false);
-		button_6.setBounds(584, 513, 70, 70);
+		button_6.setBounds(575, 513, 70, 70);
 		add(button_6);
-
 
 		setLocation(70, 50);
 		setSize(1467, 902);
-//		getContentPane().setLayout(null);
-
 		setLayout(null);
-		
 		setVisible(true);
 
 
