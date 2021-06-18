@@ -52,6 +52,24 @@ public class Join_View extends JFrame {
 		setLocation(200,100);
 		setSize(1467,902);
 		getContentPane().setLayout(null);
+
+		JButton return_button = new JButton("loginÀ¸·Î");
+		return_button.setBounds(100,100, 100,60);
+		getContentPane().add(return_button);
+		return_button.setBackground(new Color(255, 204, 51));
+		return_button.setForeground(Color.WHITE);
+		return_button.setFont(new Font("³ª´®°íµñ", Font.BOLD, 15));
+		
+		return_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				frame.dispose();
+				new Login_View();
+				
+			}
+		});
 	
 		JTextField textField1 = new JTextField();
 		textField1.setToolTipText("NAME");
