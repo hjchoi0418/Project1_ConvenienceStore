@@ -331,8 +331,6 @@ public class DeliveryOrder_View extends JPanel {
 //		getContentPane().setLayout(null);
 
 		setLayout(null);
-
-
 		
 		setVisible(true);
 
