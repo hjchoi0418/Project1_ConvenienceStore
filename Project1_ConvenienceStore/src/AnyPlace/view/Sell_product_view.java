@@ -13,7 +13,6 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,14 +22,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
 import AnyPlace.controller.BuyProduct.Buy_method;
-import AnyPlace.controller.BuyProduct.Complete;
 import AnyPlace.controller.BuyProduct.Lookup_method;
 import AnyPlace.controller.BuyProduct.Order_receipt;
-import AnyPlace.mouseEventListener.DisposalView_MouseEventListener;
 
 public class Sell_product_view extends JPanel {
 	
@@ -46,23 +42,43 @@ public class Sell_product_view extends JPanel {
 	public Sell_product_view() {
 		setBorder(new EmptyBorder(20, 50, 20, 50));
 		setBackground(Color.white);
+		setLayout(null);
 		
 		
 		JPanel buy_table_panel = new JPanel();
 		buy_table_panel.setBackground(Color.white);
-		buy_table_panel.setBounds(380, 220, 590, 360);
+		buy_table_panel.setBounds(20, 20, 600, 580);
 		add(buy_table_panel);
 		
 		data = Lookup_method.getproduct();
-		DefaultTableModel model = new DefaultTableModel(data, columnType);
+		DefaultTableModel model = new DefaultTableModel(data, columnType) {
+			boolean[] columnEditables = new boolean[] {
+					false, false, false, false, false
+				};
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
+		};
+		
 		stock_table = new JTable(model);
 		scroll = new JScrollPane(stock_table);
 		buy_table_panel.add(scroll);
-		scroll.setPreferredSize(new Dimension(500, 350));
-		stock_table.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		stock_table.setBackground(new Color(255, 255, 255));
-		stock_table.setForeground(new Color(0, 0, 0));
+		scroll.setPreferredSize(new Dimension(590, 570));
+		
+		stock_table.getTableHeader().setFont(new Font("나눔고딕", Font.BOLD, 20));
+		stock_table.getTableHeader().setBackground(new Color(22,56,81));
+		stock_table.getTableHeader().setForeground(new Color(255,255,255));
+		stock_table.getTableHeader().setPreferredSize(new Dimension(0, 60));
+		stock_table.getTableHeader().setReorderingAllowed(false);
+		stock_table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		stock_table.setRowSelectionAllowed(true);
+		stock_table.getTableHeader().setReorderingAllowed(false);
+		
 		stock_table.setRowHeight(40);
+		stock_table.setFont(new Font("나눔고딕", Font.BOLD, 15));
+		stock_table.setBackground(new Color(198,198,198));
+		stock_table.setForeground(new Color(22,56,81));
+		stock_table.setRowSelectionAllowed(true);
 
 		// 가운데 정렬
 		DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
@@ -81,7 +97,7 @@ public class Sell_product_view extends JPanel {
 		
 		JPanel order_table_panel = new JPanel();
 		order_table_panel.setBackground(Color.white);
-		order_table_panel.setBounds(1000, 220, 350, 360);
+		order_table_panel.setBounds(630, 20, 380, 580);
 		add(order_table_panel);
 		
 		Vector<String> order_headers = new Vector<String>();
@@ -90,21 +106,44 @@ public class Sell_product_view extends JPanel {
 		order_headers.add("수량");
 		
 		//오더 테이블
-		DefaultTableModel order_model = new DefaultTableModel(order_headers, 0);
+		DefaultTableModel order_model = new DefaultTableModel(order_headers, 0) {
+			boolean[] columnEditables = new boolean[] {
+					false, false, false
+				};
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
+		};
 		JTable order_table = new JTable(order_model);
 		JScrollPane order_scrollpane = new JScrollPane(order_table);
-		order_scrollpane.setPreferredSize(new Dimension(300, 350));
-		order_table.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		order_table.setBackground(new Color(255, 255, 255));
-		order_table.setForeground(new Color(0, 0, 0));
+		order_scrollpane.setPreferredSize(new Dimension(370, 570));
+
+		// 헤더 폰트
+		order_table.getTableHeader().setFont(new Font("나눔고딕", Font.BOLD, 20));
+		order_table.getTableHeader().setBackground(new Color(22,56,81));
+		order_table.getTableHeader().setForeground(new Color(255,255,255));
+		order_table.getTableHeader().setPreferredSize(new Dimension(0, 60));
+		order_table.getTableHeader().setReorderingAllowed(false);
+		order_table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		order_table.setRowSelectionAllowed(true);
+		order_table.getTableHeader().setReorderingAllowed(false);
+		
 		order_table.setRowHeight(40);
+		order_table.setFont(new Font("나눔고딕", Font.BOLD, 15));
+		order_table.setBackground(new Color(198,198,198));
+		order_table.setForeground(new Color(22,56,81));
+		order_table.setRowSelectionAllowed(true);
+		
+//		order_table.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+//		order_table.setBackground(new Color(255, 255, 255));
+//		order_table.setForeground(new Color(0, 0, 0));
+//		order_table.setRowHeight(40);
 		order_table_panel.add(order_scrollpane);
 		
-		// 헤더 폰트
-		JTableHeader order_header = order_table.getTableHeader();
-		order_table.setBackground(Color.white);
-		order_table.setForeground(Color.black);
-		order_table.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+//		JTableHeader order_header = order_table.getTableHeader();
+//		order_table.setBackground(Color.white);
+//		order_table.setForeground(Color.black);
+//		order_table.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
 		// 가운데 정렬
 		DefaultTableCellRenderer tScheduleCellRenderer2 = new DefaultTableCellRenderer();
@@ -124,7 +163,7 @@ public class Sell_product_view extends JPanel {
 		// 제품 번호 입력창
 		JTextField order = new JTextField();
 		order.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		order.setBounds(605, 600, 100, 40);
+		order.setBounds(272, 620, 186, 33);
 		add(order);
 		order.setBackground(SystemColor.WHITE);
 		order.setColumns(10);
@@ -132,7 +171,7 @@ public class Sell_product_view extends JPanel {
 		// 수량 입력창
 		JTextField count = new JTextField();
 		count.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		count.setBounds(840, 600, 100, 40);
+		count.setBounds(463, 620, 186, 33);
 		add(count);
 		count.setBackground(SystemColor.WHITE);
 		count.setColumns(10);
@@ -141,7 +180,7 @@ public class Sell_product_view extends JPanel {
 		// 장바구니 추가
 		JButton btnadd = new JButton("추가");
 		btnadd.setIcon(new ImageIcon("./image/장바구니추가.PNG"));
-		btnadd.setBounds(380, 650, 185, 128);
+		btnadd.setBounds(654, 620, 27, 17);
 		btnadd.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		add(btnadd);
 		btnadd.addActionListener(new ActionListener() {
@@ -169,7 +208,7 @@ public class Sell_product_view extends JPanel {
 		// 초기화
 		JButton btnclear = new JButton("초기화");
 		btnclear.setIcon(new ImageIcon("./image/장바구니초기화.PNG"));
-		btnclear.setBounds(780, 650, 185, 128);
+		btnclear.setBounds(686, 620, 39, 17);
 		btnclear.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		add(btnclear);
 		btnclear.addActionListener(new ActionListener() {
@@ -183,7 +222,7 @@ public class Sell_product_view extends JPanel {
 		// 결제 버튼
 		JButton btnbuy = new JButton("결제");
 		btnbuy.setIcon(new ImageIcon("./image/카드결제.PNG"));
-		btnbuy.setBounds(1070, 580, 220, 80);
+		btnbuy.setBounds(730, 620, 27, 17);
 		btnbuy.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		add(btnbuy);
 		btnbuy.addActionListener(new ActionListener() {
@@ -202,6 +241,7 @@ public class Sell_product_view extends JPanel {
 			}
 		});
 		
+		setSize(1030, 700);
 //		table = new JTable(model);
 //		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // 단일선택
 //		table.setRowSelectionAllowed(true);	// 셀 선택되는 색이 .. 
