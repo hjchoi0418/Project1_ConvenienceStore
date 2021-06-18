@@ -120,7 +120,7 @@ public class Login_View extends JFrame implements ActionListener{
 			}
 		});
 
-		joinButton.setBounds(850, 550, 74, 58);
+		joinButton.setBounds(833, 570, 74, 58);
 		getContentPane().add(joinButton);
 
 		//
