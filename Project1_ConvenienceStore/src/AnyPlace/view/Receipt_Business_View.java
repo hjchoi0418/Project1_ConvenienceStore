@@ -39,8 +39,10 @@ import javax.swing.table.JTableHeader;
 import AnyPlace.controller.Receipt_Business;
 import AnyPlace.controller.Receipt_Lookup;
 import AnyPlace.model.Order_;
+import AnyPlace.mouseEventListener.DeliveryView_MouseEventListener;
 import AnyPlace.view.receipt_business_output_view.Receipt_issuance_view;
 import AnyPlace.view.receipt_business_output_view.Return_service_view;
+import javax.swing.JComboBox;
 
 public class Receipt_Business_View extends JPanel{
 	
@@ -57,8 +59,29 @@ public class Receipt_Business_View extends JPanel{
 		    
 	   	
 		JTable order_table = table_set_data(this); // 테이블 초기 주문서 
+		order_table.getTableHeader().setFont(new Font("나눔고딕", Font.BOLD, 15)); // 컬럼 폰트 
+		order_table.getTableHeader().setBackground(new Color(22,56,81)); 	// 컬럼 배경색
+		order_table.getTableHeader().setForeground(new Color(255,255,255)); // 컬럼 폰트색
+		order_table.getTableHeader().setPreferredSize(new Dimension(0, 60)); // 컬럼 너비, 높이
+		order_table.getTableHeader().setReorderingAllowed(false); // 컬럼 이동 안되게
+		
+		order_table.setRowHeight(40);  // 행 높이
+		order_table.setFont(new Font("나눔고딕", Font.BOLD, 13)); // 행 폰트
+		order_table.setBackground(new Color(198,198,198)); // 행 배경색
+		order_table.setForeground(new Color(22,56,81)); // 행 폰트색
+		
 		JTable detail_table = table2_set_data(this); // 영수증 상세
-
+		
+		detail_table.getTableHeader().setFont(new Font("나눔고딕", Font.BOLD, 15)); // 컬럼 폰트 
+		detail_table.getTableHeader().setBackground(new Color(22,56,81)); 	// 컬럼 배경색
+		detail_table.getTableHeader().setForeground(new Color(255,255,255)); // 컬럼 폰트색
+		detail_table.getTableHeader().setPreferredSize(new Dimension(0, 60)); // 컬럼 너비, 높이
+		detail_table.getTableHeader().setReorderingAllowed(false); // 컬럼 이동 안되게
+		
+		detail_table.setRowHeight(40);  // 행 높이
+		detail_table.setFont(new Font("나눔고딕", Font.BOLD, 13)); // 행 폰트
+		detail_table.setBackground(new Color(198,198,198)); // 행 배경색
+		detail_table.setForeground(new Color(22,56,81)); // 행 폰트색
 		
 		JLabel option_label1 = create_option_label("매출구분", 1, this);
 		JLabel option_label2 = create_option_label("거래기간", 2, this);
@@ -368,7 +391,7 @@ public class Receipt_Business_View extends JPanel{
 			table = new JTable(model);
 
 			JScrollPane scroll_panel = new JScrollPane(table);
-			scroll_panel.setBounds(480, 200, 450, 380);
+			scroll_panel.setBounds(480, 200, 520, 380);
 
 			pane.add(scroll_panel);  
 			return table;
@@ -381,6 +404,16 @@ public class Receipt_Business_View extends JPanel{
 	    		String [] title = {"일자","영수증","금액","거래구분"};
 	            DefaultTableModel model = new DefaultTableModel(title,0);
 	            table = new JTable(model);
+	            table.getTableHeader().setFont(new Font("나눔고딕", Font.BOLD, 15)); // 컬럼 폰트 
+	    		table.getTableHeader().setBackground(new Color(22,56,81)); 	// 컬럼 배경색
+	    		table.getTableHeader().setForeground(new Color(255,255,255)); // 컬럼 폰트색
+	    		table.getTableHeader().setPreferredSize(new Dimension(0, 60)); // 컬럼 너비, 높이
+	    		table.getTableHeader().setReorderingAllowed(false); // 컬럼 이동 안되게
+	    		
+	    		table.setRowHeight(40);  // 행 높이
+	    		table.setFont(new Font("나눔고딕", Font.BOLD, 13)); // 행 폰트
+	    		table.setBackground(new Color(198,198,198)); // 행 배경색
+	    		table.setForeground(new Color(22,56,81)); // 행 폰트색
 	            table.getColumnModel().getColumn(0).setPreferredWidth(200);
 
 	        	JScrollPane scroll_panel = new JScrollPane(table);
