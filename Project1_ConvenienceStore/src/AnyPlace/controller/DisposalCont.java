@@ -42,7 +42,7 @@ public class DisposalCont {
 	// 테이블 데이터
 	public String[][] getData() {
 
-//		System.out.println(sql);
+//		// System.out.println(sql);
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
@@ -68,12 +68,12 @@ public class DisposalCont {
 				j++;
 			}
 			int col_cnt = rsmd.getColumnCount();
-			System.out.println("-- 폐기 30분전 제품 목록 --");
+			// System.out.println("-- 폐기 30분전 제품 목록 --");
 			while (rs.next()) {
 				for (int i = 1; i <= col_cnt; i++) {
-					System.out.print(rs.getString(i) + " | ");
+					// System.out.print(rs.getString(i) + " | ");
 				}
-				System.out.println();
+				// System.out.println();
 			}
 
 			return data;
@@ -89,18 +89,14 @@ public class DisposalCont {
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement delete_pstmt = conn.prepareStatement(delete_sql);) {
 
-//			del_list.add("9");
-//			del_list.add("10");
-//			del_list.add("11");
-
-			System.out.println(Arrays.toString(str_arr));
+			// System.out.println(Arrays.toString(str_arr));
 			try {
 				for (int i = 0; i < str_arr.length; i++) {
 					delete_pstmt.setString(1, str_arr[i]);
 					delete_pstmt.execute();
 				}
 			} catch (Exception e) {
-				System.out.println("[NULL] DisposalCont");
+				// System.out.println("[NULL] DisposalCont");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,12 +104,10 @@ public class DisposalCont {
 	}
 
 	public HashMap<String, String> getCountCost() {
-		System.out.println(sql);
+		// System.out.println(sql);
 		try (Connection conn = DBConnector.getConnection();
 //				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-//				PreparedStatement delete_pstmt = conn.prepareStatement(delete_sql);
-//				ResultSet rs = pstmt.executeQuery();
 				ResultSet rs2 = pstmt2.executeQuery();) {
 
 			HashMap<String, String> temp_map = new HashMap<>();
