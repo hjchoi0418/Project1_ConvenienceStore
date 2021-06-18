@@ -29,6 +29,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import AnyPlace.controller.Cash_Management;
+import java.awt.Rectangle;
+import java.awt.FlowLayout;
 
 public class Cash_Management_view extends JPanel implements TableModelListener {
 
@@ -106,7 +108,7 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		table.getTableHeader().setReorderingAllowed(false);
 
 		table.setIntercellSpacing(new Dimension(10, 1));
-		table.setRowHeight(62);
+		table.setRowHeight(58);
 		table.setFont(new Font("나눔고딕", Font.BOLD, 18));
 		table.setBackground(new Color(235,235,235));
  		table.setForeground(new Color(22,56,81));
@@ -126,8 +128,13 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 		label = new JLabel("POS 현금");
 		label.setForeground(new Color(22, 56, 81));
 		label.setFont(new Font("맑은 고딕", Font.BOLD, 28));
-		btnPrint = new JButton("발행", null);
-		btnPrint.setPreferredSize(new Dimension(57, 40));
+		btnPrint = new JButton(new ImageIcon("./img/시재점검/시재점검_발행B.png"));
+		btnPrint.setBounds(0, 0, 179, 68);
+		btnPrint.setPreferredSize(new Dimension(180, 68));
+		btnPrint.setPressedIcon(new ImageIcon("./img/시재점검/시재점검_발행.png"));
+		btnPrint.setBorderPainted(false);
+		btnPrint.setContentAreaFilled(false);
+		btnPrint.setFocusPainted(false);
 		setLayout(new BorderLayout(0, 0));
 
 		table.getModel().addTableModelListener(this);
@@ -170,11 +177,7 @@ public class Cash_Management_view extends JPanel implements TableModelListener {
 
 		centerPanel.setLayout(new GridLayout(0, 2, 20, 0));
 		centerPanel.add(l_scrollPane);
-
-		bottomPanel.setLayout(new GridLayout(0, 3, 0, 0));
-		JPanel empty_panel = new JPanel();
-		empty_panel.setBackground(Color.WHITE);
-		bottomPanel.add(empty_panel);
+		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		bottomPanel.add(btnPrint);
 		
 		add(topPanel, BorderLayout.NORTH);

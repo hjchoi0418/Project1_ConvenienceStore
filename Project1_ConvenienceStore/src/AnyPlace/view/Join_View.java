@@ -97,6 +97,19 @@ public class Join_View extends JFrame {
 		});
 		btnNewButton.setBounds(557, 498, 353, 55);
 		getContentPane().add(btnNewButton);
+		
+		JButton btnBack = new JButton("<<");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Login_View();
+				dispose();
+			}
+		});
+		btnBack.setForeground(Color.WHITE);
+		btnBack.setFont(new Font("³ª´®°íµñ", Font.BOLD, 15));
+		btnBack.setBackground(new Color(255, 204, 51));
+		btnBack.setBounds(120, 120, 60, 60);
+		getContentPane().add(btnBack);
 	}
 
 	public static void main(String[] args) {

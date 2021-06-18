@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,6 +25,8 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import AnyPlace.controller.BuyProduct.Lookup_method;
+import javax.swing.border.LineBorder;
+import javax.swing.DefaultComboBoxModel;
 
 public class Inventory_view extends JPanel{
 	
@@ -92,8 +95,16 @@ public class Inventory_view extends JPanel{
 		columnModels.getColumn(3).setPreferredWidth(60);
 		columnModels.getColumn(4).setPreferredWidth(1);
 		
+		JComboBox cBox = new JComboBox();
+		cBox.setModel(new DefaultComboBoxModel(new String[] {"»óÇ°¹øÈ£", "ºÐ·ù", "»óÇ° ÀÌ¸§", "»óÇ° °¡°Ý", "Àç°í"}));
+		cBox.setSize(80, 30);
+		cBox.setLocation(300, 610);
+		cBox.setFont(new Font("³ª´®°íµñ", Font.BOLD, 12));
+		add(cBox);
+		
 		JTextField search = new JTextField();
-		search.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
+		search.setBorder(new LineBorder(new Color(22, 56, 81), 5, true));
+		search.setFont(new Font("³ª´®°íµñ", Font.BOLD, 20));
 		search.setBounds(400, 600, 230, 50);
 		add(search);
 		search.setBackground(SystemColor.WHITE);
@@ -101,9 +112,10 @@ public class Inventory_view extends JPanel{
 		search.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				String val = search.getText();
+				
 				TableRowSorter<TableModel> trs = new TableRowSorter<>(stock_table.getModel());
 				stock_table.setRowSorter(trs);
-				trs.setRowFilter(RowFilter.regexFilter(val));
+				trs.setRowFilter(RowFilter.regexFilter(val, cBox.getSelectedIndex()));
 			}
 		});
 	}

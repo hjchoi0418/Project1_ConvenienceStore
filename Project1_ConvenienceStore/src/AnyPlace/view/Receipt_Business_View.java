@@ -388,7 +388,13 @@ public class Receipt_Business_View extends JPanel{
 			JTable table;
 	    	String [] title = {"상세영수증번호","영수증번호","제품시리얼번호","제품가격","제품이름"};
 			DefaultTableModel model = new DefaultTableModel(title,0);
-			table = new JTable(model);
+			table = new JTable(model) {
+				boolean[] columnEditables = new boolean[] { false, false, false, false, false };
+
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
+			};
 
 			JScrollPane scroll_panel = new JScrollPane(table);
 			scroll_panel.setBounds(480, 200, 520, 380);
@@ -403,7 +409,13 @@ public class Receipt_Business_View extends JPanel{
 	    	try {
 	    		String [] title = {"일자","영수증","금액","거래구분"};
 	            DefaultTableModel model = new DefaultTableModel(title,0);
-	            table = new JTable(model);
+	            table = new JTable(model){
+					boolean[] columnEditables = new boolean[] { false, false, false, false };
+
+					public boolean isCellEditable(int row, int column) {
+						return columnEditables[column];
+					}
+				};
 	            table.getTableHeader().setFont(new Font("나눔고딕", Font.BOLD, 15)); // 컬럼 폰트 
 	    		table.getTableHeader().setBackground(new Color(22,56,81)); 	// 컬럼 배경색
 	    		table.getTableHeader().setForeground(new Color(255,255,255)); // 컬럼 폰트색
