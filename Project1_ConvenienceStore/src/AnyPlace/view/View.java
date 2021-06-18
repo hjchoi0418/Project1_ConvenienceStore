@@ -180,7 +180,11 @@ public class View extends JFrame implements Runnable {
 		user_label.setBounds(1230, 10, 100, 40);
 		getContentPane().add(user_label);
 		
-		logoutBtn = new JButton();
+		logoutBtn = new JButton(new ImageIcon("./img/로그아웃.png"));//
+		logoutBtn.setBorderPainted(false);
+		logoutBtn.setContentAreaFilled(false);
+		logoutBtn.setFocusPainted(false);
+		logoutBtn.setBounds(1340, 10, 40, 40);
 		logoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "LogOut", JOptionPane.YES_NO_OPTION);
