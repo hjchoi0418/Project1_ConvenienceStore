@@ -63,8 +63,6 @@ public class Receipt_Business {
 					+ "(SELECT serial_no FROM order_detail WHERE order_no = ?)");
 			pstmt.setString(1, search_Options);
 			pstmt.executeUpdate();
-			pstmt = con.prepareStatement("DELETE FROM order_detail WHERE order_no = ?");
-			pstmt.setString(1, search_Options);
 			pstmt = con.prepareStatement("DELETE FROM order_ WHERE order_no = ?");
 			pstmt.setString(1, search_Options);
 			pstmt.executeUpdate();

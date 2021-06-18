@@ -95,7 +95,7 @@ public class Receipt_Business_View extends JPanel{
 		refresh.setBackground(color);
 		
 		
-		issuance_button.addActionListener(new ActionListener() {
+		issuance_button.addActionListener(new ActionListener() { //영수증발행버튼
 			
 			@Override
 			public void actionPerformed(ActionEvent e) { //영수증 출력
@@ -110,7 +110,7 @@ public class Receipt_Business_View extends JPanel{
 			}
 		});
 		
-		return_button.addActionListener(new ActionListener() {
+		return_button.addActionListener(new ActionListener() { // 반품버튼
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -126,6 +126,7 @@ public class Receipt_Business_View extends JPanel{
 				} 
 				Return_service_view  rsv = new Return_service_view();
 				new Receipt_Business_View();
+				
 			}
 		});
 		
@@ -281,23 +282,27 @@ public class Receipt_Business_View extends JPanel{
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}}}});
+		
+		
 		//-------------------------------------------------------------------------------- serch_button 클릭이벤트
 		
 	    }
-	
-	public static JButton create_Refresh_btn(Container pane) {
+	public static JButton create_Refresh_btn(Container pane) { // 리플래쉬 버튼
 		JButton btn = new JButton("Refresh");
 		btn.setBounds(350, 170, 100, 30);
 		btn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				table_set_data(pane);
+
+				View.refresh();
+				
 			}
 		});
 		pane.add(btn);
 		return btn;
 	}
+
 
 	public static JTextArea create_option_text_area(Container pane, int option_num) {
 		JTextArea text_area = new JTextArea();
@@ -366,6 +371,7 @@ public class Receipt_Business_View extends JPanel{
 	    	String [] title = {"상세영수증번호","영수증번호","제품시리얼번호","제품가격","제품이름"};
 			DefaultTableModel model = new DefaultTableModel(title,0);
 			table = new JTable(model);
+			
 
 			JScrollPane scroll_panel = new JScrollPane(table);
 			scroll_panel.setBounds(480, 200, 450, 380);
@@ -391,6 +397,7 @@ public class Receipt_Business_View extends JPanel{
 	    		//System.out.println(rs.isBeforeFirst()); 널체크 false == null
 
 	        	String [] input_data;
+	        	model.setNumRows(0);
 	        	
 		    	while(rs.next()) {
 		    		input_data = new String[]{rs.getString(2), rs.getString(1), rs.getString(4), rs.getString(3)};
