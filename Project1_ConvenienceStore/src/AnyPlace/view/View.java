@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -34,7 +35,7 @@ public class View extends JFrame implements Runnable {
 	}
 
 	public View() {
-
+		
 		setTitle("Any Place");
 
 		getContentPane().setLayout(null);
@@ -86,6 +87,9 @@ public class View extends JFrame implements Runnable {
 				btnEnable();
 				menu2.setEnabled(false);
 				main_panel.removeAll();
+				
+				Sell_product_view sp_panel = new Sell_product_view();
+				main_panel.add(sp_panel);
 				
 				main_panel.updateUI();
 			}
@@ -150,6 +154,9 @@ public class View extends JFrame implements Runnable {
 				menu5.setEnabled(false);
 				main_panel.removeAll();
 				
+				Inventory_view iv_panel = new Inventory_view();
+				main_panel.add(iv_panel);
+				
 				main_panel.updateUI();
 			}
 		});
@@ -167,12 +174,22 @@ public class View extends JFrame implements Runnable {
 		getContentPane().add(time_label);
 		
 		user_label = new JLabel("user´Ô");
+		user_label.setText(Login_View.emp.getEmployee_id() + "´Ô");
 		user_label.setHorizontalAlignment(SwingConstants.RIGHT);
 		user_label.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 14));
 		user_label.setBounds(1230, 10, 100, 40);
 		getContentPane().add(user_label);
 		
 		logoutBtn = new JButton();
+		logoutBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, "·Î±×¾Æ¿ô ÇÏ½Ã°Ú½À´Ï±î?", "LogOut", JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.YES_OPTION) {
+					new Login_View();
+					dispose();
+				}
+			}
+		});
 		logoutBtn.setBounds(1340, 10, 40, 40);
 		getContentPane().add(logoutBtn);
 		

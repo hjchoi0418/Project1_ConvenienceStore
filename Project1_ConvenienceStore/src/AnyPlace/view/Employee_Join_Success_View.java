@@ -45,7 +45,6 @@ public class Employee_Join_Success_View extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
-				
 				Login_View lv = new Login_View(); 
 				sv.dispose();
 			}

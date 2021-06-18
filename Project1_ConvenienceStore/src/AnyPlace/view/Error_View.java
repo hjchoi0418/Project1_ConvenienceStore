@@ -1,3 +1,4 @@
+
 package AnyPlace.view;
 
 import java.awt.Color;

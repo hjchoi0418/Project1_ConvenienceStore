@@ -6,23 +6,19 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import AnyPlace.controller.Join;
-
 
 public class Join_View extends JFrame {
 
@@ -52,14 +48,12 @@ public class Join_View extends JFrame {
 	    	 
 		JFrame frame = new JFrame();
 		
-
-		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocation(0,0);
+		setLocation(200,100);
 		setSize(1467,902);
 		getContentPane().setLayout(null);
-		
-		JButton return_button = new JButton("뒤로가기");
+
+		JButton return_button = new JButton("login으로");
 		return_button.setBounds(100,100, 100,60);
 		getContentPane().add(return_button);
 		return_button.setBackground(new Color(255, 204, 51));
@@ -76,8 +70,7 @@ public class Join_View extends JFrame {
 				
 			}
 		});
-		
-		
+	
 		JTextField textField1 = new JTextField();
 		textField1.setToolTipText("NAME");
 		textField1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -110,25 +103,21 @@ public class Join_View extends JFrame {
 				Join.main(null);
 				
 				if(Join.isSuccess()) {	
-
 					new Employee_Join_Success_View();
-					frame.dispose();
+					dispose();
 					}
 				else {
-					new Error_View();
-					frame.dispose();
+					JOptionPane.showMessageDialog(null, 
+							"중복된 아이디입니다.", "경고",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 		btnNewButton.setBounds(557, 498, 353, 55);
 		getContentPane().add(btnNewButton);
-		
-		
 	}
 
 	public static void main(String[] args) {
 		new Join_View();
-		
 	}
 }
-
