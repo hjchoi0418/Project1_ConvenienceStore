@@ -12,7 +12,6 @@ public class DBConnector {
 
 	public static Connection getConnection() {
 
-		String driver;
 		String url;
 		String id;
 		String password;
@@ -23,6 +22,7 @@ public class DBConnector {
 			url = in.readLine();
 			id = in.readLine();
 			password = in.readLine();
+
 
 			// 2. DriverManager 클래스를 통해 DB와의 연결을 생성한다.
 			Connection conn = DriverManager.getConnection(url, id, password);

@@ -6,8 +6,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/HikariCP-4.0.3.jar"/>
-	<classpathentry kind="lib" path="lib/ojdbc8.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-api-1.7.30.jar"/>
+	<classpathentry kind="lib" path="D:/lib/ojdbc8.jar"/>
+	<classpathentry kind="lib" path="D:/lib/HikariCP-4.0.3.jar"/>
+	<classpathentry kind="lib" path="D:/lib/slf4j-api-1.7.30.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
