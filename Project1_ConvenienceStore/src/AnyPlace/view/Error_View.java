@@ -39,7 +39,6 @@ public class Error_View extends JFrame{
 		label.setForeground(Color.white);
 
 		back_btn.setBounds(panel.getWidth()/10*2, panel.getHeight()/10*4+40, panel.getWidth()/10*6, (int)(panel.getHeight()/10*1.3));
-		
 		back_btn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -56,6 +55,6 @@ public class Error_View extends JFrame{
 		c.add(panel);
 	}
 	public static void main(String[] args) {
-		Error_View ev = new Error_View();
+		new Error_View();
 	}
 }

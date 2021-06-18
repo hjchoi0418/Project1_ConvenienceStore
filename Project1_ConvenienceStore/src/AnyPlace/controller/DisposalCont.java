@@ -7,6 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import AnyPlace.DBConnector;
 import AnyPlace.model.Product;
@@ -41,7 +42,7 @@ public class DisposalCont {
 	// 테이블 데이터
 	public String[][] getData() {
 
-		System.out.println(sql);
+//		System.out.println(sql);
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
@@ -86,9 +87,8 @@ public class DisposalCont {
 	public void delData(String[] str_arr) {
 
 		try (Connection conn = DBConnector.getConnection();
-			PreparedStatement delete_pstmt = conn.prepareStatement(delete_sql);
-			){
-			
+				PreparedStatement delete_pstmt = conn.prepareStatement(delete_sql);) {
+
 //			del_list.add("9");
 //			del_list.add("10");
 //			del_list.add("11");
@@ -96,14 +96,39 @@ public class DisposalCont {
 			System.out.println(Arrays.toString(str_arr));
 			try {
 				for (int i = 0; i < str_arr.length; i++) {
-					delete_pstmt.setString(1,str_arr[i]);
+					delete_pstmt.setString(1, str_arr[i]);
 					delete_pstmt.execute();
 				}
-			}catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println("[NULL] DisposalCont");
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public HashMap<String, String> getCountCost() {
+		System.out.println(sql);
+		try (Connection conn = DBConnector.getConnection();
+//				PreparedStatement pstmt = conn.prepareStatement(sql);
+				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+//				PreparedStatement delete_pstmt = conn.prepareStatement(delete_sql);
+//				ResultSet rs = pstmt.executeQuery();
+				ResultSet rs2 = pstmt2.executeQuery();) {
+
+			HashMap<String, String> temp_map = new HashMap<>();
+
+			rs2.next();
+
+			waste_count = rs2.getInt(1);
+			total_waste_price = rs2.getInt(2);
+
+			temp_map.put(Integer.toString(waste_count), Integer.toString(total_waste_price));
+			
+			return temp_map;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

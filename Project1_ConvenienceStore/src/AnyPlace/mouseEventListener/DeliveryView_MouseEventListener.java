@@ -64,6 +64,7 @@ public class DeliveryView_MouseEventListener extends MouseAdapter {
 		total_cost = deliveryCont.getTotalCost(product_map);
 		return total_cost;
 	}
+	
 	// 주문 완료 하기 
 	public void addProducts(JTable table) {
 		int[] key_arr; // p_no
