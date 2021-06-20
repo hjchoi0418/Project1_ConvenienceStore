@@ -13,7 +13,7 @@ public class Buy_method {
 	public static Connection getConnection() {
 		try {
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String user = "gs25";
+			String user = "c##gs25";
 			String pass = "1234";
 			Connection conn = DriverManager.getConnection(url, user, pass);
 			return conn;
@@ -136,6 +136,46 @@ public class Buy_method {
 		return result; 		
 	}
 	
+	// 4. 현금 계산시 cash에 insert
+	public static int Update_cash() {
+		int result = 0;
+		String sql_update = "UPDATE cash SET amount = ? WHERE cash = 1";
+		
+		String sql = "SELECT "
+				+ "order_amount "
+				+ "FROM "
+				+ "order_ "
+				+ "where order_no = (SELECT MAX(order_no) FROM order_) ";
+		
+		String amount_sql = "SELECT amount FROM cash WHERE cash = 1";
+		
+	try (Connection conn = getConnection();
+			PreparedStatement pstmt_update = conn.prepareStatement(sql_update);
+			PreparedStatement pstmt_amount = conn.prepareStatement(amount_sql);
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			){
+		
+		ResultSet rs = pstmt.executeQuery();
+		int[] date_amount = new int[1];				
+		while (rs.next()) {
+			date_amount[0] = rs.getInt("order_amount");
+		}
+		ResultSet amount_rs = pstmt_amount.executeQuery();
+		int[] amount = new int[1];
+		while (amount_rs.next()) {
+			amount[0] = amount_rs.getInt("amount");
+		}
+		pstmt_update.setInt(1, date_amount[0] + amount[0]);
+		pstmt_update.executeUpdate();
+		return result;
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return 0;
+	
+	}
+	
+	
 	public static ArrayList<String> getorder(String order, String count){
 		String sql = "SELECT "
 				+ "product_name, "
@@ -183,4 +223,5 @@ public class Buy_method {
 		}
 		
 	}
+	
 }
