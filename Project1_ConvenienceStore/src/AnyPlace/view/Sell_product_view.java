@@ -179,6 +179,7 @@ public class Sell_product_view extends JPanel {
 		sumTextField.setBounds(680, 620, 100, 40);
 		sumTextField.setBackground(SystemColor.WHITE);
 		sumTextField.setFont(new Font("³ª´®°íµñ", Font.BOLD, 20));
+		sumTextField.setEditable(false);
 		add(sumTextField);
 			
 		// °áÁ¦Á¤º¸

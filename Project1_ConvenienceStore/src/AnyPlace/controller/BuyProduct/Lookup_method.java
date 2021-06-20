@@ -16,7 +16,7 @@ public class Lookup_method {
 	public static Connection getConnection() {
 		try {
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String user = "c##gs25";
+			String user = "gs25";
 			String pass = "1234";
 			Connection conn = DriverManager.getConnection(url, user, pass);
 			return conn;
