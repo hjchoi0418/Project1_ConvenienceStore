@@ -1,6 +1,7 @@
 package AnyPlace.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -208,6 +209,8 @@ public class View extends JFrame implements Runnable {
 		main_panel = new JPanel();
 		main_panel.setLayout(new GridLayout());
 		main_panel.setBounds(350, 100, 1030, 700);
+		main_panel.setBackground(new Color(255, 255, 255));
+		main_panel.add(new JLabel(new ImageIcon("./img/·Î°í.png")));
 		
 		getContentPane().add(main_panel);
 
